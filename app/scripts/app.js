@@ -1,35 +1,23 @@
 'use strict';
 
-/**
- * @ngdoc overview
- * @name paticaApp
- * @description
- * # paticaApp
- *
- * Main module of the application.
- */
 angular
   .module('paticaApp', [
-    'ngAnimate',
-    'ngCookies',
-    'ngResource',
-    'ngRoute',
-    'ngSanitize',
-    'ngTouch'
+    'ui.router',
+    'controller'
   ])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
+  .config(function($stateProvider, $urlRouterProvider) {
+     $urlRouterProvider.otherwise('/index');
+     $stateProvider.state('index', {
+        url: '/index',
+        views: {
+          '': {
+            templateUrl: 'views/index.html',
+            controller:'indexController'
+          } 
+        }
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
   });
+
+angular.module('controller',[]);
+
+// http://www.patica.com.cn/patica/html/index.html?openid=ohQRxs4EMc4dBVahHIY7HvvQ2XNM&user_access_token=OezXcEiiBSKSxW0eoylIeKgL0Csc5Fk-ftXOSB6u_ubDy-sXqSiiI98l2784Y5uMrHrNF4W4zBeG4aPxU3kbFG502-quHHSFlDR2c72MYLpe5fJXcBYLKcPMTQyF9uWJPZeSDcDnYrz0EB9rrukY6Q
