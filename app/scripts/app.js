@@ -6,7 +6,7 @@ angular
     'controller'
   ])
   .config(function($stateProvider, $urlRouterProvider) {
-     $urlRouterProvider.otherwise('/b/b');
+     $urlRouterProvider.otherwise('/state1/list');
      // $stateProvider.state('index', {
      //    url: '/index',
      //    views: {
@@ -16,19 +16,31 @@ angular
      //      } 
      //    }
      //  })
-     $stateProvider.state('a ', {
-        url:'/a',
-        templateUrl: 'views/index.html'
-      }).
-     state('ab',{
-        url:'/b/:id',
-        templateUrl: 'views/customerService.html',
-        controller:function($stateParams){
-          console.log($stateParams)
-        }
-     })
+  //    $stateProvider.state('a ', {
+  //       url:'/a',
+  //       templateUrl: 'views/index.html'
+  //     }).
+  //    state('ab',{
+  //       url:'/b/:id',
+  //       templateUrl: 'views/customerService.html',
+  //       controller:function($stateParams){
+  //         console.log($stateParams)
+  //       }
+  //    })
+  
+ $stateProvider
+    .state('state1', {
+      url: "/state1",
+      template: "123<div ui-view=''></div>"
+    }).state('state1.list', {
+      url: "/list",
+      template: "{{items}}",
+      controller: function($scope) {
+        $scope.items = 'iii';
+      }
+    })
+    
   });
-
 
 // angular.module('paticaApp').config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
 //      $stateProvider.state('a ', {
@@ -39,7 +51,7 @@ angular
 //         url:'/b',
 //         templateUrl: 'views/customerService.html'
 //      })
-//   }])
+  // }])
 
 angular.module('controller',[]);
 
