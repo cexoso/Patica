@@ -12,8 +12,9 @@ header span{
 
 .border{
   border: 3px solid steelblue;
-  /*height: 99vh;*/
+  height: 100vh;
   padding: 10px;
+  box-sizing: border-box;
 }
 h1.text-center{
   border-bottom: 2px dashed steelblue;
