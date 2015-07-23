@@ -6,52 +6,33 @@ angular
     'controller'
   ])
   .config(function($stateProvider, $urlRouterProvider) {
-     $urlRouterProvider.otherwise('/state1/list');
-     // $stateProvider.state('index', {
-     //    url: '/index',
-     //    views: {
-     //      '': {
-     //        templateUrl: 'views/index.html',
-     //        controller:'indexController'
-     //      } 
-     //    }
-     //  })
-  //    $stateProvider.state('a ', {
-  //       url:'/a',
-  //       templateUrl: 'views/index.html'
-  //     }).
-  //    state('ab',{
-  //       url:'/b/:id',
-  //       templateUrl: 'views/customerService.html',
-  //       controller:function($stateParams){
-  //         console.log($stateParams)
-  //       }
-  //    })
+     $urlRouterProvider.otherwise('/order');
+     $stateProvider.state('index', {
+        url:'/index',
+        templateUrl: 'views/index.html',
+        abstract:true,
+        controller:'indexController'
+      }).
+     state('index.order',{
+        url:'^/order',
+        templateUrl: 'views/order.html'
+     })
   
- $stateProvider
-    .state('state1', {
-      url: "/state1",
-      template: "123<div ui-view=''></div>"
-    }).state('state1.list', {
-      url: "/list",
-      template: "{{items}}",
-      controller: function($scope) {
-        $scope.items = 'iii';
-      }
-    })
+ 
     
   });
 
-// angular.module('paticaApp').config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
-//      $stateProvider.state('a ', {
-//         url:'/a',
-//         templateUrl: 'views/index.html'
-//       }).
-//      state('a.b',{
-//         url:'/b',
-//         templateUrl: 'views/customerService.html'
-//      })
-  // }])
+angular.module('paticaApp').config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
+     $stateProvider
+    .state('recruitment', {
+      url: "/recruitment",
+      templateUrl: 'views/recruitment.html',
+      abstract:true
+    }).state('recruitment.customerService', {
+      url: "/customerService",
+      templateUrl: 'views/customerService.html'
+    })
+  }])
 
 angular.module('controller',[]);
 
