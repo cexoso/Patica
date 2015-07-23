@@ -4,15 +4,15 @@ body{
   font-family:"Helvetica Neue",Helvetica,Arial,"Microsoft Yahei",sans-serif;
   color: steelblue;
 }
-header span{
+#customerService header span{
   background-color: steelblue;
   color: white;
   padding:0 5px;
 }
 
-.border{
+#customerService.border{
+  margin-top: 50px;
   border: 3px solid steelblue;
-  height: 100vh;
   padding: 10px;
   box-sizing: border-box;
 }
@@ -20,4 +20,7 @@ h1.text-center{
   border-bottom: 2px dashed steelblue;
   margin-bottom: 10px;
   padding-bottom: 10px;
+}
+#customerService p{
+    line-height: 1.5;
 }
