@@ -2,7 +2,6 @@ var gulp = require('gulp'),
   connect = require('gulp-connect'),
    jshint = require('gulp-jshint');
 gulp.task('server', function() {
-    
   connect.server({
     root: ['app','bower_components','node_modules'],
     livereload: true,

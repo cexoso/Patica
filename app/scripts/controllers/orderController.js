@@ -1,9 +1,13 @@
+
 angular.module('controller').
-controller('orderController',['$scope',function(s){
+controller('orderController',['$scope','$resource',function(s,resource){
+    var orderInfo=resource('data/orderinfo/:name.json');
+    var a=orderInfo.get({name:'phone'});
+    s.q=a;    
      var brand = {
                 name: '品牌',
                 check: false,
-                show: false
+                show: true
             },
             version = {
                 name: "型号",

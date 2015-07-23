@@ -3,7 +3,9 @@
 angular
   .module('paticaApp', [
     'ui.router',
-    'controller'
+    'ngResource',
+    'controller',
+    'service'
   ])
   .config(function($stateProvider, $urlRouterProvider) {
      $urlRouterProvider.otherwise('/order');
@@ -36,6 +38,7 @@ angular.module('paticaApp').config(['$stateProvider','$urlRouterProvider',functi
   }])
 
 angular.module('controller',[]);
+angular.module('service',[]);
 
 
 
