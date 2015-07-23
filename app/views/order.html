@@ -1,9 +1,9 @@
 <div id="order">
     <div class="header text-center">手机信息</div>
-    <div class="panel text-center"  ng-class="{true: 'panel-success', false: 'panel-default'}[brand.check]">
-        <div class="panel-heading" ng-click="brandClickHandle()">{{brand.name}}</div>
-        <div class="panel-body" ng-show="brand.show" style="padding:0">
-            <div class="item" ng-click="checkBrand(brand)" ng-repeat="brand in brandList track by $index">{{brand}}</div>
+    <div class="panel text-center"  ng-class="{true: 'panel-success', false: 'panel-default'}[step>0]">
+        <div class="panel-heading" ng-click="brandClickHandle()">{{oi.brand.name||'品牌'}}</div>
+        <div class="panel-body" ng-show="show=='brand'" style="padding:0">
+            <div class="item" ng-click="checkBrand(brand)" ng-repeat="brand in list.brandType.brandList track by $index">{{brand.name}}</div>
         </div>
     </div>
     <div class="panel text-center" ng-class="{true: 'panel-success', false: 'panel-default'}[version.check]">

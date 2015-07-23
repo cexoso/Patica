@@ -1,13 +1,22 @@
 
 angular.module('controller').
 controller('orderController',['$scope','$resource',function(s,resource){
-    var orderInfo=resource('data/orderinfo/:name.json');
-    var a=orderInfo.get({name:'phone'});
-    s.q=a;    
-     var brand = {
-                name: '品牌',
-                check: false,
-                show: true
+    var loadData=(function(){
+        var orderInfo=resource('data/orderinfo/:name.json?id=:id');    
+        return function (name,id){
+            return orderInfo.get({name:name,id:id});
+        }
+    })();
+    s.show="brand";
+    s.step="1";
+    s.oi={};
+    var list=s.list={};
+    list.brandType=loadData('brandList',123);
+    list.versionType=loadData('versionList',123);
+    list.colorType=loadData('colorList',123);
+    list.colorType=loadData('faultList',123);
+    var brand = {
+               
             },
             version = {
                 name: "型号",
@@ -52,7 +61,7 @@ controller('orderController',['$scope','$resource',function(s,resource){
             "外壳",
             "信号弱",
             "蓝牙故障",
-            "耳机孔",
+           "耳机孔",
             "扬声器",
             "听筒",
             "按键失灵",
@@ -61,6 +70,7 @@ controller('orderController',['$scope','$resource',function(s,resource){
             "感应功能",
             "进水",
             "其他"
+           
         ];
         s.brandClickHandle = function() {
             s.brand.show = !s.brand.show;
