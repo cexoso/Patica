@@ -15,7 +15,8 @@ angular
       }).
      state('index.order',{
         url:'^/order',
-        templateUrl: 'views/order.html'
+        templateUrl: 'views/order.html',
+        controller:'orderController'
      })
   
  

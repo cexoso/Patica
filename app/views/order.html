@@ -1,1 +1,47 @@
-hello
+<div id="order">
+    <div class="header text-center">手机信息</div>
+    <div class="panel text-center"  ng-class="{true: 'panel-success', false: 'panel-default'}[brand.check]">
+        <div class="panel-heading" ng-click="brandClickHandle()">{{brand.name}}</div>
+        <div class="panel-body" ng-show="brand.show" style="padding:0">
+            <div class="item" ng-click="checkBrand(brand)" ng-repeat="brand in brandList track by $index">{{brand}}</div>
+        </div>
+    </div>
+    <div class="panel text-center" ng-class="{true: 'panel-success', false: 'panel-default'}[version.check]">
+        <div class="panel-heading" ng-click="versionClickHandle()">{{version.name}}</div>
+        <div class="panel-body" ng-show="version.show" style="padding:0">
+            <div class="item" ng-click="checkVersion(version)" ng-repeat="version in versionList track by $index">{{version}}</div>
+        </div>
+    </div>
+    <div class="panel text-center" ng-class="{true: 'panel-success', false: 'panel-default'}[color.check]">
+        <div class="panel-heading" ng-click="colorClickHandle()">{{color.name}}</div>
+        <div class="panel-body" ng-show="color.show" style="padding:0">
+            <div class="item" ng-click="checkColor(color)" ng-repeat="color in colorList track by $index">{{color}}</div>
+        </div>
+    </div>
+    <div class="panel text-center" ng-class="{true: 'panel-success', false: 'panel-default'}[fault.check]">
+        <div class="panel-heading" ng-click="faultClickHandle()">{{fault.name}}</div>
+        <div class="panel-body" ng-show="fault.show" style="padding:0">
+            <div>
+                <div class="cell" ng-click="checkfault('外屏破碎')">
+                    <span style="font-size:200%" class="glyphicon glyphicon-flash"></span>
+                    <div>外屏破碎</div>
+                </div>
+                <div class="cell" ng-click="checkfault('WIFI')">
+                    <span style="font-size:200%" class="glyphicon glyphicon-signal"></span>
+                    <div>WIFI</div>
+                </div>
+                <div class="cell" ng-click="checkfault('开机')">
+                    <span style="font-size:200%" class="glyphicon glyphicon-off"></span>
+                    <div>开机</div>
+                </div>
+                <div class="cell" ng-click="checkfault('麦克风')">
+                    <span style="font-size:200%" class="glyphicon glyphicon-earphone"></span>
+                    <div>麦克风</div>
+                </div>
+            </div>
+            <div class="item" ng-click="checkfault(fault)" ng-repeat="fault in faultList track by $index">{{fault}}</div>
+        </div>
+    </div>
+
+    <button  class="btn btn-success btn-lg btn-block" ng-click="submit()">提交订单</button>
+</div>

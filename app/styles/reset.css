@@ -6,3 +6,7 @@
 *, *::before, *::after {
     box-sizing: border-box;
 }
+
+body{
+    cursor: default;
+}
