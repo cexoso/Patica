@@ -68,5 +68,6 @@ controller('orderController',['$scope','$resource',function(s,resource){
         }else{
             console.log('信息不完全');
         }
+        
     }
 }]);
