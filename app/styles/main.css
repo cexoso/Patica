@@ -2,6 +2,7 @@ body{
   margin: 0;
   padding:0;
   font-family:"Helvetica Neue",Helvetica,Arial,"Microsoft Yahei",sans-serif;
+  font-size: 20px;
 }
 #customerService header span{
   background-color: steelblue;
@@ -36,10 +37,10 @@ header.nav{
   border-bottom: 1px solid black;
 }
 
-#order{
+#order,#modtype,#door{
   padding: 2px;
 }
-#order .header{
+.header{
   padding: 0.5em;
   font-weight: 800;
   background-color: rgb(192,192,192);
@@ -64,4 +65,28 @@ div.cell {
 div.cell:hover {
     background-color: rgb(208, 83, 92);
     color: #fff;
+}
+
+#modtype article{
+  padding: 20px;
+}
+#door header{
+  background-color: #66cc00;
+}
+
+#door input,#door select{
+  width: 100%;
+  border:1px solid silver;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 3px;
+  font-size: 14px;
+}
+
+#city{
+  margin: 20px 0;
+}
+
+select[name=user_repair_date],input[name=user_real_name]{
+  margin-bottom: 10px;
 }

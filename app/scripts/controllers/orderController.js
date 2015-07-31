@@ -1,6 +1,6 @@
 
 angular.module('controller').
-controller('orderController',['$scope','$resource',function(s,resource){
+controller('orderController',['$scope','$resource','$state','orderInfo',function(s,resource,$state,orderInfo){
     var loadData=(function(){
         var orderInfo=resource('data/orderinfo/:name.json?id=:id');    
         return function (name,id){
@@ -64,10 +64,12 @@ controller('orderController',['$scope','$resource',function(s,resource){
     s.checkHandle=handle.checkHandle;
     s.clickHandle=handle.clickHandle;
     s.submit=function(){
+        //angular.extend(orderInfo,s.oi); 
+        orderInfo.oi=s.oi;
         if(s.step>4){
         }else{
             console.log('信息不完全');
         }
-        
+        $state.go('index.modtype');
     }
 }]);

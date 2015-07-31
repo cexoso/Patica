@@ -19,6 +19,21 @@ angular
         url:'^/order',
         templateUrl: 'views/order.html',
         controller:'orderController'
+     }).
+     state('index.modtype',{
+        url:'^/modtype',
+        templateUrl: 'views/modtype.html',
+        controller:'modtypeController'
+     }).
+     state('index.door',{
+        url:'^/door',
+        templateUrl: 'views/door.html',
+        controller:'doorController'
+     }).
+     state('index.mail',{
+        url:'^/mail',
+        templateUrl: 'views/mail.html',
+        controller:'mailController'
      })
   
  

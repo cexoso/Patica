@@ -134,6 +134,11 @@ button, input, select, textarea {
     border-color: #4cae4c;
     color: #fff;
 }
+.btn-orange{
+    background-color: #ff9900;
+    border-color: #ff9900;
+    color: #fff;
+}
 
 .btn:hover, .btn:focus {
     color: #333;
@@ -143,4 +148,24 @@ button, input, select, textarea {
     background-color: #47a447;
     border-color: #398439;
     color: #fff;
+}
+.banner{
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+  display: block;
+  font-size: 30px;
+  text-decoration: none;
+  color: #000;
+}
+.banner .small{
+  font-size: 20px;
+  letter-spacing: 0px;
+}
+.bgc-g{
+  background-color: #66cc00;
+}
+
+.bgc-b{
+  background-color: #6CD3E5;
 }

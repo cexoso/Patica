@@ -1,0 +1,37 @@
+<section id="door">
+    <header class="text-center header">上门维修</header>
+    <article class='container'>
+        <span>姓名</span>
+        <input type="text" name='user_real_name' placeholder="请输入姓名">
+        <span>联系方式</span>
+        <input type="text" name='user_phone' placeholder="请输入您的电话">
+
+        <div id="city" >
+            <div class="clearfix">
+                <div style="float:left;width:45%;" >
+                    <span>选择城市</span>
+                    <select name="user_city" ng-model="city">
+                        <option value="">请选择城市</option>
+                        <option ng-repeat="city in citys" value="{{city.cityName}}">{{city.cityName}}</option>
+                    </select>
+                </div>
+                <div style="float:right;width:45%;">
+                    <span>选择区县</span>
+                    <select name="user_area">
+                        <option value="">qweqwe</option>
+                    </select>
+                </div>
+            </div>
+            <span>详细地址</span>
+            <input name="address_desc" type="text" placeholder="请输入详细地址"></div>
+        <span>期望上门时间</span>
+        <select name="user_repair_date">
+            <option value="">qweqwe</option>
+        </select>
+        <select name="user_repair_time_slot">
+            <option value="">qweqwe</option>
+        </select>
+
+        <button  style="margin-top: 30px;" class="btn btn-orange btn-lg btn-block" ng-click="submit()">提交订单</button>
+    </article>
+</section>
