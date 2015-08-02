@@ -12,26 +12,29 @@
                     <span>选择城市</span>
                     <select name="user_city" ng-model="city">
                         <option value="">请选择城市</option>
-                        <option ng-repeat="city in citys" value="{{city.cityName}}">{{city.cityName}}</option>
+                        <option ng-repeat="city in citys" value="{{city.id}}">{{city.cityName}}</option>
                     </select>
                 </div>
                 <div style="float:right;width:45%;">
                     <span>选择区县</span>
                     <select name="user_area">
-                        <option value="">qweqwe</option>
+                        <option value="">请选择区县！</option>
+                        <option ng-repeat="region in regions" value="{{region}}">{{region.region}}</option>
                     </select>
                 </div>
             </div>
             <span>详细地址</span>
             <input name="address_desc" type="text" placeholder="请输入详细地址"></div>
         <span>期望上门时间</span>
-        <select name="user_repair_date">
-            <option value="">qweqwe</option>
+        <select name="user_repair_date" value="qwe">
+            <option value="">请选择日期</option>
+            
+            <option ng-repeat="date in dates" value="{{date}}">{{date|msToDate}}</option>
         </select>
         <select name="user_repair_time_slot">
-            <option value="">qweqwe</option>
+            <option value="">请选择时间段</option>
+            <option ng-repeat="time in times" value="{{time.value}}">{{time.text}}</option>
         </select>
-
         <button  style="margin-top: 30px;" class="btn btn-orange btn-lg btn-block" ng-click="submit()">提交订单</button>
     </article>
 </section>

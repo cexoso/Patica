@@ -5,12 +5,44 @@ controller('modtypeController',['$scope',function(s){
 
 
 angular.module('controller').
-controller('doorController',['$scope','city','orderInfo',function(s,c,orderInfo){
+controller('doorController',['$scope','city','orderInfo','$filter',function(s,c,orderInfo,filter){
+    //一级城市
     s.citys=c.citys;
-    s.regions=[];
-    s.$watch('city',function(d){
-        console.log(d)
-    })
+    //二级区县联动
+    s.$watch('city',function(cityId){
+        //cytyId is id in {"cityName":"北京","id":"1"}
+        if(!cityId){return} 
+        s.regions=[].filter.call(c.regions,function(item){
+          if(item.parentid==cityId){
+            return true;
+          }else{
+            return false;
+          }
+        });
+    });
+    //获取4天时间 并挂载到dates上
+    var today=new Date().getTime(),
+          tomorrow = today+86400000,
+          tdat=tomorrow+86400000,
+          btdat=tdat+86400000;
+    s.dates=[today,tomorrow,tdat,btdat];
+    var times=[
+        {key:10,value:'9-10',text:'9:00-10:00'},
+        {key:12,value:'10-12',text:'10:00-12:00'},
+        {key:14,value:'13-14',text:'13:00-14:00'},
+        {key:16,value:'14-16',text:'14:00-16:00'},
+        {key:18,value:'16-18',text:'16:00-18:00'},
+        {key:20,value:'18-20',text:'18:00-20:00'}
+    ];
+    s.times=[].filter.call(times,function(o){
+        return true;
+        var h=new Date().getHours();
+        if(h>o.key){
+            return false;
+        }else{
+            return true;
+        }
+    });
 }]);
 
 
@@ -18,11 +50,19 @@ angular.module('controller').
 controller('mailController',['$scope',function(s){
     
 }]);
-
-
-
-
-angular.module('service').service('orderInfo',function(){
+angular.module('service').filter('msToDate',function(){
+    var tag=['今天','明天','后天','大后天'];
+    return function(ms){
+        var today=new Date();
+        var todayMs=new Date(today.getYear()+1900,today.getMonth(),today.getDate()).getTime();
+        var d=new Date(ms);
+        var delta=ms-todayMs
+        var tagN="";
+        tagN=tag[Math.floor(delta/86400000)];
+        return d.getMonth()+1+'月'+d.getDate()+'日('+tagN+')';
+    }
+})
+.service('orderInfo',function(){
     var orderInfo=Object.create({
         get:function(key){
             return this.key;
@@ -31,10 +71,8 @@ angular.module('service').service('orderInfo',function(){
             this[key]=value;
         }
     })
-
     return orderInfo;
-});
-angular.module('service').constant('city',{
+}).constant('city',{
         citys: [{
             cityName: '北京',
             id: '1'
