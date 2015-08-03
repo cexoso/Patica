@@ -1,0 +1,53 @@
+<section  id="mail">
+    <header class="text-center header">邮寄维修</header>
+    <article class='container'>
+        <span>姓名</span>
+        <input type="text" name='user_real_name' placeholder="请输入姓名">
+        <span>联系方式</span>
+        <input type="text" name='user_phone' placeholder="请输入您的电话">
+
+        <div class="city" >
+            <div class="clearfix">
+                <div style="float:left;width:45%;" >
+                    <span>选择城市</span>
+                    <select name="user_city" ng-model="city">
+                        <option value="">请选择城市</option>
+                        <option ng-repeat="city in citys" value="{{city.id}}">{{city.cityName}}</option>
+                    </select>
+                </div>
+                <div style="float:right;width:45%;">
+                    <span>选择区县</span>
+                    <select name="user_area">
+                        <option value="">请选择区县！</option>
+                        <option ng-repeat="region in regions" value="{{region}}">{{region.region}}</option>
+                    </select>
+                </div>
+            </div>
+            <span>详细地址</span>
+            <input name="address_desc" type="text" placeholder="请输入详细地址">
+        </div>
+        <span>预计寄出时间</span>
+        <select name="user_repair_date" value="qwe">
+            <option value="">请选择日期</option>
+            <option ng-repeat="date in dates" value="{{date}}">{{date|msToDate}}</option>
+        </select>
+        <div class="check_lable">
+          <input type="checkbox" id="is_need_mailer">
+          <label for="is_need_mailer">需要Patica帮我联系快递员上门收件</label>
+        </div>
+        <button  style="margin-top: 30px;" class="btn btn-orange btn-lg btn-block" ng-click="submit()">提交订单,立即微信支付</button>
+    </article>
+    <footer class="container">
+        你的爱机在寄修的过程中，我们会按天给予补贴
+        <ul>
+            <li>第一天 5元</li>
+            <li>第二天 额外5元</li>
+            <li>第三天 额外10元</li>
+            <li>第四天 额外10元</li>
+        </ul>
+        补贴形式:在我的红包中领取现金提现即可
+        <br>
+        <br>
+        时间计算：补贴金从您订单寄出开始计算补贴金从您订单寄出开始计算补贴金从您订单寄出开始计算补贴金从您订单寄出开始计算补贴金从您订单寄出开始计算
+    </footer>
+</section>

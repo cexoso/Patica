@@ -47,8 +47,27 @@ controller('doorController',['$scope','city','orderInfo','$filter',function(s,c,
 
 
 angular.module('controller').
-controller('mailController',['$scope',function(s){
-    
+controller('mailController',['$scope','city','orderInfo','$filter',function(s,c,orderInfo,filter){
+    //一级城市
+    s.citys=c.citys;
+    //二级区县联动
+    s.$watch('city',function(cityId){
+        //cytyId is id in {"cityName":"北京","id":"1"}
+        if(!cityId){return} 
+        s.regions=[].filter.call(c.regions,function(item){
+          if(item.parentid==cityId){
+            return true;
+          }else{
+            return false;
+          }
+        });
+    });
+     //获取4天时间 并挂载到dates上
+    var today=new Date().getTime(),
+          tomorrow = today+86400000,
+          tdat=tomorrow+86400000,
+          btdat=tdat+86400000;
+    s.dates=[today,tomorrow,tdat,btdat];
 }]);
 angular.module('service').filter('msToDate',function(){
     var tag=['今天','明天','后天','大后天'];

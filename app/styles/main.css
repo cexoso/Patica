@@ -4,6 +4,11 @@ body{
   font-family:"Helvetica Neue",Helvetica,Arial,"Microsoft Yahei",sans-serif;
   font-size: 20px;
 }
+#fixedTitle{
+  height: 50px;
+  line-height: 50px;
+  vertical-align: middle;
+}
 #customerService header span{
   background-color: steelblue;
   color: white;
@@ -28,16 +33,22 @@ body{
 #callMe{
   display: block;
   height: 50px;
+  width: 63px;
   line-height: 50px;
   text-decoration: none;
   color: #ccc;
   text-align: center;
+  background: url('../images/listall.png');
+  background-clip: padding-box;
+  background-repeat: no-repeat;
+  background-size: 188px;
+  background-position: 12px -40px;
 }
 header.nav{
   border-bottom: 1px solid black;
 }
 
-#order,#modtype,#door{
+#order,#modtype,#door,#mail{
   padding: 2px;
 }
 .header{
@@ -74,7 +85,7 @@ div.cell:hover {
   background-color: #66cc00;
 }
 
-#door input,#door select{
+#door input,#door select,#mail input,#mail select{
   width: 100%;
   border:1px solid silver;
   height: 30px;
@@ -82,11 +93,38 @@ div.cell:hover {
   border-radius: 3px;
   font-size: 14px;
 }
-
-#city{
+.city{
   margin: 20px 0;
 }
 
 select[name=user_repair_date],input[name=user_real_name]{
   margin-bottom: 10px;
+}
+
+#mail header{
+  background-color: #6CD3E5;
+}
+
+.check_lable{
+  text-align: center;
+}
+
+.check_lable input[type=checkbox]{
+  width: 20px !important;
+  vertical-align: middle;
+}
+.check_lable label{
+  vertical-align: middle;
+}
+#mail footer{
+  margin-top: 20px;
+  border-top: 1px dashed black;
+  font-size: 14px;
+}
+#mail footer li{
+  list-style: none;
+  padding-left: 30px;
+  margin: 10px 0;
+  background: url("../images/arrow.png") left center no-repeat;
+  background-size: auto 100%;
 }
