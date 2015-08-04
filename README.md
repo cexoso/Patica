@@ -5,8 +5,13 @@ version 0.12.1.
 
 ## Build & development
 
-Run `grunt` for building and `grunt serve` for preview.
+npm install -g bower;
+npm install;
+bower install;
+npm install gulp -g
+
+run gulp
 
 ## Testing
 
-Running `grunt test` will run the unit tests with karma.
+i have no test
