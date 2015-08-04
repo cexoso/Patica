@@ -1,27 +1,43 @@
 <section class="container">
-    <header>订单列表&gt;所有订单</header>
+    <header></header>
     <article>
         <div class="panel panel-default">
-            <div class="panel-heading">123</div>
+            <div class="panel-heading">订单列表&gt;所有订单</div>
             <div class="panel-body">
-                <table class="table">
-                    <thead>
-                        <th>
-                            <td>订单号</td>
-                            <td>订单类型</td>
-                            <td>下单时间</td>
-                            <td>是否支付</td>
-                            <td>订单状态</td>
-                            <td>用户姓名-电话</td>
-                            <td>维修内容</td>
-                            <td>维修价格</td>
-                            <td>上门日期</td>
-                            <td>用户地址</td>
-                            <td>操作</td>
-                        </th>
-                    </thead>
-                </table>
+                <p>...</p>
             </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>订单号</th>
+                        <th>订单类型</th>
+                        <th>下单时间</th>
+                        <th>是否支付</th>
+                        <th>订单状态</th>
+                        <th>用户姓名-电话</th>
+                        <th>维修内容</th>
+                        <th>维修价格</th>
+                        <th>上门日期</th>
+                        <th>用户地址</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="order in orderList">
+                        <td>{{order.name}}</td>
+                        <td>{{order.name}}</td>
+                        <td>{{order.name}}</td>
+                        <td>{{order.name}}</td>
+                        <td>{{order.name}}</td>
+                        <td>{{order.name}}</td>
+                        <td>{{order.name}}</td>
+                        <td>{{order.name}}</td>
+                        <td>{{order.name}}</td>
+                        <td>{{order.name}}</td>
+                        <td>{{order.name}}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </article>
     <footer></footer>
