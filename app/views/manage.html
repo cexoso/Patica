@@ -1,4 +1,4 @@
-<section class="container">
+<section class="container-fluid">
     <header></header>
     <article>
         <div class="panel panel-default">
@@ -23,17 +23,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="order in orderList">
-                        <td>{{order.name}}</td>
-                        <td>{{order.name}}</td>
-                        <td>{{order.name}}</td>
-                        <td>{{order.name}}</td>
-                        <td>{{order.name}}</td>
-                        <td>{{order.name}}</td>
-                        <td>{{order.name}}</td>
-                        <td>{{order.name}}</td>
-                        <td>{{order.name}}</td>
-                        <td>{{order.name}}</td>
+                    <tr ng-repeat="order in page.orders">
+                        <td>{{order.orderid}}</td>
+                        <td>{{order.order_type}}</td>
+                        <td>{{order.ordertime}}</td>
+                        <td>{{order.pay_status}}</td>
+                        <td>{{order.status}}</td>
+                        <td>{{order.user_real_name}} {{order.user_phone}}</td>
+                        <td>{{order.trouble_desc}}</td>
+                        <td>
+                            原价：{{order.total_price}} 
+                            折扣：{{order.discount_price}}
+                            实付：{{order.total_price-order.discount_price}}    
+                        </td>
+                        <td>{{order.user_repair_date}} {{order.user_repair_time_slot}}</td>
+                        <td>{{order.user_city}} {{order.user_area}} {{order.address_desc}}</td>
                         <td>{{order.name}}</td>
                     </tr>
                 </tbody>
@@ -42,3 +46,4 @@
     </article>
     <footer></footer>
 </section>
+
