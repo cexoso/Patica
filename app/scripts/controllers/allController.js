@@ -3,13 +3,19 @@ controller('modtypeController',['$scope',function(s){
     
 }]);
 
+angular.module('controller').
+controller('orderdetailController',['$scope','orderInfo',function(s,orderInfo){
+    s.oi=orderInfo.get('oi');
+    s.ui=orderInfo.get('ui');
+    
+}]);
 
 angular.module('controller').
-controller('doorController',['$scope','city','orderInfo','$filter',function(s,c,orderInfo,filter){
+controller('doorController',['$scope','city','orderInfo','$filter','$state',function(s,c,orderInfo,filter,state){
     //一级城市
     s.citys=c.citys;
     //二级区县联动
-    s.$watch('city',function(cityId){
+    s.$watch('ui.user_city',function(cityId){
         //cytyId is id in {"cityName":"北京","id":"1"}
         if(!cityId){return} 
         s.regions=[].filter.call(c.regions,function(item){
@@ -43,6 +49,10 @@ controller('doorController',['$scope','city','orderInfo','$filter',function(s,c,
             return true;
         }
     });
+    s.submit=function(){
+        orderInfo.set('ui',s.ui);
+        state.go('index.orderdetail');
+    }
 }]);
 
 
@@ -69,6 +79,7 @@ controller('mailController',['$scope','city','orderInfo','$filter',function(s,c,
           btdat=tdat+86400000;
     s.dates=[today,tomorrow,tdat,btdat];
 }]);
+
 angular.module('service').filter('msToDate',function(){
     var tag=['今天','明天','后天','大后天'];
     return function(ms){
@@ -80,14 +91,47 @@ angular.module('service').filter('msToDate',function(){
         tagN=tag[Math.floor(delta/86400000)];
         return d.getMonth()+1+'月'+d.getDate()+'日('+tagN+')';
     }
-})
+}).filter('cityParse',['city',function(city){
+    return function(id){     
+        var arr=city.citys;
+        for(var i=0;i<arr.length;i++){
+            if(arr[i].id==id){
+                return arr[i].cityN;
+            }
+        }
+        return "地区信息有误";
+    }
+}]).filter('areaParse',['city',function(city){
+    return function(id){     
+        var arr=city.regions;
+        for(var i=0;i<arr.length;i++){
+            if(arr[i].id==id){
+                return arr[i].region;
+            }
+        }
+        return "地区信息有误";
+    }
+}])
 .service('orderInfo',function(){
     var orderInfo=Object.create({
         get:function(key){
-            return this.key;
+            var value=this.key;
+            if(angular.isUndefined(value)){
+                try{
+                    return JSON.parse(sessionStorage.getItem(key));
+                }catch(e){
+                    console.log(e);
+                }    
+            }
+            return value;
         },
         set:function(key,value){
             this[key]=value;
+            try{
+                sessionStorage.setItem(key,JSON.stringify(value));
+            }catch(e){
+                console.log(e);
+            }
         }
     })
     return orderInfo;
@@ -481,3 +525,10 @@ angular.module('service').filter('msToDate',function(){
         parentName: "龙岩"
     }]
 });
+
+angular.module('paticaApp').directive('stars',[function(){
+    
+    return{
+
+    }
+}]);

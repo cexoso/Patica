@@ -34,6 +34,11 @@ angular
         url:'^/mail',
         templateUrl: 'views/mail.html',
         controller:'mailController'
+     }).
+     state('index.orderdetail',{
+        url:'^/orderdetail',
+        templateUrl: 'views/orderdetail.html',
+        controller:'orderdetailController'
      })
   
  

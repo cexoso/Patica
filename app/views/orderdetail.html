@@ -1,0 +1,67 @@
+<section id="orderdetail">
+    <header class="text-center header">上门维修</header>
+    <article class='container'>
+        <div class="info">
+            <p>
+                感谢您的订单！
+                <br>我们会尽快与您联系</p>
+        </div>
+
+        <div id="progress"></div>
+
+        <div id="grade">
+            <div class="clearfix">
+                <span class="pull-left" stars='5' disable></span>
+                <span class="pull-right">服务评分</span>
+            </div>
+            <textarea placeholder='您有什么想对我们说的'></textarea>
+
+        </div>
+
+        <button  style="margin-top: 30px;" class="btn btn-pink btn-lg btn-block" ng-click="submit()">提交评论</button>
+
+        <div id="productInfo">
+            产品信息
+            <div>
+                <div>
+                    <span class="key">品牌</span>
+                    <span class="value">{{oi.brand.name}}</span>
+                </div>
+                <div>
+                    <span class="key">型号</span>
+                    <span class="value">{{oi.version.name}}</span>
+                </div>
+                <div>
+                    <span class="key">颜色</span>
+                    <span class="value">{{oi.color.name}}</span>
+                </div>
+                <div>
+                    <span class="key">故障类型</span>
+                    <span class="value">{{oi.fault.name}}</span>
+                </div>
+            </div>
+        </div>
+        <div id="userInfo">
+            用户信息
+            <div>
+                <div>
+                    <span class="key">姓名</span>
+                    <span class="value">{{ui.user_real_name}}</span>
+                </div>
+                <div>
+                    <span class="key">手机号</span>
+                    <span class="value">{{ui.user_phone}}</span>
+                </div>
+                <div>
+                    <span class="key">城市区县</span>
+                    <span class="value">{{ui.user_city|cityParse}} {{ui.user_area|areaParse}}</span>
+                </div>
+                <div>
+                    <span class="key">街道信息</span>
+                    <span class="value">{{ui.address_desc}}</span>
+                </div>
+            </div>
+        </div>
+        <button  style="margin-top: 30px;" class="btn btn-green btn-lg btn-block" ng-click="submit()">取消订单</button>
+    </article>
+</section>

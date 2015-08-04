@@ -139,6 +139,18 @@ button, input, select, textarea {
     border-color: #ff9900;
     color: #fff;
 }
+.btn-pink{
+    background-color: rgb(250, 153, 118);
+    border: 1px white solid;
+    color: white;
+    border-radius: 30px;
+}
+.btn-green{
+    background-color: #66cc00;
+    border: 1px white solid;
+    color: white;
+    border-radius: 30px;
+}
 
 .btn:hover, .btn:focus {
     color: #333;

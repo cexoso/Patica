@@ -65,7 +65,7 @@ controller('orderController',['$scope','$resource','$state','orderInfo',function
     s.clickHandle=handle.clickHandle;
     s.submit=function(){
         //angular.extend(orderInfo,s.oi); 
-        orderInfo.oi=s.oi;
+        orderInfo.set('oi',s.oi);
         if(s.step>4){
         }else{
             console.log('信息不完全');

@@ -2,36 +2,36 @@
     <header class="text-center header">上门维修</header>
     <article class='container'>
         <span>姓名</span>
-        <input type="text" name='user_real_name' placeholder="请输入姓名">
+        <input type="text" name='user_real_name' ng-model="ui.user_real_name" placeholder="请输入姓名">
         <span>联系方式</span>
-        <input type="text" name='user_phone' placeholder="请输入您的电话">
+        <input type="text" name='user_phone' ng-model="ui.user_phone" placeholder="请输入您的电话">
 
         <div id="city" >
             <div class="clearfix">
                 <div style="float:left;width:45%;" >
                     <span>选择城市</span>
-                    <select name="user_city" ng-model="city">
+                    <select name="user_city" ng-model="ui.user_city">
                         <option value="">请选择城市</option>
                         <option ng-repeat="city in citys" value="{{city.id}}">{{city.cityName}}</option>
                     </select>
                 </div>
                 <div style="float:right;width:45%;">
                     <span>选择区县</span>
-                    <select name="user_area">
+                    <select name="user_area" ng-model="ui.user_area">
                         <option value="">请选择区县！</option>
-                        <option ng-repeat="region in regions" value="{{region}}">{{region.region}}</option>
+                        <option ng-repeat="region in regions" value="{{region.id}}">{{region.region}}</option>
                     </select>
                 </div>
             </div>
             <span>详细地址</span>
-            <input name="address_desc" type="text" placeholder="请输入详细地址"></div>
+            <input name="address_desc" type="text" ng-model="ui.address_desc" placeholder="请输入详细地址"></div>
         <span>期望上门时间</span>
-        <select name="user_repair_date" value="qwe">
+        <select name="user_repair_date" ng-model="ui.user_repair_date" value="qwe">
             <option value="">请选择日期</option>
             
             <option ng-repeat="date in dates" value="{{date}}">{{date|msToDate}}</option>
         </select>
-        <select name="user_repair_time_slot">
+        <select name="user_repair_time_slot" ng-model="ui.user_repair_time_slot">
             <option value="">请选择时间段</option>
             <option ng-repeat="time in times" value="{{time.value}}">{{time.text}}</option>
         </select>
