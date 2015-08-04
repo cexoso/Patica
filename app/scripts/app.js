@@ -4,35 +4,15 @@ angular
   .module('paticaApp', [
     'ui.router',
     'controller'
-  ])
-  .config(function($stateProvider, $urlRouterProvider) {
-     $urlRouterProvider.otherwise('/order');
-     $stateProvider.state('index', {
-        url:'/index',
-        templateUrl: 'views/index.html',
-        abstract:true,
-        controller:'indexController'
-      }).
-     state('index.order',{
-        url:'^/order',
-        templateUrl: 'views/order.html'
-     })
-  
- 
-    
-  });
-
-angular.module('paticaApp').config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
-     $stateProvider
-    .state('recruitment', {
-      url: "/recruitment",
-      templateUrl: 'views/recruitment.html',
-      abstract:true
-    }).state('recruitment.customerService', {
-      url: "/customerService",
-      templateUrl: 'views/customerService.html'
-    })
-  }])
+])
+.config(function($stateProvider, $urlRouterProvider) {
+     $urlRouterProvider.otherwise('/manage');
+     $stateProvider.state('manage', {
+        url:'/manage',
+        templateUrl: 'views/manage.html',
+        controller:'manageController'
+      })
+});
 
 angular.module('controller',[]);
 
