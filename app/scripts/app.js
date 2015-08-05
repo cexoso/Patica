@@ -4,7 +4,10 @@ angular
   .module('paticaApp', [
     'ngResource',
     'ui.router',
-    'controller'
+    'ui.bootstrap',
+    'ui.bootstrap.tpls',
+    'controller',
+    'services'
 ])
 .config(function($stateProvider, $urlRouterProvider) {
      $urlRouterProvider.otherwise('/manage');
@@ -16,6 +19,7 @@ angular
 });
 
 angular.module('controller',[]);
+angular.module('services',[]);
 
 
 

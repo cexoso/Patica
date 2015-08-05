@@ -3,8 +3,11 @@
     <article>
         <div class="panel panel-default">
             <div class="panel-heading">订单列表&gt;所有订单</div>
-            <div class="panel-body">
-                <p>...</p>
+            <div class="panel-body" ng-controller="funCtroller">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default btn-lg" ng-click="appendBill()">手动录单</button>
+                    <button type="button" class="btn btn-default btn-lg">手动录单</button>
+                </div>
             </div>
             <table class="table table-hover">
                 <thead>
@@ -24,26 +27,99 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="order in page.orders">
-                        <td>{{order.orderid}}</td>
-                        <td>{{order.order_type}}</td>
-                        <td>{{order.ordertime}}</td>
-                        <td>{{order.pay_status}}</td>
-                        <td>{{order.status}}</td>
-                        <td>{{order.user_real_name}} {{order.user_phone}}</td>
-                        <td>{{order.trouble_desc}}</td>
-                        <td>
-                            原价：{{order.total_price}} 
-                            折扣：{{order.discount_price}}
-                            实付：{{order.total_price-order.discount_price}}    
+                        <td class="vertical-middle">{{order.orderid}}</td>
+                        <td class="vertical-middle">{{order.order_type|orderTypeParse}}</td>
+                        <td class="vertical-middle">{{order.ordertime}}</td>
+                        <td class="vertical-middle">{{order.pay_status|payStatusParse}}</td>
+                        <td class="vertical-middle">{{order.status|statusParse}}</td>
+                        <td class="vertical-middle">{{order.user_real_name}} {{order.user_phone}}</td>
+                        <td class="vertical-middle">{{order.trouble_desc}}</td>
+                        <td class="vertical-middle">
+                            <p>
+                                <label>原价：</label>
+                                {{order.total_price}}
+                            </p>
+                            <p>
+                                <label>折扣：</label>
+                                {{order.discount_price}}
+                            </p>
+                            <p>
+                                <label>实付：</label>
+                                {{order.total_price-order.discount_price}}
+                            </p>
                         </td>
-                        <td>{{order.user_repair_date}} {{order.user_repair_time_slot}}</td>
-                        <td>{{order.user_city}} {{order.user_area}} {{order.address_desc}}</td>
-                        <td>{{order.name}}</td>
+                        <td class="vertical-middle">
+                            <p>
+                                <label>{{order.user_repair_date|userRepairDateParse}}</label>
+                            </p>
+                            <p>
+                                <label>{{order.user_repair_time_slot}}</label>
+                            </p>
+                        </td>
+                        <td class="vertical-middle">
+                            <p>
+                                <label>{{order.user_city}}</label>
+                            </p>
+                            <p>
+                                <label>{{order.user_area}}</label>
+                            </p>
+                            <p>
+                                <label>{{order.address_desc}}</label>
+                            </p>
+                        </td>
+                        <td class="vertical-middle">
+                            <div class="btn-group-vertical">
+                                <button class="btn btn-default" ng-click="evaluation(order)">查看评价</button>
+                                <button class="btn btn-default" ng-click="del(order)">删除</button>
+                                <button class="btn btn-default">确认收件</button>
+                                <button class="btn btn-default">维修完成</button>
+                                <button class="btn btn-default">已邮寄</button>
+                            </div>
+                        </td>
                     </tr>
+                </tbody>
+            </table>
+
+            <table class="table table-hover" ng-if="false">
+                <thead>
+                    <tr>
+                        <th>订单号</th>
+                        <th>下单时间</th>
+                        <th>手机品牌</th>
+                        <th>手机型号</th>
+                        <th>手机颜色</th>
+                        <th>一级故障</th>
+                        <th>二级故障</th>
+                        <th>城市</th>
+                        <th>姓名</th>
+                        <th>手机</th>
+                        <th>地址</th>
+                        <th>上门日期</th>
+                        <th>上门时间</th>
+                        <th>订单类型</th>
+                        <th>报价</th>
+                        <th>实收</th>
+                        <th>优惠</th>
+                        <th>付款方式</th>
+                        <th>订单状态</th>
+                        <th>负责人</th>
+                        <th>客户来源</th>
+                        <th>服务单号</th>
+                        <th>IMEI</th>
+                        <th>券号</th>
+                        <th>备注</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="order in page.orders"></tr>
                 </tbody>
             </table>
         </div>
     </article>
-    <footer></footer>
+    <footer>
+        <div class="container">
+            <pagination ng-change="pageChanged(page.page)" total-items="page.totalcount" items-per-page="page.pagesize" ng-model="page.page" max-size="10" class="pagination-sm" boundary-links="true" rotate="false"></pagination>
+            <pre>Page: {{page.page}} / {{page.numPages}}</pre>
+        </div>
+    </footer>
 </section>
-
