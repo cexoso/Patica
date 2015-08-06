@@ -10,34 +10,41 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">下单时间</label>
                     <div class="col-sm-4">
-                        <input type="date" class="form-control"  placeholder="下单时间"></div>
+                        <input type="date" ng-model="oi.orderTime" class="form-control"  placeholder="下单时间"></div>
                     <label for="order_id" class="col-sm-2 control-label">订单状态</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control"  placeholder="订单状态"></div>
+                        <input type="text" class="form-control" ng-model="oi.orderStatus" placeholder="订单状态"></div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">负责人</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control"  placeholder="负责人"></div>
+                        <input type="text" class="form-control"  ng-model="oi.counterman" placeholder="负责人"></div>
                     <label for="order_id" class="col-sm-2 control-label">客户来源</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control"  placeholder="客户来源"></div>
+                        <input type="text" class="form-control"  ng-model="oi.clientOrigin" placeholder="客户来源"></div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">服务单号</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control"  placeholder="服务单号"></div>
+                        <input type="text" class="form-control" ng-model="oi.serviceCode" placeholder="服务单号"></div>
                     <label for="order_id" class="col-sm-2 control-label">IMEI</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control"  placeholder="IMEI"></div>
+                        <input type="text" class="form-control"  ng-model="oi.IMEI" placeholder="IMEI"></div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">券号</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control"  placeholder="券号"></div>
+                        <input type="text" class="form-control" ng-model="oi.ticketCode" placeholder="券号"></div>
                     <label class="col-sm-2 control-label">订单类型</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control"  placeholder="订单类型"></div>
+                        <input type="text" class="form-control"  ng-model="oi.orderType" placeholder="订单类型"></div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <div class="checkbox">
+                            <label class="btn btn-primary btn-lg" ng-init="oi.refixed=false" ng-model="oi.refixed" btn-checkbox>{{{true:'返修',false:'首单'}[oi.refixed]}}</label>
+                        </div>
+                    </div>
                 </div>
             </fieldset>
             <fieldset>
@@ -45,11 +52,11 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">手机品牌</label>
                     <div class="col-sm-4">
-                        <select class="form-control">
+                        <select class="form-control" ng-model="oi.brand">
                             <option value="">请选择手机品牌</option>
                         </select>
                     </div>
-                    <label class="col-sm-2 control-label">手机型号</label>
+                    <label class="col-sm-2 control-label" ng-model="oi.version">手机型号</label>
                     <div class="col-sm-4">
                         <select class="form-control">
                             <option value="">请选择手机型号</option>
@@ -57,15 +64,15 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">手机颜色</label>
+                    <label class="col-sm-2 control-label" ng-model="oi.color">手机颜色</label>
                     <div class="col-sm-4">
                         <select class="form-control">
                             <option value="">请选择手机颜色</option>
                         </select>
                     </div>
-                    <label class="col-sm-2 control-label">一级故障</label>
+                    <label class="col-sm-2 control-label" >一级故障</label>
                     <div class="col-sm-4">
-                        <select class="form-control">
+                        <select class="form-control" ng-model="oi.fault">
                             <option value="">请选择手机故障</option>
                         </select>
                     </div>
@@ -73,7 +80,7 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">二级故障</label>
                     <div class="col-sm-10">
-                        <select class="form-control">
+                        <select class="form-control" ng-model="oi.subfault">
                             <option value="">请选择手机二级故障</option>
                         </select>
                     </div>
@@ -84,10 +91,10 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">姓名</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" placeholder="姓名"></div>
+                        <input type="text" class="form-control" ng-model="oi.userName" placeholder="姓名"></div>
                     <label for="order_id" class="col-sm-2 control-label">城市</label>
                     <div class="col-sm-4">
-                        <select class="form-control">
+                        <select class="form-control" ng-model="oi.city">
                             <option value="">城市</option>
                         </select>
                     </div>
@@ -95,23 +102,23 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">手机号</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" placeholder="手机号"></div>
+                        <input type="text" class="form-control" ng-model="oi.phoneNum" placeholder="手机号"></div>
                     <label for="order_id" class="col-sm-2 control-label">地址</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" placeholder="地址"></div>
+                        <input type="text" class="form-control" ng-model="oi.address" placeholder="地址"></div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">上门日期</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" placeholder="上门日期"></div>
+                        <input type="text" class="form-control" ng-model="oi.visitingDate" placeholder="上门日期"></div>
                     <label for="order_id" class="col-sm-2 control-label">上门时间</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" placeholder="上门时间"></div>
+                        <input type="text" class="form-control" placeholder="上门时间" ng-model="oi.visitingTime"></div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">备注</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" placeholder="备注"></div>
+                        <input type="text" class="form-control" ng-model="oi.remark" placeholder="备注"></div>
                 </div>
             </fieldset>
         </form>
