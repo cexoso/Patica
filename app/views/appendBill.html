@@ -3,7 +3,7 @@
         <h3 class="modal-title">手动录单</h3>
     </header>
     <article class="modal-body">
-
+{{oi}}
         <form class="form-horizontal">
             <fieldset>
                 <legend>订单信息</legend>
@@ -54,26 +54,30 @@
                     <div class="col-sm-4">
                         <select class="form-control" ng-model="oi.brand">
                             <option value="">请选择手机品牌</option>
+                            <option value="{{brand.id}}" ng-repeat="brand in list.brandList">{{brand.name}}</option>
                         </select>
                     </div>
-                    <label class="col-sm-2 control-label" ng-model="oi.version">手机型号</label>
+                    <label class="col-sm-2 control-label">手机型号</label>
                     <div class="col-sm-4">
-                        <select class="form-control">
+                        <select class="form-control" ng-model="oi.version">
                             <option value="">请选择手机型号</option>
+                            <option value="{{version.id}}" ng-repeat="version in list.versionList">{{version.name}}</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" ng-model="oi.color">手机颜色</label>
+                    <label class="col-sm-2 control-label" >手机颜色</label>
                     <div class="col-sm-4">
-                        <select class="form-control">
+                        <select class="form-control" ng-model="oi.color">
                             <option value="">请选择手机颜色</option>
+                            <option value="{{color.id}}" ng-repeat="color in list.colorList">{{color.name}}</option>
                         </select>
                     </div>
                     <label class="col-sm-2 control-label" >一级故障</label>
                     <div class="col-sm-4">
                         <select class="form-control" ng-model="oi.fault">
                             <option value="">请选择手机故障</option>
+                            <option value="{{fault.id}}" ng-repeat="fault in list.faultList">{{fault.name}}</option>
                         </select>
                     </div>
                 </div>
