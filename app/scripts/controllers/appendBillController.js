@@ -3,12 +3,12 @@ angular.module('paticaApp')
         var loadData =(function(){
             var baseUrl='/data/orderinfo/';
             return function(url,params){
-                $http.get(baseUrl+url,angular.extend({cache:true},{params:params}));
+                $http.get(baseUrl+url+'.json',angular.extend({cache:true},{params:params}));
             }
         })();
         
-        loadData('brandList.json',{id:1});
-        loadData('brandList.json',{id:2});
+        loadData('brandList');
+        loadData('brandList');
         
 
     s.show="brand"; 
