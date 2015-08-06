@@ -92,5 +92,20 @@ angular.module('paticaApp')
             });
         }
 
-    s.appendBill();
+    s.appendPeople=function(order){
+            var modalInstance = $modal.open({
+                  animation: true,
+                  templateUrl: 'views/appendPeople.html',
+                  controller: 'appendPeopleController',
+                  size: 'lg',
+                  backdrop:false
+             });
+            modalInstance.result.then(function(q){
+                console.log(q)
+            },function(w){
+                console.log(w)
+            });
+        }
+
+    s.appendPeople();
 }]);
