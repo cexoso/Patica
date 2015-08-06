@@ -91,4 +91,6 @@ angular.module('paticaApp')
                 console.log(w)
             });
         }
+
+    s.appendBill();
 }]);
