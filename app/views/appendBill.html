@@ -3,14 +3,13 @@
         <h3 class="modal-title">手动录单</h3>
     </header>
     <article class="modal-body">
-{{oi}}
         <form class="form-horizontal">
             <fieldset>
                 <legend>订单信息</legend>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">下单时间</label>
                     <div class="col-sm-4">
-                        <input type="date" ng-model="oi.orderTime" class="form-control"  placeholder="下单时间"></div>
+                        <input type="text" ng-model="oi.orderTime" class="form-control"  placeholder="下单时间"></div>
                     <label for="order_id" class="col-sm-2 control-label">订单状态</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" ng-model="oi.orderStatus" placeholder="订单状态"></div>
@@ -99,7 +98,8 @@
                     <label for="order_id" class="col-sm-2 control-label">城市</label>
                     <div class="col-sm-4">
                         <select class="form-control" ng-model="oi.city">
-                            <option value="">城市</option>
+                            <option value="">请选择城市</option>
+                            <option value="{{city.id}}" ng-repeat="city in city.citys">{{city.cityName}}</option>
                         </select>
                     </div>
                 </div>

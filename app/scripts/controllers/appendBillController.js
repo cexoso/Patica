@@ -1,5 +1,5 @@
 angular.module('paticaApp')
-  .controller('appendBillController',['$scope','$modalInstance','$http',function(s,$modalInstance,$http){
+  .controller('appendBillController',['$scope','$modalInstance','$http','city',function(s,$modalInstance,$http,city){
         var loadData =(function(){
             var baseUrl='/data/orderinfo/';
             return function(url,params){
@@ -61,9 +61,13 @@ angular.module('paticaApp')
         
         })
         
-        // 
+        s.city=city;
         s.ok = function () {
-            $modalInstance.close("hello");
+            $http.post('qwe',s.oi).success(function(){
+                $modalInstance.close("success");
+            }).error(function(){
+                alert("提交失败")
+            });
         };
         s.cancel = function () {
            $modalInstance.dismiss('cancel');
