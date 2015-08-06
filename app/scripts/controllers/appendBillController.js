@@ -1,13 +1,15 @@
 angular.module('paticaApp')
   .controller('appendBillController',['$scope','$modalInstance','$http',function(s,$modalInstance,$http){
         var loadData =(function(){
+            var baseUrl='/data/orderinfo/';
             return function(url,params){
-                $http.get(url,angular.extend({cache:true},{params:params}));
+                $http.get(baseUrl+url,angular.extend({cache:true},{params:params}));
             }
         })();
         
-        loadData('/data/repairorder.json');
-
+        loadData('brandList.json',{id:1});
+        loadData('brandList.json',{id:2});
+        
 
         
 
