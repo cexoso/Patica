@@ -3,7 +3,50 @@
         <h3 class="modal-title">添加负责人</h3>
     </header>
     <article class="modal-body">
-        
+           <form class="form-horizontal">
+            <fieldset>
+                <legend>订单信息</legend>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">下单时间</label>
+                    <div class="col-sm-4">
+                        <input type="text" ng-model="oi.orderTime" class="form-control"  placeholder="下单时间"></div>
+                    <label for="order_id" class="col-sm-2 control-label">订单状态</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" ng-model="oi.orderStatus" placeholder="订单状态"></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">负责人</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control"  ng-model="oi.counterman" placeholder="负责人"></div>
+                    <label for="order_id" class="col-sm-2 control-label">客户来源</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control"  ng-model="oi.clientOrigin" placeholder="客户来源"></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">服务单号</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" ng-model="oi.serviceCode" placeholder="服务单号"></div>
+                    <label for="order_id" class="col-sm-2 control-label">IMEI</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control"  ng-model="oi.IMEI" placeholder="IMEI"></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">券号</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" ng-model="oi.ticketCode" placeholder="券号"></div>
+                    <label class="col-sm-2 control-label">订单类型</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control"  ng-model="oi.orderType" placeholder="订单类型"></div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <div class="checkbox">
+                            <label class="btn btn-primary btn-lg" ng-init="oi.refixed=false" ng-model="oi.refixed" btn-checkbox>{{{true:'返修',false:'首单'}[oi.refixed]}}</label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
     </article>
     <footer class="modal-footer">
         <button class="btn btn-primary" ng-click="ok()">添加</button>
