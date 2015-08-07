@@ -1,5 +1,5 @@
 'use strict';
-angular.module('paticaApp')
+angular.module('controller')
   .controller('appendBillController',['$scope','$modalInstance','$http','city',function(s,$modalInstance,$http,city){
         var loadData =(function(){
             var baseUrl='/data/orderinfo/';

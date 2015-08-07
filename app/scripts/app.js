@@ -10,8 +10,16 @@ angular
     'services'
 ])
 .config(function($stateProvider, $urlRouterProvider) {
-     $urlRouterProvider.otherwise('/manage');
+     $urlRouterProvider.otherwise('/index');
      $stateProvider.state('manage', {
+        url:'/manage',
+        templateUrl: 'views/manage.html',
+        controller:'manageController'
+      }).state('index', {
+        url:'/index',
+        templateUrl: 'views/index.html',
+        controller:'indexController'
+      }).state('index.order', {
         url:'/manage',
         templateUrl: 'views/manage.html',
         controller:'manageController'

@@ -1,5 +1,5 @@
 'use strict';
-angular.module('paticaApp')
+angular.module('controller')
   .controller('appendPeopleController', ['$scope','$modalInstance',function (s,$modalInstance) {
         s.ok = function () {
             $modalInstance.close("ok");

@@ -1,5 +1,5 @@
 'use strict';
-angular.module('paticaApp')
+angular.module('controller')
   .controller('manageController', ['$scope','$resource','$modal',function (s,resource,$modal) {
         var loadData=(function(){
         var orderInfo=resource('data/repairorder.json?type=:type&order_type=:order_type&orderid=:orderid&user_phone=:user_phone&order_time_from=:order_time_from&user_real_name=:user_real_name&page=:page&pagesize=:pagesize');    
@@ -74,7 +74,7 @@ angular.module('paticaApp')
 }]);
 
 
-angular.module('paticaApp')
+angular.module('controller')
   .controller('funCtroller',['$scope','$modal',function(s,$modal){
     // s.$emit('a',{a:123});
     s.appendBill=function(order){
@@ -107,5 +107,5 @@ angular.module('paticaApp')
             });
         }
 
-    s.appendPeople();
+    
 }]);
