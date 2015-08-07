@@ -1,3 +1,4 @@
+'use strict';
 angular.module('paticaApp')
   .controller('appendPeopleController', ['$scope','$modalInstance',function (s,$modalInstance) {
         s.ok = function () {
@@ -6,4 +7,4 @@ angular.module('paticaApp')
         s.cancel = function () {
            $modalInstance.dismiss('cancel');
         };
-  }])
+}]);

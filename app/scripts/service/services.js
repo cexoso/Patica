@@ -1,3 +1,4 @@
+'use strict';
 angular.module('services').filter('orderTypeParse',function(){
     return function(t){
         var map={

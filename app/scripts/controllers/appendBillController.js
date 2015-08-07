@@ -1,3 +1,4 @@
+'use strict';
 angular.module('paticaApp')
   .controller('appendBillController',['$scope','$modalInstance','$http','city',function(s,$modalInstance,$http,city){
         var loadData =(function(){
@@ -72,4 +73,4 @@ angular.module('paticaApp')
         s.cancel = function () {
            $modalInstance.dismiss('cancel');
         }; 
-}])
+}]);
