@@ -423,3 +423,22 @@ angular.module('services').filter('orderTypeParse',function(){
     }]
 });
 
+angular.module('services').service('confirm',['$http','$modal',function($http,$modal){
+    return function(view){
+        var modalInstance = $modal.open({
+            animation: true,
+            templateUrl: 'views/confirm.html',
+            controller: ['$scope','$modalInstance',function($scope,$modalInstance){
+                $scope.view= view;
+                $scope.ok = function () {
+                    $modalInstance.close("ok");
+                };
+                $scope.cancel = function () {
+                    $modalInstance.dismiss('cancel');
+                };
+            }],
+            size: 'lg'
+        });
+        return modalInstance.result;
+    }
+}]);

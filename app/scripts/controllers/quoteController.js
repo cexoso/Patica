@@ -1,7 +1,24 @@
 'use strict';
+angular.module('services').service('filter',['$http','$timeout',function($http,$timeout){
+    return function($scope,exp){
+          var doFilter=(function(){
+            var timeout=null;
+            return function(n){
+                if (timeout) $timeout.cancel(timeout);
+                timeout=$timeout(function(){
+                    // $http.post('aaa',n)
+                    //     .success(function(data){
+                    //         console.log(data);
+                    //     })
+                    console.log('2015年8月12日 10:06:38 此处请求')
+                },1000);
+            }    
+        })();
+        $scope.$watch('filter',doFilter,true)
+    }
+}]);
 angular.module('controller')
-  .controller('quoteController', ['$scope','$http','$timeout',function (s,$http,$timeout) {
-        s.filter={};
+  .controller('quoteController', ['$scope','$http','$timeout','filter',function (s,$http,$timeout,filter) {
         s.quotes=[
             {product:'手机',brand:'苹果',version:'Iphone4',color:'黄',fault:'耳机',subfault:'',quote:123},
             {product:'手机',brand:'苹果',version:'Iphone4',color:'黄',fault:'耳机',subfault:''},
@@ -58,10 +75,5 @@ angular.module('controller')
                 return;
             }
         }
-        function doFilter(){
-            console.log(s)
-        }
-        s.$watch('s.filter',function(){
-            console.log(321)
-        })
+        filter(s,'filter');//监听过渡器 但是不知道为什么要用service来做
 }]);

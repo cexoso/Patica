@@ -1,7 +1,17 @@
 <section>
     <header>
         <h3>修改报价</h3>
-        {{filter}}
+        <div class="well">
+            <div class="btn-toolbar" role="toolbar">
+                <div class="btn-group" role="group">
+                    <a ui-sref="index.addPB" class="btn btn-default">添加品牌-型号</a>
+                    <a ui-sref="index.addDefault" class="btn btn-default">添加故障类型</a>
+                </div>
+                <div class="btn-group" role="group">
+                    <a ui-sref="index.addQuote" class="btn btn-default">新增报价</a>
+                </div>
+            </div>
+        </div>
     </header>
     <article>
         <div class="container">
@@ -44,16 +54,14 @@
                                 <td class="vertical-middle">
                                     <input class='form-control' type="number" ng-model="quote.quote" ng-init="quote.orignQupte=quote.quote"></td>
                                 <td class="vertical-middle text-nowrap">
-                                    <button class='btn btn-success' act='ok'>确定</button>
+                                    <button class='btn' ng-class="{true:'btn-success',false:'btn-default'}[quote.orignQupte!=quote.quote]" act='ok'>确定</button>
                                     <button class='btn btn-warning' act="reset">复位</button>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="panel-footer">
-                    
-                </div>
+                <div class="panel-footer"></div>
             </div>
         </div>
     </article>

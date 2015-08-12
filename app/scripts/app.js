@@ -27,6 +27,18 @@ angular
         url:'/quote',
         templateUrl: 'views/quote.html',
         controller:'quoteController'
+      }).state('index.addPB',{
+        url:'/addPB',
+        templateUrl: 'views/addPB.html',
+        controller:'addPBController'
+      }).state('index.addDefault',{
+        url:'/addDefault',
+        templateUrl: 'views/addDefault.html',
+        controller:'addDefaultController'
+      }).state('index.addQuote',{
+        url:'/addQuote',
+        templateUrl: 'views/addQuote.html',
+        controller:'addQuoteController'
       })
 
 });

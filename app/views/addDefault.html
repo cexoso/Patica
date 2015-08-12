@@ -1,0 +1,55 @@
+<section>
+    <header>
+        <h3>添加故障类型</h3>
+    </header>
+    <article>
+        <div class="container">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1>添加一级故障</h1>
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">输入新故障</label>
+                            <div class="col-sm-10">
+                                <input type="text" ng-model="defaultToAdd" class="form-control"  placeholder="输入新故障"></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="panel-footer clearfix">
+                    <button type="button" class="pull-right btn btn-default" ng-click="addDefault(defaultToAdd)">确定添加</button>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1>添加二级故障</h1>
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">选择一级故障</label>
+                            <div class="col-sm-10">
+                                <select class="form-control">
+                                    <option value="">请选择一级故障</option>
+                                    <option value="{{default.id}}" ng-repeat="default in defaultList">{{default.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">输入新二级故障</label>
+                            <div class="col-sm-10">
+                                <input type="text" ng-model="subDefaultToAdd" class="form-control"  placeholder="输入新二级故障"></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="panel-footer clearfix">
+                    <button type="button" class="pull-right btn btn-default" ng-click="addSubDefault(subDefaultToAdd)">确定添加</button>
+                </div>
+            </div>
+        </div>
+    </article>
+    <footer></footer>
+</section>

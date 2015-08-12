@@ -1,0 +1,12 @@
+<section>
+    <header class="modal-header">
+        <h3 class="modal-title">{{view.title||'确认信息'}}</h3>
+    </header>
+    <article class="modal-body">
+           {{view.content||'是否确认'}}
+    </article>
+    <footer class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">{{view.ok||'确认'}}</button>
+        <button class="btn btn-warning" ng-click="cancel()">{{view.cancel||'取消'}}</button>
+    </footer>
+</section>
