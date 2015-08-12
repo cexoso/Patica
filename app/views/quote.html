@@ -1,0 +1,61 @@
+<section>
+    <header>
+        <h3>修改报价</h3>
+        {{filter}}
+    </header>
+    <article>
+        <div class="container">
+            <div class="panel panel-success">
+                <div class="panel-heading">修改报价</div>
+                <div class="panel-body">
+                    <table class="table table-success table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th class='text-center vertical-middle'>
+                                    产品
+                                    <input type="text" class='form-control' ng-model="filter.product"></th>
+                                <th class='text-center vertical-middle'>
+                                    品牌
+                                    <input type="text" class='form-control' ng-model="filter.brand"></th>
+                                <th class='text-center vertical-middle'>
+                                    型号
+                                    <input type="text" class='form-control' ng-model="filter.version"></th>
+                                <th class='text-center vertical-middle'>
+                                    颜色
+                                    <input type="text" class='form-control' ng-model="filter.color"></th>
+                                <th class='text-center vertical-middle'>
+                                    一级故障
+                                    <input type="text" class='form-control' ng-model="filter.fault"></th>
+                                <th class='text-center vertical-middle'>
+                                    二级故障
+                                    <input type="text" class='form-control' ng-model="filter.subfault"></th>
+                                <th class='text-center vertical-middle'>报价</th>
+                                <th class='text-center vertical-middle'>确定</th>
+                            </tr>
+                        </thead>
+                        <tbody ng-click="tbodyClick($event)">
+                            <tr ng-repeat="quote in quotes|filter:{product:filter.product,brand:filter.brand,version:filter.version,color:filter.color,fault:filter.fault,subfault:filter.subfault}">
+                                <td class="vertical-middle">{{quote.product}}</td>
+                                <td class="vertical-middle">{{quote.brand}}</td>
+                                <td class="vertical-middle">{{quote.version}}</td>
+                                <td class="vertical-middle">{{quote.color}}</td>
+                                <td class="vertical-middle">{{quote.fault}}</td>
+                                <td class="vertical-middle">{{quote.subfault}}</td>
+                                <td class="vertical-middle">
+                                    <input class='form-control' type="number" ng-model="quote.quote" ng-init="quote.orignQupte=quote.quote"></td>
+                                <td class="vertical-middle text-nowrap">
+                                    <button class='btn btn-success' act='ok'>确定</button>
+                                    <button class='btn btn-warning' act="reset">复位</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="panel-footer">
+                    
+                </div>
+            </div>
+        </div>
+    </article>
+    <footer></footer>
+</section>

@@ -10,7 +10,7 @@ angular
     'services'
 ])
 .config(function($stateProvider, $urlRouterProvider) {
-     $urlRouterProvider.otherwise('/manage');
+     $urlRouterProvider.otherwise('/index/quote');
      $stateProvider.state('manage', {
         url:'/manage',
         templateUrl: 'views/manage.html',
@@ -23,7 +23,12 @@ angular
         url:'/manage',
         templateUrl: 'views/manage.html',
         controller:'manageController'
+      }).state('index.quote',{
+        url:'/quote',
+        templateUrl: 'views/quote.html',
+        controller:'quoteController'
       })
+
 });
 
 angular.module('controller',[]);
