@@ -27,33 +27,30 @@
                         卡券名字
                         <input type="text" class='form-control' ng-model="filter.card_name"></th>
                     <th class='text-center vertical-middle text-nowrap'>卡券描述</th>
-                    <th class='text-center vertical-middle text-nowrap'>卡券开始时间
-                        <input type="date" class='form-control' ng-model="filter.card_start_time">
-                    </th>
-                    <th class='text-center vertical-middle text-nowrap'>卡券持续时间
-                        <input type="number" class='form-control' ng-model="filter.card_expire_time">
-                    </th>
-                    <th class='text-center vertical-middle text-nowrap'>卡券领取后持续时间
-                    <input type="number" class='form-control' ng-model="filter.card_get_expire_time"></th>
-                    <th class='text-center vertical-middle text-nowrap'>卡券最大数量
-                    <input type="number" class='form-control' ng-model="filter.card_max_number"></th>
-                    <th class='text-center vertical-middle text-nowrap'>卡券已领取数额
-                    <input type="number" class='form-control' ng-model="filter.card_get_number"></th>
-                    <th class='text-center vertical-middle text-nowrap'>卡券价格
-                        <input type="number" class='form-control' ng-model="filter.card_price">
-                    </th>
-                    <th class='text-center vertical-middle text-nowrap'>卡券单位
-<input type="text" class='form-control' ng-model="filter.card_cell">
-                    </th>
-                    <th class='text-center vertical-middle text-nowrap'>卡券类型
-                    <input type="text" class='form-control' ng-model="filter.card_type">
-                    </th>
-                    <th class='text-center vertical-middle text-nowrap'>领取提示
-                    <input type="text" class='form-control' ng-model="filter.card_get_tips">
-                    </th>
-                    <th class='text-center vertical-middle text-nowrap'>是否显示
-                    <input type="checkbox" class='form-control' ng-model="filter.card_show">
-                    </th>
+                    <th class='text-center vertical-middle text-nowrap'>
+                        卡券开始时间
+                        <input type="date" class='form-control' ng-model="filter.card_start_time"></th>
+                    <th class='text-center vertical-middle text-nowrap'>
+                        卡券持续时间
+                        <input type="number" class='form-control' ng-model="filter.card_expire_time"></th>
+                    <th class='text-center vertical-middle text-nowrap'>
+                        卡券领取后持续时间
+                        <input type="number" class='form-control' ng-model="filter.card_get_expire_time"></th>
+                    <th class='text-center vertical-middle text-nowrap'>
+                        卡券最大数量
+                        <input type="number" class='form-control' ng-model="filter.card_max_number"></th>
+                    <th class='text-center vertical-middle text-nowrap'>
+                        卡券已领取数额
+                        <input type="number" class='form-control' ng-model="filter.card_get_number"></th>
+                    <th class='text-center vertical-middle text-nowrap'>
+                        卡券价格
+                        <input type="number" class='form-control' ng-model="filter.card_price"></th>
+                    <th class='text-center vertical-middle text-nowrap'>
+                        卡券单位
+                        <input type="text" class='form-control' ng-model="filter.card_cell"></th>
+                    <th class='text-center vertical-middle text-nowrap'>卡券类型</th>
+                    <th class='text-center vertical-middle text-nowrap'>领取提示</th>
+                    <th class='text-center vertical-middle text-nowrap'>是否显示</th>
                 </tr>
             </thead>
             <tbody ng-click="tbodyClick($event)">
