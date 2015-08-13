@@ -4,7 +4,7 @@
         <div class="well">
             <div class="btn-toolbar" role="toolbar">
                 <div class="btn-group" role="group">
-                    <a class="btn btn-default">添加券</a>
+                    <button type="button" ng-click="alterC()" class="btn btn-default">修改券</button>
 
                 </div>
                 <div class="btn-group" role="group">
@@ -53,20 +53,22 @@
                     <th class='text-center vertical-middle text-nowrap'>是否显示</th>
                 </tr>
             </thead>
-            <tbody ng-click="tbodyClick($event)">
-                <tr ng-repeat="quote in quotes|filter:{product:filter.product,brand:filter.brand,version:filter.version,color:filter.color,fault:filter.fault,subfault:filter.subfault}">
-                    <td class="vertical-middle">{{quote.product}}</td>
-                    <td class="vertical-middle">{{quote.brand}}</td>
-                    <td class="vertical-middle">{{quote.version}}</td>
-                    <td class="vertical-middle">{{quote.color}}</td>
-                    <td class="vertical-middle">{{quote.fault}}</td>
-                    <td class="vertical-middle">{{quote.subfault}}</td>
-                    <td class="vertical-middle">
-                        <input class='form-control' type="number" ng-model="quote.quote" ng-init="quote.orignQupte=quote.quote"></td>
-                    <td class="vertical-middle text-nowrap">
-                        <button class='btn' ng-class="{true:'btn-success',false:'btn-default'}[quote.orignQupte!=quote.quote]" act='ok'>确定</button>
-                        <button class='btn btn-warning' act="reset">复位</button>
-                    </td>
+            <tbody>
+                <tr ng-repeat="card in cardList">
+                   <td class="vertical-middle">{{card.card_id}}</td>
+                   <td class="vertical-middle">{{card.card_title}}</td>
+                   <td class="vertical-middle">{{card.card_name}}</td>
+                   <td class="vertical-middle">{{card.card_des}}</td>
+                   <td class="vertical-middle">{{card.card_start_time}}</td>
+                   <td class="vertical-middle">{{card.card_expire_time}}</td>
+                   <td class="vertical-middle">{{card.card_get_expire_days}}</td>
+                   <td class="vertical-middle">{{card.card_max_number}}</td>
+                   <td class="vertical-middle">{{card.card_get_number}}</td>
+                   <td class="vertical-middle">{{card.card_price}}</td>
+                   <td class="vertical-middle">{{card.card_cell}}</td>
+                   <td class="vertical-middle">{{card.card_type}}</td>
+                   <td class="vertical-middle">{{card.card_get_tips}}</td>
+                   <td class="vertical-middle">{{card.card_show}}</td>
                 </tr>
             </tbody>
         </table>
