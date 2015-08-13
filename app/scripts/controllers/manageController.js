@@ -42,7 +42,6 @@ angular.module('controller')
                 (function(order){
                     //$http
                     var orders=s.page.orders;
-                    console.log(orders);
                     for(var i=0;i<orders.length;i++){
                         if(orders[i].id==order.id){
                             orders.splice(i,1);

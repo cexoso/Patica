@@ -9,16 +9,18 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">品牌</label>
                     <div class="col-sm-10">
-                        <select name="" class="form-control">
+                        <select class="form-control" ng-model="data.brand">
                             <option value="">请选择品牌</option>
+                            <option value="{{brand.id}}" ng-repeat="brand in brandList">{{brand.name}}</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">型号</label>
                     <div class="col-sm-10">
-                        <select name="" class="form-control">
+                        <select class="form-control" ng-model="data.version">
                             <option value="">请选择型号</option>
+                            <option value="{{version.id}}" ng-repeat="version in versionList">{{version.name}}</option>
                         </select>
                     </div>
                 </div>
@@ -28,16 +30,18 @@
                  <div class="form-group">
                     <label class="col-sm-2 control-label">一级故障</label>
                     <div class="col-sm-10">
-                        <select name="" class="form-control">
+                        <select ng-model="data.fault" class="form-control">
                             <option value="">请选择一级故障</option>
+                            <option value="{{fault.id}}" ng-repeat="fault in faultList">{{fault.name}}</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">二级故障</label>
                     <div class="col-sm-10">
-                        <select name="" class="form-control">
+                        <select ng-model="data.subFault" class="form-control">
                             <option value="">请选择二级故障</option>
+                            <option value="{{subFault.id}}" ng-repeat="subFault in subFaultList">{{subFault.name}}</option>
                         </select>
                     </div>
                 </div>

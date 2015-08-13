@@ -1,6 +1,11 @@
 <section>
     <header>
-        <h3>添加报价</h3>
+        <div class="well">
+            <h3>添加报价</h3>
+            <a class="btn btn-default" ui-sref="index.quote"> <i class="glyphicon glyphicon-share-alt flip-horizontal"></i>
+                返回
+            </a>
+        </div>
     </header>
     <article>
         <div class="container">
@@ -8,8 +13,7 @@
                 <div class="panel-heading"></div>
                 <div class="panel-body">
                     <div class="well">
-                        <button type="button" class="btn btn-default" ng-click="addQuoteDtl()"> 
-                            <i class="glyphicon glyphicon-plus"></i>
+                        <button type="button" class="btn btn-default" ng-click="addQuoteDtl()"> <i class="glyphicon glyphicon-plus"></i>
                         </button>
                     </div>
                     <table class="table table-success table-bordered table-striped">
@@ -19,19 +23,24 @@
                                 <th class='text-center vertical-middle'>型号</th>
                                 <th class='text-center vertical-middle'>一级故障</th>
                                 <th class='text-center vertical-middle'>二级故障</th>
+                                <th class='text-center vertical-middle'>报价</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                            <tr ng-repeat="quote in quoteList">
+                                <td>{{quote.brand}}</td>
+                                <td>{{quote.version}}</td>
+                                <td>{{quote.fault}}</td>
+                                <td>{{quote.subFault}}</td>
+                                <td>
+                                    <input type="text" ng-model="quote.quote" ng-init="quote.quote=0" class="form-control"  placeholder="报价"></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="panel-footer"></div>
+                <div class="panel-footer clearfix">
+                    <button type="button" class="pull-right btn btn-default" ng-click="submit()">确定</button>
+                </div>
             </div>
         </div>
     </article>

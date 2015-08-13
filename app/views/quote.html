@@ -23,7 +23,12 @@
                             <tr>
                                 <th class='text-center vertical-middle'>
                                     产品
-                                    <input type="text" class='form-control' ng-model="filter.product"></th>
+                                    <select class='form-control' style="min-width:100px" ng-model="filter.product">
+                                        <option value=""></option>
+                                        <option value="手机">手机</option>
+                                        <option value="电脑">电脑</option>
+                                    </select>
+                                </th>
                                 <th class='text-center vertical-middle'>
                                     品牌
                                     <input type="text" class='form-control' ng-model="filter.brand"></th>

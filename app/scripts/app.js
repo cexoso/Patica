@@ -39,6 +39,10 @@ angular
         url:'/addQuote',
         templateUrl: 'views/addQuote.html',
         controller:'addQuoteController'
+      }).state('index.coupons',{
+        url:'/coupons',
+        templateUrl: 'views/coupons.html',
+        controller:'couponsController'
       })
 
 });
