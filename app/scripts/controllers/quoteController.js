@@ -49,6 +49,13 @@ angular.module('controller')
             {product:'手机',brand:'苹果',version:'Iphone4',color:'黄',fault:'耳机',subfault:''},
             {product:'手机',brand:'苹果',version:'Iphone4',color:'黄',fault:'耳机',subfault:''}
         ];
+
+        s.kkk=function(){
+            $http.get('http://192.168.0.153/PaticaService/order/getAllOrder').then(function(d){
+                console.log(d)
+            });    
+        }
+        
         function ok(scope){
             var quote=scope.quote;
             console.log(quote);

@@ -11,6 +11,14 @@ gulp.task('server', function() {
   connect.server({
     root: ['app','bower_components','node_modules'],
     livereload: true,
+    middleware: function(connect, opt) {
+      return [
+        function(req,res,next){
+          console.log(req)
+          next();
+        }
+      ]
+    },
     port:80
   });
   var rel=['app/views/**/*.html','app/scripts/**/*.js','app/styles/**/*.css'];
