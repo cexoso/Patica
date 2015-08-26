@@ -1,69 +1,158 @@
 'use strict';
-angular.module('services').service('filter',['$http','$timeout',function($http,$timeout){
-    return function($scope,exp){
-          var doFilter=(function(){
-            var timeout=null;
-            return function(n){
-                if (timeout) $timeout.cancel(timeout);
-                timeout=$timeout(function(){
-                    // $http.post('aaa',n)
-                    //     .success(function(data){
-                    //         console.log(data);
-                    //     })
-                    console.log('2015年8月12日 10:06:38 此处请求')
-                },1000);
-            }    
-        })();
-        $scope.$watch('filter',doFilter,true)
+angular.module('services').service('resourceLoader',['$http',function($http){
+    function get(url,opt){
+        return $http.get(url,{
+            cache:true,
+            params:opt
+        });
+    }
+    function loadBrand(opt){
+        return get('api/price/getBrand',opt);
+    }
+    function loadBrandModel(opt){
+        return get('api/price/getBrandModel',opt);
+    }
+    function loadTrouble(opt){
+        return get('api/price/getTrouble',opt);
+    }
+    function loadTroubleDetail(opt){
+        return get('api/price/getTroubleDetail',opt);   
+    }
+    function loadColor(){
+        return [
+            {name:'金色',id:'1'},
+            {name:'灰色',id:'2'},
+            {name:'白色',id:'3'},
+            {name:'黑色',id:'4'}
+        ]
+    }
+    function loadSource(){
+        return [
+            {name:'腾讯',id:'tengxun'},
+            {name:'淘福利',id:'taofuli'}
+        ]
+    }
+    function loadQuote(opt){
+        return $http.post('api/price/getPriceByParam',opt);
+    }
+    return {
+        loadBrandModel:loadBrandModel,
+        loadBrand:loadBrand,
+        loadTrouble:loadTrouble,
+        loadTroubleDetail:loadTroubleDetail,
+        loadColor:loadColor,
+        loadSource:loadSource,
+        loadQuote:loadQuote
+    }
+}]).service('autoResource',['resourceLoader',function(resourceLoader){
+    function watch(s,obj){
+        s.$watch(obj+".product",function(n){
+            if(!n){
+                return;
+            }
+            resourceLoader.loadBrand({
+                producetype:n.id
+            }).success(function(e){
+                console.log(e)
+                s.brands=e.data;
+                s.filter.brand=s.brands[0];
+            });
+        });
+        s.$watch(obj+".brand",function(n){
+            if(!n){
+                return;
+            }
+            resourceLoader.loadBrandModel({
+                brandid:n.id
+            }).success(function(e){
+                console.log(e)
+                s.brandModels=e.data;
+                s.filter.brandModel=s.brandModels[0];
+            });
+        });
+        s.$watch(obj+".trouble",function(n){
+            if(!n){
+                return;
+            }
+            resourceLoader.loadTroubleDetail({
+                troubleid:n.id
+            }).success(function(e){
+                s.troubleDetails=e.data;
+            });
+        });
+    }
+    function loadCTS(s){
+        s.colors=resourceLoader.loadColor();
+        resourceLoader.loadTrouble().success(function(e){
+            s.troubles=e.data;
+        });
+        s.sources=resourceLoader.loadSource();
+    }
+    function loadQuote(opt){
+        return resourceLoader.loadQuote(opt);
+    }
+    return {
+        watch:watch,
+        loadCTS:loadCTS,
+        loadQuote:loadQuote
     }
 }]);
 angular.module('controller')
-  .controller('quoteController', ['$scope','$http','$timeout','filter',function (s,$http,$timeout,filter) {
-        s.quotes=[
-            {product:'手机',brand:'苹果',version:'Iphone4',color:'黄',fault:'耳机',subfault:'',quote:123},
-            {product:'手机',brand:'苹果',version:'Iphone4',color:'黄',fault:'耳机',subfault:''},
-            {product:'手机',brand:'苹果',version:'Iphone4',color:'黄',fault:'耳机',subfault:''},
-            {product:'手机',brand:'苹果',version:'Iphone4',color:'黄',fault:'耳机',subfault:''},
-            {product:'手机',brand:'苹果',version:'Iphone4',color:'黄',fault:'耳机',subfault:''},
-            {product:'手机',brand:'苹果',version:'Iphone4',color:'黄',fault:'耳机',subfault:''},
-            {product:'手机',brand:'苹果',version:'Iphone4',color:'黄',fault:'耳机',subfault:''},
-            {product:'手机',brand:'苹果',version:'Iphone4',color:'黄',fault:'耳机',subfault:''},
-            {product:'手机',brand:'苹果',version:'Iphone4',color:'黄',fault:'耳机',subfault:''},
-            {product:'手机',brand:'苹果',version:'Iphone4',color:'黄',fault:'耳机',subfault:''},
-            {product:'手机',brand:'苹果',version:'Iphone4',color:'黄',fault:'耳机',subfault:''},
-            {product:'手机',brand:'苹果',version:'Iphone4',color:'黄',fault:'耳机',subfault:''},
-            {product:'手机',brand:'苹果',version:'Iphone4',color:'黄',fault:'耳机',subfault:''},
-            {product:'手机',brand:'苹果',version:'Iphone4',color:'黄',fault:'耳机',subfault:''},
-            {product:'手机',brand:'苹果',version:'Iphone4',color:'黄',fault:'耳机',subfault:''},
-            {product:'手机',brand:'苹果',version:'Iphone4',color:'黄',fault:'耳机',subfault:''},
-            {product:'手机',brand:'苹果',version:'Iphone4',color:'黄',fault:'耳机',subfault:''},
-            {product:'手机',brand:'苹果',version:'Iphone4',color:'黄',fault:'耳机',subfault:''},
-            {product:'手机',brand:'苹果',version:'Iphone4',color:'黄',fault:'耳机',subfault:''},
-            {product:'手机',brand:'苹果',version:'Iphone4',color:'黄',fault:'耳机',subfault:''},
-            {product:'手机',brand:'苹果',version:'Iphone4',color:'黄',fault:'耳机',subfault:''},
-            {product:'手机',brand:'苹果',version:'Iphone4',color:'黄',fault:'耳机',subfault:''},
-            {product:'手机',brand:'苹果',version:'Iphone4',color:'黄',fault:'耳机',subfault:''},
-            {product:'手机',brand:'苹果',version:'Iphone4',color:'黄',fault:'耳机',subfault:''},
-            {product:'手机',brand:'苹果',version:'Iphone4',color:'黄',fault:'耳机',subfault:''},
-            {product:'手机',brand:'苹果',version:'Iphone4',color:'黄',fault:'耳机',subfault:''},
-            {product:'手机',brand:'苹果',version:'Iphone4',color:'黄',fault:'耳机',subfault:''},
-            {product:'手机',brand:'苹果',version:'Iphone4',color:'黄',fault:'耳机',subfault:''}
-        ];
-
-        s.kkk=function(){
-            $http.get('http://192.168.0.153/PaticaService/order/getAllOrder').then(function(d){
-                console.log(d)
-            });    
+  .controller('quoteController', ['$scope','autoResource','$http',function (s,autoResource,$http) {
+        s.products=[
+            {name:'手机',id:'200001'},
+            {name:'电脑',id:'200002'},
+        ]
+        s.tips={
+            btn:'查询',
+            lastT:''
+        }
+        s.filter={};
+        autoResource.watch(s,'filter');
+        autoResource.loadCTS(s);
+        s.filter.product=s.products[0];
+        s.query=function(){
+            s.tips.btn="正在查询";
+            var detailid=null,
+                  modelid=null,
+                  offergoal=null;
+            try{
+                detailid=s.filter.troubleDetail.id;
+            }catch(e){}
+            try{
+                modelid=s.filter.brandModel.id;
+            }catch(e){}
+            try{
+                offergoal=s.filter.source.id;
+            }catch(e){}
+            autoResource.loadQuote({
+                detailid:detailid,
+                modelid:modelid,
+                offergoal:offergoal
+            }).success(function(d){
+                s.quotes=d.data;
+                console.log(d);
+                s.tips.btn="查询";
+                s.tips.lastT=new Date();
+            });
         }
         
         function ok(scope){
             var quote=scope.quote;
             console.log(quote);
+            $http.post('api/price/modifyPrice',quote).success(function(d){
+                console.log(d)
+                if(d.code=="200"){
+                    quote.orignQupte=quote.price;
+                }else{
+                    alert(d.msg)
+                }
+            })
         } 
         function reset(scope){
             var quote=scope.quote;
-            console.log(quote);
-            quote.quote=quote.orignQupte;
+            
+            quote.price=quote.orignQupte;
         } 
         s.tbodyClick=function(e){
             var act;
@@ -82,5 +171,4 @@ angular.module('controller')
                 return;
             }
         }
-        filter(s,'filter');//监听过渡器 但是不知道为什么要用service来做
 }]);

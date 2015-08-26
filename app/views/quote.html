@@ -1,5 +1,4 @@
 <section>
-<button ng-click="kkk()">qweqweqwe</button>
     <header>
         <h3>修改报价</h3>
         <div class="well">
@@ -15,61 +14,110 @@
         </div>
     </header>
     <article>
-        <div class="container">
+
+        <div class="container-fluid">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-3">
+                        <div class="input-group">
+                            <label class="control-label input-group-addon">产品</label>
+                            <select class='form-control' ng-model="filter.product" ng-options="product.name for product in products"></select>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="input-group">
+                            <label class="control-label input-group-addon">品牌</label>
+                            <select  class='form-control' ng-model="filter.brand" ng-options="brand.name for brand in brands"></select>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="input-group">
+                            <label class="control-label input-group-addon">型号</label>
+                            <select class='form-control' ng-model="filter.brandModel" ng-options="brandModel.name for brandModel in brandModels"></select>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="input-group">
+                            <label class="control-label input-group-addon">来源</label>
+                            <select class='form-control' ng-model="filter.source" ng-options="source.name for source in sources">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <div class="input-group">
+                            <label class="control-label input-group-addon">一级故障</label>
+                            <select class='form-control' ng-model="filter.trouble" ng-options="trouble.name for trouble in troubles">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="input-group">
+                            <label class="control-label input-group-addon">二级故障</label>
+                            <select class='form-control' ng-model="filter.troubleDetail" ng-options="troubleDetail.name for troubleDetail in troubleDetails">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    
+
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <button style="width:100%" class='btn-lg btn btn-success' ng-click="query()">{{tips.btn}}</button>
+                    </div>
+                </div>
+            </form>
+            
             <div class="panel panel-success">
-                <div class="panel-heading">修改报价</div>
+                <div class="panel-heading">
+                <h3>修改报价<small><label ng-show="tips.lastT">上次更新时间:</label>{{tips.lastT|date:'hh:mm:ss.sss'}}</small></h3>
+                </div>
                 <div class="panel-body">
                     <table class="table table-success table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th class='text-center vertical-middle'>
-                                    产品
-                                    <select class='form-control' style="min-width:100px" ng-model="filter.product">
-                                        <option value=""></option>
-                                        <option value="手机">手机</option>
-                                        <option value="电脑">电脑</option>
-                                    </select>
-                                </th>
-                                <th class='text-center vertical-middle'>
-                                    品牌
-                                    <input type="text" class='form-control' ng-model="filter.brand"></th>
-                                <th class='text-center vertical-middle'>
-                                    型号
-                                    <input type="text" class='form-control' ng-model="filter.version"></th>
-                                <th class='text-center vertical-middle'>
-                                    颜色
-                                    <input type="text" class='form-control' ng-model="filter.color"></th>
-                                <th class='text-center vertical-middle'>
-                                    一级故障
-                                    <input type="text" class='form-control' ng-model="filter.fault"></th>
-                                <th class='text-center vertical-middle'>
-                                    二级故障
-                                    <input type="text" class='form-control' ng-model="filter.subfault"></th>
-                                <th class='text-center vertical-middle'>报价</th>
-                                <th class='text-center vertical-middle'>确定</th>
-                            </tr>
-                        </thead>
-                        <tbody ng-click="tbodyClick($event)">
-                            <tr ng-repeat="quote in quotes|filter:{product:filter.product,brand:filter.brand,version:filter.version,color:filter.color,fault:filter.fault,subfault:filter.subfault}">
-                                <td class="vertical-middle">{{quote.product}}</td>
-                                <td class="vertical-middle">{{quote.brand}}</td>
-                                <td class="vertical-middle">{{quote.version}}</td>
-                                <td class="vertical-middle">{{quote.color}}</td>
-                                <td class="vertical-middle">{{quote.fault}}</td>
-                                <td class="vertical-middle">{{quote.subfault}}</td>
-                                <td class="vertical-middle">
-                                    <input class='form-control' type="number" ng-model="quote.quote" ng-init="quote.orignQupte=quote.quote"></td>
-                                <td class="vertical-middle text-nowrap">
-                                    <button class='btn' ng-class="{true:'btn-success',false:'btn-default'}[quote.orignQupte!=quote.quote]" act='ok'>确定</button>
-                                    <button class='btn btn-warning' act="reset">复位</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="panel-footer"></div>
+                                <th class='text-center vertical-middle'>产品</th>
+                                <th class='text-center vertical-middle'>品牌</th>
+                                <th class='text-center vertical-middle'>型号</th>
+                                <!--  <th class='text-center vertical-middle'>
+                                颜色
+                                <select class='form-control' ng-model="filter.color" ng-options="color.name for color in colors">
+                                    <option value=""></option>
+                                </select>
+                            </th>
+                            -->
+                            <th class='text-center vertical-middle'>来源</th>
+                            <th class='text-center vertical-middle'>一级故障</th>
+                            <th class='text-center vertical-middle'>二级故障</th>
+                            <th class='text-center vertical-middle'>报价</th>
+                            <th class='text-center vertical-middle'>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-click="tbodyClick($event)">
+                        <tr ng-repeat="quote in quotes">
+                            <td class="vertical-middle">{{quote.cartegoryname}}</td>
+                            <td class="vertical-middle">{{quote.brandname}}</td>
+                            <td class="vertical-middle">{{quote.modelname}}</td>
+                            <td class="vertical-middle">{{quote.offergoal}}</td>
+                            <td class="vertical-middle">{{quote.troublename}}</td>
+                            <td class="vertical-middle">{{quote.detailname}}</td>
+                            <td class="vertical-middle">
+                                <input class='form-control' type="number" ng-model="quote.price" ng-init="quote.orignQupte=quote.price"></td>
+                            <td class="vertical-middle text-nowrap">
+                                <button class='btn' ng-class="{true:'btn-success',false:'btn-default'}[quote.orignQupte!=quote.price]" act='ok'>确定</button>
+                                <button class='btn btn-warning' act="reset">复位</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+            <div class="panel-footer"></div>
         </div>
-    </article>
-    <footer></footer>
+    </div>
+</article>
+<footer></footer>
 </section>

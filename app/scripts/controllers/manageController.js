@@ -1,13 +1,19 @@
 'use strict';
 angular.module('controller')
-  .controller('manageController', ['$scope','$resource','$modal',function (s,resource,$modal) {
+  .controller('manageController', ['$scope','$modal','$http',function (s,$modal,$http) {
         var loadData=(function(){
-        var orderInfo=resource('data/repairorder.json?type=:type&order_type=:order_type&orderid=:orderid&user_phone=:user_phone&order_time_from=:order_time_from&user_real_name=:user_real_name&page=:page&pagesize=:pagesize');    
             return function (o){
-                s.page = orderInfo.get(o);
-                s.page.$promise.then(function(){
+                $http.post('api/order/getOrderByParam',o)
+                .success(function(d){
+                    console.log(d);
+                    s.page={
+                      totalcount:d.data.totle,
+                      page:d.data.index,
+                      pagesize:d.data.size,
+                      orders:d.data.data
+                    }
                     s.page.numPages = Math.floor(s.page.totalcount/s.page.pagesize)+1;    
-                })
+                });
             }
         })();
         s.evaluation=function(order){

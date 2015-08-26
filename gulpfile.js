@@ -5,21 +5,31 @@ var gulp = require('gulp'),
    jsmin=require('gulp-jsmin'),
    es=require('event-stream'),
    inject=require('gulp-inject'),
-   bowerFiles=require('main-bower-files');
+   bowerFiles=require('main-bower-files'),
+   csso = require('gulp-csso');
+   var httpProxy = require('http-proxy');
+   var proxy = httpProxy.createProxyServer({});
+
 
 gulp.task('server', function() {
   connect.server({
     root: ['app','bower_components','node_modules'],
     livereload: true,
-    middleware: function(connect, opt) {
-      return [
-        function(req,res,next){
-          console.log(req)
-          next();
-        }
-      ]
-    },
     port:80
+    //,
+    // middleware:function(connect,opt){
+    //     return [function(req,res,next){
+    //       var arr=['html','js','css','png','jpg','svg','woff2','woff','ttf'];
+    //       var regUrl=new RegExp('.('+arr.join('|')+')$','igm');
+    //       console.log(req.url)
+    //       if(req.url.match(regUrl)){
+    //         next();
+    //       }else{
+    //         console.log("代理："+req.url)
+    //         proxy.web(req, res, { target: 'http://192.168.0.145:8080/PaticaService'});  
+    //       }
+    //     }]
+    //   }
   });
   var rel=['app/views/**/*.html','app/scripts/**/*.js','app/styles/**/*.css'];
   gulp.watch(rel,function(){
@@ -39,14 +49,41 @@ gulp.task('lint', function() {
 
 gulp.task('default', ['server']);
 
+
+// var distPath="E:/Program Files/eclipseWS/PaticaService/WebContent";
+var distPath="D:/apache-tomcat-7.0.63/webapps/PaticaService";
+var distPath1="E:/Program Files/eclipseWS/PaticaService/WebContent";
+gulp.task('watch',function(){
+  gulp.watch('app/scripts/**/*.js',['buildlogic']);
+  gulp.watch('app/views/**/*',['buildview']);
+  gulp.watch('app/styles/**/*.css',['buildcsscos']);
+})
 gulp.task('build',function(){
+  return gulp.start([
+    'buildlogic',
+    'buildview',
+    'buildlib',
+    'buildcsslib',
+    'buildcsscos'
+    ]);
+})
+gulp.task('buildlogic',function(){
   var path='app/scripts/**/*.js';
   
-  gulp.src(path)
+  return gulp.src(path)
           .pipe(concat('all.js'),{newLine: ';'})
-          .pipe(jsmin())
-          .pipe(gulp.dest('dist/'));
- 
+          // .pipe(jsmin())
+          .pipe(gulp.dest(distPath+"/scripts"))
+          .pipe(gulp.dest(distPath1+"/scripts"));
+})
+gulp.task('buildview',function(){
+  return gulp.src('app/views/**/*')
+  .pipe(gulp.dest(distPath+'/views'))
+  .pipe(gulp.dest(distPath1+'/views'));
+})
+gulp.task('buildlib',function(){
+  var path='app/scripts/**/*.js';
+  
    var arr=[
       'bower_components/angular/angular.js',
       'bower_components/angular-ui-router/release/angular-ui-router.js',
@@ -54,18 +91,35 @@ gulp.task('build',function(){
       'bower_components/angular-bootstrap/ui-bootstrap.js',
       'bower_components/angular-bootstrap/ui-bootstrap-tpls.js'
     ];
-
-  gulp.src(arr)
+  return gulp.src(arr)
     .pipe(concat('lib.js'),{newLine: ';'})
     .pipe(jsmin())
-    .pipe(gulp.dest('dist/'));
- 
-
-  gulp.src('app/views/**/*')
-  .pipe(gulp.dest('dist/views'));
+    .pipe(gulp.dest(distPath+"/scripts"))
+    .pipe(gulp.dest(distPath1+"/scripts"));
 });
-
-
+gulp.task('buildcsslib',function(opt,q){
+  var arr=[
+    'bower_components/bootstrap/dist/css/bootstrap.min.css',
+    'bower_components/angular-bootstrap/ui-bootstrap-csp.css'
+  ];  
+  
+  gulp.src('bower_components/bootstrap/dist/fonts/*.*')
+  .pipe(gulp.dest(distPath+'/fonts'))
+  .pipe(gulp.dest(distPath1+'/fonts'));
+  return gulp.src(arr)
+    .pipe(concat('lib.css'))
+    .pipe(csso())
+    .pipe(gulp.dest(distPath+"/styles"))
+    .pipe(gulp.dest(distPath1+"/styles"));
+});
+gulp.task('buildcsscos',function(opt,q){
+  var path="app/styles/**/*.css";
+  return gulp.src(path)
+    .pipe(concat('costom.css'))
+    .pipe(csso())
+    .pipe(gulp.dest(distPath+"/styles"))
+    .pipe(gulp.dest(distPath1+"/styles"));
+});
 // gulp.task('injectIndex',function(){
 //    gulp.src('app/index.html')
 //   .pipe(inject(lib, {name: 'bower'}))
