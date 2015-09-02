@@ -54,7 +54,7 @@ angular.module('services').service('resourceLoader',['$http',function($http){
                 producetype:n.id
             }).success(function(e){
                 console.log(e)
-                s.brands=e.data;
+                s.brands=e.data.data;
                 s.filter.brand=s.brands[0];
             });
         });
@@ -66,7 +66,7 @@ angular.module('services').service('resourceLoader',['$http',function($http){
                 brandid:n.id
             }).success(function(e){
                 console.log(e)
-                s.brandModels=e.data;
+                s.brandModels=e.data.data;
                 s.filter.brandModel=s.brandModels[0];
             });
         });
@@ -77,14 +77,14 @@ angular.module('services').service('resourceLoader',['$http',function($http){
             resourceLoader.loadTroubleDetail({
                 troubleid:n.id
             }).success(function(e){
-                s.troubleDetails=e.data;
+                s.troubleDetails=e.data.data;
             });
         });
     }
     function loadCTS(s){
         s.colors=resourceLoader.loadColor();
         resourceLoader.loadTrouble().success(function(e){
-            s.troubles=e.data;
+            s.troubles=e.data.data;
         });
         s.sources=resourceLoader.loadSource();
     }
@@ -130,7 +130,7 @@ angular.module('controller')
                 modelid:modelid,
                 offergoal:offergoal
             }).success(function(d){
-                s.quotes=d.data;
+                s.quotes=d.data.data;
                 console.log(d);
                 s.tips.btn="查询";
                 s.tips.lastT=new Date();
@@ -151,7 +151,6 @@ angular.module('controller')
         } 
         function reset(scope){
             var quote=scope.quote;
-            
             quote.price=quote.orignQupte;
         } 
         s.tbodyClick=function(e){

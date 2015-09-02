@@ -3,16 +3,31 @@
         <h3 class="modal-title">{{a}}</h3>
     </header>
     <article class="modal-body">
-           <form class="form-horizontal">
+        <form class="form-horizontal">
             <fieldset>
                 <legend>人员信息</legend>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">名字</label>
+                    <label class="col-sm-2 control-label">姓名</label>
                     <div class="col-sm-4">
-                        <input type="text" ng-model="oi.orderTime" class="form-control"  placeholder="名字"></div>
+                        <input type="text" ng-model="user.name" class="form-control"  placeholder="名字"></div>
                     <label for="order_id" class="col-sm-2 control-label">手机号</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" ng-model="oi.orderStatus" placeholder="手机号"></div>
+                        <input type="text" class="form-control" ng-model="user.telphone" placeholder="手机号"></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">编号</label>
+                    <div class="col-sm-4">
+                        <input type="text" ng-model="user.code" class="form-control"  placeholder="人员编号"></div>
+                    <label for="order_id" class="col-sm-2 control-label">微信号</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" ng-model="user.weixincode" placeholder="分配的微信号"></div>
+                </div>
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label class="btn btn-default btn-lg" ng-model="sexL" btn-checkbox>{{{true:'男',false:'女'}[sexL]}}</label>
+                        </div>
+                    </div>
                 </div>
             </fieldset>
         </form>

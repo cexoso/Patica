@@ -7,6 +7,17 @@ angular.module('services').filter('orderTypeParse',function(){
         }
         return map[t];
     }
+}).filter('ordersourceParse',function(){
+    return function(t){
+        if(!t){
+            return '正常下单';
+        }
+        var map={
+            'tengxun':'腾讯',
+            'taofuli':'淘福利'
+        }
+        return map[t];
+    }
 }).filter('payStatusParse',function(){
     return function(t){
         var map={
@@ -441,4 +452,86 @@ angular.module('services').service('confirm',['$http','$modal',function($http,$m
         });
         return modalInstance.result;
     }
+}]);
+angular.module('services').constant('source',[
+    {name:'腾讯',id:'tengxun'},
+    {name:'淘福利',id:'taofuli'}
+]).constant('orderTypes',[
+    {name:'上门维修',id:'1'},
+    {name:'邮寄维修',id:'2'}
+]);
+
+angular.module('services').service('objParse',[function(){    
+    var N=(function(){
+        var _this={};
+        function _next(o){
+            this.o=o;
+        }
+        function next(o){
+            if(arguments.length!=0){
+                _next.call(_this,o);    
+            }else{
+                return _this.o;
+            }
+        }
+        function reset(){
+            _this={};
+            return true;
+        }
+        return {
+            next:next,
+            reset:reset
+        }
+    })();
+    return function parseFun(obj,parse/*array*/){
+        var robj={};
+        for(var o in obj){
+            var value=obj[o];
+            if(!value){
+                continue;
+            }
+            var parsed;            
+            if(value.constructor.name=="Object"){
+                robj[o]=parseFun(value,parse);
+                continue;
+            }
+            N.reset();
+            for(var i=0,length=parse.length;i<length;i++){
+                var p=parse[i];
+                if(typeof p=='function'){
+                    p(value,N.next);
+                    parsed=N.next();
+                    if(parsed!=undefined){
+                        robj[o]=parsed;
+                        break;
+                    }
+                }
+            }
+            robj[o]||(robj[o]=value);
+        }
+        return robj;
+    }
+}]);
+
+angular.module('services').service('author',[function(){    
+    var interceptor={
+        'request':function(config){
+            config.headers.author="123456789";
+            console.log(config);
+            return config;
+        },
+        'response':function(response){
+            console.log(response);
+            return response;
+        },
+        'requestError':function(rejection){
+            console.log(rejection);
+            return rejection;
+        },
+        'responseError':function(rejection){
+            console.log(rejection);
+            return rejection;
+        }
+    };
+    return interceptor;
 }]);

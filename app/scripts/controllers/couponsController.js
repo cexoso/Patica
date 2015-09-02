@@ -17,7 +17,7 @@ angular.module('controller')
                 console.log(w)
             });
         }
-        s.alterC();
+
 }]).controller('alterCController',['$scope','$modalInstance','$http',function(s,$modalInstance,$http){
 
 }]);

@@ -42,3 +42,11 @@
     margin: 0 auto;
     display: block;
 }
+#login{
+    background:url("../images/loginbg.jpg") center center no-repeat #000;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}

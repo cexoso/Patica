@@ -3,3 +3,21 @@
     -ms-transform: scale(-1, 1);
     transform: scale(-1, 1);
 }
+.ellipsis{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    
+}
+.ellipsis:hover{
+    text-overflow: unset;
+    overflow: visible;
+}
+
+.text-warp{
+    word-wrap:break-word;
+    word-break:break-all;
+}
+
+.table-cell .cell-item{
+    margin: 5px 0;
+}

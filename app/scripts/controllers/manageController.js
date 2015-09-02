@@ -1,11 +1,63 @@
 'use strict';
 angular.module('controller')
-  .controller('manageController', ['$scope','$modal','$http',function (s,$modal,$http) {
+  .controller('manageController', ['$scope','$modal','$http','manageFiltersLinkage','city','resourceLoader','$filter','objParse',function (s,$modal,$http,manageFiltersLinkage,city,resourceLoader,$filter,objParse) {
+        var config={
+          pagesize:10
+        };
+        var now=new Date;
+        s.filter={
+          endtime:now,
+          starttime:new Date(now.getFullYear(),now.getMonth(),now.getDate()-3)
+        };
+        s.page={};
+        manageFiltersLinkage(s);
+        s.filters={
+          citys:city.citys,
+          payStatus:[
+            {name:'未支付',id:'0'},
+            {name:'已支付',id:'1'}
+          ],
+          ordersources:[
+            {name:'腾讯',id:'tengxun'},
+            {name:'淘福利',id:'taofuli'}
+          ]
+        };
+        s.tips={
+          btn:"查询"
+        };
+        
+        (function(){
+          resourceLoader.loadBrand({
+            producetype:'200001'
+          }).success(function(d){
+            if(d.code!=200){
+              alert(d.msg)
+            }
+            s.filters.brands=d.data.data;
+          })
+          s.$watch('filter.brand',function(n){
+            if(!n){
+              s.filters.versions=null;
+              return;
+            }
+            resourceLoader.loadBrandModel({
+                brandid:n.id
+            }).success(function(e){
+                
+                s.filters.versions=e.data.data;                
+            });
+          });
+        })();
+        
         var loadData=(function(){
             return function (o){
+                
                 $http.post('api/order/getOrderByParam',o)
                 .success(function(d){
-                    console.log(d);
+                    if(d.code!=200){
+                      alert(d.msg);
+                      return;
+                    }
                     s.page={
                       totalcount:d.data.totle,
                       page:d.data.index,
@@ -16,26 +68,6 @@ angular.module('controller')
                 });
             }
         })();
-        s.evaluation=function(order){
-            var modalInstance = $modal.open({
-                  animation: true,
-                  templateUrl: 'views/evaluation.html',
-                  controller: 'evaluationController',
-                  size: 'lg',
-                  resolve:{
-                    order:function(){
-                        return order;
-                    }
-                  }
-                  //,backdrop:false
-             });
-            modalInstance.result.then(function(q){
-                console.log(q)
-            },function(w){
-                console.log(w)
-            });
-        }
-
         s.del=function(order){
             var modalInstance = $modal.open({
                   animation: true,
@@ -58,24 +90,44 @@ angular.module('controller')
             },function(msg){
             });
         }
-        s.pageChanged = function(to) {
-            loadData({
-                pagesize:10,
-                page:to
-            });
+        var load=function(to){
+          var f=s.filter,
+          o=objParse(f,[function(o,next){
+            if(o instanceof Date){
+              next($filter('date')(o,'yyyy-MM-dd'));
+            }            
+          }]);
+          loadData(angular.extend({
+            page:{
+              size:config.pagesize,
+              index:to||s.page.page||1
+            }
+          },o));
         };
-            
-
-
-        //加载数据
-         loadData({
-            pagesize:10,
-            page:1
-         });
-
+        s.pageChanged=load;
+        s.query=load;
+        s.query();
          // s.$on('a',function(a){
-         //    console.log(a)
+         
          // })
+}]);
+
+angular.module('services').service('manageFiltersLinkage',['$http','city',function($http,city){
+  return function(scope){
+    scope.$watch('filter.city',function(n){
+      if(!n){
+        scope.filters.areas=null;  
+        return;
+      }
+      scope.filters.areas=city.regions.filter(function(item){
+        if(item.parentid==n.id){
+          return true;
+        }else{
+          return false;
+        }
+      })
+    });
+  }
 }]);
 
 
@@ -91,9 +143,9 @@ angular.module('controller')
                   backdrop:false
              });
             modalInstance.result.then(function(q){
-                console.log(q)
+                
             },function(w){
-                console.log(w)
+                
             });
         }
 
@@ -106,11 +158,28 @@ angular.module('controller')
                   backdrop:false
              });
             modalInstance.result.then(function(q){
-                console.log(q)
+                
             },function(w){
-                console.log(w)
+                
             });
         }
+}]);
 
-    
+
+angular.module('controller').controller('DatepickerDemoCtrl', ['$scope',function ($scope) {
+  $scope.startOpen = function($event) {
+    $scope.status.startOpened = true;
+  };
+  $scope.endOpen = function($event) {
+    $scope.status.endOpened = true;
+  };
+  $scope.dateOptions = {
+    formatYear: 'yy',
+    startingDay: 1,
+    currentText:'今天'
+  };
+  $scope.status = {
+    startOpened: false,
+    endOpened: false
+  };
 }]);

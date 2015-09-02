@@ -9,8 +9,8 @@ angular
     'controller',
     'services'
 ])
-.config(function($stateProvider, $urlRouterProvider) {
-     $urlRouterProvider.otherwise('/index/quote');
+.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
+     $urlRouterProvider.otherwise('/login');
      $stateProvider.state('manage', {
         url:'/manage',
         templateUrl: 'views/manage.html',
@@ -43,10 +43,18 @@ angular
         url:'/coupons',
         templateUrl: 'views/coupons.html',
         controller:'couponsController'
+      }).state('engineer',{
+        url:'/engineer',
+        templateUrl: 'views/engineer.html'
+      }).state('login',{
+        url:'/login',
+        templateUrl: 'views/login.html'
       })
 
-});
-
+}]);
+angular.module('paticaApp').config(['$httpProvider',function($httpProvider){
+  $httpProvider.interceptors.push('author');
+}]);
 angular.module('controller',[]);
 angular.module('services',[]);
 
