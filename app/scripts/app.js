@@ -48,7 +48,14 @@ angular
         templateUrl: 'views/engineer.html'
       }).state('login',{
         url:'/login',
-        templateUrl: 'views/login.html'
+        views:{
+          '':{
+            templateUrl: 'views/login.html'  
+          },
+          'login':{
+            templateUrl: 'views/alterC.html'  
+          }
+        }
       })
 
 }]);
