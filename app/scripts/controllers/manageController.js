@@ -31,7 +31,7 @@ angular.module('controller')
             producetype:'200001'
           }).success(function(d){
             if(d.code!=200){
-              alert(d.msg)
+              //alert(d.msg)
             }
             s.filters.brands=d.data.data;
           })
@@ -55,7 +55,7 @@ angular.module('controller')
                 $http.post('api/order/getOrderByParam',o)
                 .success(function(d){
                     if(d.code!=200){
-                      alert(d.msg);
+                      //alert(d.msg);
                       return;
                     }
                     s.page={
@@ -110,6 +110,20 @@ angular.module('controller')
          // s.$on('a',function(a){
          
          // })
+         
+         s.assign=function(order){
+            var modalInstance = $modal.open({
+                  animation: true,
+                  templateUrl: 'views/engineer.html',
+                  controller: 'engineerController',
+                  size: 'lg'
+                  //,backdrop:false
+             });
+            modalInstance.result.then(function(ok){
+            },function(msg){
+            });
+        }
+        s.assign();
 }]);
 
 angular.module('services').service('manageFiltersLinkage',['$http','city',function($http,city){

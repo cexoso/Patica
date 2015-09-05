@@ -42,11 +42,25 @@
     margin: 0 auto;
     display: block;
 }
-#login{
+#loginBG{
     background:url("../images/loginbg.jpg") center center no-repeat #000;
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
+}
+#login{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform:translate(-50%,-50%);
+    -webkit-transform:translate(-50%,-50%);
+    width: 500px;
+}
+#login article{
+    background-color: rgba(0,0,0,0.8);
+    border: 1px solid #eee;
+    padding: 30px;
+    border-radius: 7px;
 }

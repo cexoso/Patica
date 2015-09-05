@@ -31,7 +31,7 @@ gulp.task('server', function() {
     //     }]
     //   }
   });
-  var rel=['app/views/**/*.html','app/scripts/**/*.js','app/styles/**/*.css'];
+  var rel=['app/views/**/*.html','app/tpls/**/*.html','app/scripts/**/*.js','app/styles/**/*.css'];
   gulp.watch(rel,function(){
     gulp.src('./app/*.html')
     .pipe(connect.reload());
@@ -56,12 +56,14 @@ var distPath1="E:/Program Files/eclipseWS/PaticaService/WebContent";
 gulp.task('watch',function(){
   gulp.watch('app/scripts/**/*.js',['buildlogic']);
   gulp.watch('app/views/**/*',['buildview']);
+  gulp.watch('app/tpls/**/*',['buildtpl']);
   gulp.watch('app/styles/**/*.css',['buildcsscos']);
 })
 gulp.task('build',function(){
   return gulp.start([
     'buildlogic',
     'buildview',
+    'buildtpl',
     'buildlib',
     'buildcsslib',
     'buildcsscos'
@@ -80,6 +82,11 @@ gulp.task('buildview',function(){
   return gulp.src('app/views/**/*')
   .pipe(gulp.dest(distPath+'/views'))
   .pipe(gulp.dest(distPath1+'/views'));
+})
+gulp.task('buildview',function(){
+  return gulp.src('app/tpls/**/*')
+  .pipe(gulp.dest(distPath+'/tpls'))
+  .pipe(gulp.dest(distPath1+'/tpls'));
 })
 gulp.task('buildlib',function(){
   var path='app/scripts/**/*.js';

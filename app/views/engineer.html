@@ -1,16 +1,22 @@
 <section>
-    <article class="container">
-        <div class="panel panel-default">
-            <div class="panel-heading">维修员列表</div>
-            <div class="panel-body">
-            </div>
+    <header class="modal-header">
+        <h3 class="modal-title">维修员列表</h3>
+    </header>
+    <article class="modal-body">
+    <div class="panel panel-default">
             <table class="table table-hover table-bordered table-striped">
-                <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
+                <tr ng-click="engineerClickHandle(engineer)" ng-class="{success:engineer.checked}" ng-repeat="engineer in engineers">
+                    <td>{{engineer.name}}</td>
+                    <td>{{engineer.telphone}}</td>
+                    <td>{{engineer.code}}</td>
+                    <td>{{engineer.weixincode}}</td>
+                    <td>{{engineer.sex}}</td>
                 </tr>
-            </table>            
+            </table>
         </div>
     </article>
+    <footer class="modal-footer">
+        <button class="btn btn-primary" ng-click="assign()">派单</button>
+        <button class="btn btn-warning" ng-click="cancel()">退出</button>
+    </footer>
 </section>
