@@ -48,9 +48,6 @@ gulp.task('lint', function() {
 });
 
 gulp.task('default', ['server']);
-
-
-// var distPath="E:/Program Files/eclipseWS/PaticaService/WebContent";
 var distPath="D:/apache-tomcat-7.0.63/webapps/PaticaService";
 var distPath1="E:/Program Files/eclipseWS/PaticaService/WebContent";
 gulp.task('watch',function(){
@@ -66,7 +63,8 @@ gulp.task('build',function(){
     'buildtpl',
     'buildlib',
     'buildcsslib',
-    'buildcsscos'
+    'buildcsscos',
+    'buildimg'
     ]);
 })
 gulp.task('buildlogic',function(){
@@ -83,7 +81,12 @@ gulp.task('buildview',function(){
   .pipe(gulp.dest(distPath+'/views'))
   .pipe(gulp.dest(distPath1+'/views'));
 })
-gulp.task('buildview',function(){
+gulp.task('buildimg',function(){
+  return gulp.src('app/images/**/*')
+  .pipe(gulp.dest(distPath+'/images'))
+  .pipe(gulp.dest(distPath1+'/images'));
+})
+gulp.task('buildtpl',function(){
   return gulp.src('app/tpls/**/*')
   .pipe(gulp.dest(distPath+'/tpls'))
   .pipe(gulp.dest(distPath1+'/tpls'));

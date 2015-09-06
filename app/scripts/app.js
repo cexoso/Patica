@@ -9,7 +9,7 @@ angular.module('paticaApp', [
 ]).config(['$stateProvider',
 '$urlRouterProvider',
 function ($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.otherwise('/engineer');
+  $urlRouterProvider.otherwise('/manage');
   $stateProvider.state('manage', {
     url: '/manage',
     templateUrl: 'views/manage.html',
@@ -42,10 +42,6 @@ function ($stateProvider, $urlRouterProvider) {
     url: '/coupons',
     templateUrl: 'views/coupons.html',
     controller: 'couponsController'
-  }).state('engineer', {
-    url: '/engineer',
-    templateUrl: 'views/engineer.html',
-    controller: 'engineerController'
   }).state('login', {
     abstract: true,
     url: '/login',
@@ -64,9 +60,9 @@ function ($stateProvider, $urlRouterProvider) {
 angular.module('paticaApp').config(['$httpProvider',function ($httpProvider) {
   $httpProvider.interceptors.push('author');
 }]);
-angular.module('paticaApp').run(['$rootScope','$state',function($rootScope,$state){
-  console.log($rootScope.qwe=123)
-  console.log($state)
+angular.module('paticaApp').run(['$rootScope','$state','user',function($rootScope,$state,user){
+  $rootScope.$state=$state;
+  
 }])
 angular.module('controller', [
 ]);

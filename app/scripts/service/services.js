@@ -624,41 +624,72 @@ angular.module('services').service('author', [
   '$q',
   '$injector',
   '$rootScope',
-  function (user, $location,$q,$injector,$rootScope) {
-    console.log($rootScope);
+  function (user, $location, $q, $injector, $rootScope) {
+    // console.log($rootScope);
     var interceptor = {
       'request': function (config) {
         var headers = config.headers;
-        headers.author = user.author;
+        var author=user.get('author');
+        headers.author = author;
+        if(config.method=='GET'&&!author&&!config.url.match('login.html')){
+          $rootScope.$state.go('login.login');
+          return $q.reject(config);
+        }
         return config;
       },
-      'response': function (response) {
-        console.log(response);
-        return response;
-      },
-      'requestError': function (response) {
+      // 'response': function (response) {
+      //   return response;
+      // },
+      // 'requestError': function (request) {
+      //   return request;
+      // },
+      'responseError': function (response) {
         if (response.status == 401) {
-          var rootScope = $injector.get('$rootScope');
-          var state = $injector.get('$rootScope').$state.current.name;
-          rootScope.stateBeforLogin = state;
-          rootScope.$state.go('login');
-          return $q.reject(response);
-        } else if (response.status === 404) {          
+          $rootScope.$state.go('login.login');
           return $q.reject(response);
         }
-      },
-      'responseError': function (rejection) {
-        return rejection;
+        return response;
       }
     };
     return interceptor;
   }
 ]);
-angular.module('services').service('user', [
-  function () {
-    var user = {
+angular.module('services').service('user', ['localstorage',
+  function (localstorage) {
+    var userInfo=localstorage.getItem('user')||
+    {
       author: ''
-    };
+    }
+    function set(user){
+      this.user=user;
+      localstorage.setItem('user',user);
+    }
+    function get(key){
+      return this.user[key];
+    }
+    var user={
+      user:userInfo,
+      set:set,
+      get:get
+    }
     return user;
   }
-]);
+]).service('localstorage',[function(){
+  if(!window.localStorage){
+   console.error('浏览器不支持本地存储');
+  }
+  var map={};
+  function setItem(key,value){
+    value=JSON.stringify(value);
+    map[key]=value;
+    localStorage.setItem(key,value);
+  }
+  function getItem(key){
+    var value=map[key]||localStorage.getItem(key);
+    return JSON.parse(value);
+  }
+  return {
+    setItem:setItem,
+    getItem:getItem
+  }
+}]);

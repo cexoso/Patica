@@ -1,7 +1,4 @@
 <section class="container-fluid">
-    <header>
-        imei服务单号过滤支付状态和金额过滤暂时不可用
-    </header>
     <article>
         <div class="panel panel-default">
             <div class="panel-heading">订单列表&gt;所有订单</div>
@@ -147,13 +144,16 @@
                             <div class="cell-item">实付:{{order.actual_price}}</div>
                         </div>
                     </td>
-                    <td>{{order.status|statusParse}}</td>
+                    <td>
+                        <div class="table-cell text-wrap">
+                            <div class="cell-item">订单状态:{{order.status|statusParse}}</div>
+                            <div class="cell-item">负责人:{{order.engineerName}}</div>
+                        </div>
+                    </td>
                     <td class="vertical-middle">
                         <div style="width:100px" class="btn-group-vertical">
                             <button class="btn btn-default" ng-click="del(order)">删除</button>
-                            <button class="btn btn-default">派单</button>
-                            <button class="btn btn-default">维修完成</button>
-                            <button class="btn btn-default">已邮寄</button>
+                            <button class="btn btn-default" ng-disabled="order.engineerName" ng-click="assign(order)">派单</button>
                         </div>
                     </td>
                 </tr>

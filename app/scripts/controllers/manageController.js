@@ -6,8 +6,8 @@ angular.module('controller')
         };
         var now=new Date;
         s.filter={
-          endtime:now,
-          starttime:new Date(now.getFullYear(),now.getMonth(),now.getDate()-3)
+          // endtime:now,
+          // starttime:new Date(now.getFullYear(),now.getMonth(),now.getDate()-3)
         };
         s.page={};
         manageFiltersLinkage(s);
@@ -116,14 +116,33 @@ angular.module('controller')
                   animation: true,
                   templateUrl: 'views/engineer.html',
                   controller: 'engineerController',
-                  size: 'lg'
-                  //,backdrop:false
+                  size: 'lg',
+                  backdrop:true
              });
-            modalInstance.result.then(function(ok){
+            modalInstance.result.then(function(engineer){
+              $http.post('api/order/addTask',{
+                orderid:order.orderid,
+                userid:engineer.id,
+                status:0
+              }).success(function(d){
+                if(d.code!=200){
+                  alert(d.msg)
+                }else{
+                  $http.post('api/order/updateOrder',{
+                    status:102,
+                    orderid:order.orderid
+                  }).success(function(d){
+                    if(d.code!=200){
+                      alert(d.msg)
+                    }else{
+                      order=d.data.data[0];
+                    }
+                  });
+                }
+              });
             },function(msg){
             });
         }
-        s.assign();
 }]);
 
 angular.module('services').service('manageFiltersLinkage',['$http','city',function($http,city){
