@@ -6,8 +6,8 @@ angular.module('controller')
         };
         var now=new Date;
         s.filter={
-          // endtime:now,
-          // starttime:new Date(now.getFullYear(),now.getMonth(),now.getDate()-3)
+          endtime:now,
+          starttime:new Date(now.getFullYear(),now.getMonth(),now.getDate()-3)
         };
         s.page={};
         manageFiltersLinkage(s);
@@ -43,7 +43,6 @@ angular.module('controller')
             resourceLoader.loadBrandModel({
                 brandid:n.id
             }).success(function(e){
-                
                 s.filters.versions=e.data.data;                
             });
           });
@@ -92,7 +91,7 @@ angular.module('controller')
         }
         var load=function(to){
           var f=s.filter,
-          o=objParse(f,[function(o,next){
+          o=objParse(f,[function(key,o,next){
             if(o instanceof Date){
               next($filter('date')(o,'yyyy-MM-dd'));
             }            
@@ -135,7 +134,8 @@ angular.module('controller')
                     if(d.code!=200){
                       alert(d.msg)
                     }else{
-                      order=d.data.data[0];
+                        console.log(d.data.data[0])
+                        angular.extend(order,d.data.data[0]);
                     }
                   });
                 }
@@ -176,7 +176,7 @@ angular.module('controller')
                   backdrop:false
              });
             modalInstance.result.then(function(q){
-                
+                console.log(q);
             },function(w){
                 
             });
@@ -196,6 +196,7 @@ angular.module('controller')
                 
             });
         }
+        s.appendBill();
 }]);
 
 

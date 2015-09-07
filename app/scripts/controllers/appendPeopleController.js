@@ -3,6 +3,7 @@ angular.module('controller')
   .controller('appendPeopleController', ['$scope','$modalInstance','$http',function (s,$modalInstance,$http) {
         s.sexL=false;
         s.user={
+            type:0
         };
         s.ok = function () {
             s.user.sex={

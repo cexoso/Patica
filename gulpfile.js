@@ -69,7 +69,6 @@ gulp.task('build',function(){
 })
 gulp.task('buildlogic',function(){
   var path='app/scripts/**/*.js';
-  
   return gulp.src(path)
           .pipe(concat('all.js'),{newLine: ';'})
           // .pipe(jsmin())
@@ -93,13 +92,14 @@ gulp.task('buildtpl',function(){
 })
 gulp.task('buildlib',function(){
   var path='app/scripts/**/*.js';
-  
    var arr=[
       'bower_components/angular/angular.js',
       'bower_components/angular-ui-router/release/angular-ui-router.js',
       'bower_components/angular-resource/angular-resource.js',
       'bower_components/angular-bootstrap/ui-bootstrap.js',
-      'bower_components/angular-bootstrap/ui-bootstrap-tpls.js'
+      'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+      'bower_components/ui-select/dist/select.js',
+      'bower_components/angular-sanitize/angular-sanitize.js'
     ];
   return gulp.src(arr)
     .pipe(concat('lib.js'),{newLine: ';'})
@@ -110,9 +110,9 @@ gulp.task('buildlib',function(){
 gulp.task('buildcsslib',function(opt,q){
   var arr=[
     'bower_components/bootstrap/dist/css/bootstrap.min.css',
-    'bower_components/angular-bootstrap/ui-bootstrap-csp.css'
-  ];  
-  
+    'bower_components/angular-bootstrap/ui-bootstrap-csp.css',
+    'bower_components/ui-select/dist/select.css'
+  ];
   gulp.src('bower_components/bootstrap/dist/fonts/*.*')
   .pipe(gulp.dest(distPath+'/fonts'))
   .pipe(gulp.dest(distPath1+'/fonts'));

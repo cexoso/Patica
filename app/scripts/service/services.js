@@ -1,5 +1,34 @@
 'use strict';
-angular.module('services').filter('orderTypeParse', function () {
+angular.module('services').filter('propsFilter', function() {
+  return function(items, props) {
+    var out = [];
+
+    if (angular.isArray(items)) {
+      items.forEach(function(item) {
+        var itemMatches = false;
+
+        var keys = Object.keys(props);
+        for (var i = 0; i < keys.length; i++) {
+          var prop = keys[i];
+          var text = props[prop].toLowerCase();
+          if (item[prop].toString().toLowerCase().indexOf(text) !== -1) {
+            itemMatches = true;
+            break;
+          }
+        }
+
+        if (itemMatches) {
+          out.push(item);
+        }
+      });
+    } else {
+      // Let the output be the input untouched
+      out = items;
+    }
+
+    return out;
+  }
+}).filter('orderTypeParse', function () {
   return function (t) {
     var map = {
       '1': '上门维修',
@@ -43,7 +72,14 @@ angular.module('services').filter('orderTypeParse', function () {
     var d = new Date(t * 1000);
     return d.getYear() + 1900 + '-' + (d.getMonth() + 1) + '-' + d.getDate();
   }
-}).constant('city', {
+}).constant('status',[
+      {id:'101',name:'订单已提交'},
+      {id:'102',name:'维修工程师确认'},
+      {id:'103',name:'确认支付'},
+      {id:'104',name:'用户评价'},
+      {id:'105',name:'订单结束'},
+      {id:'200',name:'订单取消'}
+]).constant('city', {
   citys: [
     {
       cityName: '北京',
@@ -597,14 +633,14 @@ angular.module('services').service('objParse', [
         }
         var parsed;
         if (value.constructor.name == 'Object') {
-          robj[o] = parseFun(value, parse);
+          robj[o] = parseFun(key,value, parse);
           continue;
         }
         N.reset();
         for (var i = 0, length = parse.length; i < length; i++) {
           var p = parse[i];
           if (typeof p == 'function') {
-            p(value, N.next);
+            p(o,value, N.next);
             parsed = N.next();
             if (parsed != undefined) {
               robj[o] = parsed;
@@ -632,17 +668,13 @@ angular.module('services').service('author', [
         var author=user.get('author');
         headers.author = author;
         if(config.method=='GET'&&!author&&!config.url.match('login.html')){
+          console.log('已拦截url'+config.url);
           $rootScope.$state.go('login.login');
           return $q.reject(config);
+        }else{
+          return config;
         }
-        return config;
       },
-      // 'response': function (response) {
-      //   return response;
-      // },
-      // 'requestError': function (request) {
-      //   return request;
-      // },
       'responseError': function (response) {
         if (response.status == 401) {
           $rootScope.$state.go('login.login');

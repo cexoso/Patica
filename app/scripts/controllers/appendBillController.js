@@ -1,10 +1,10 @@
 'use strict';
 angular.module('controller')
-  .controller('appendBillController',['$scope','$modalInstance','$http','city','source','orderTypes','resourceLoader','objParse',function(s,$modalInstance,$http,city,source,orderTypes,resourceLoader,objParse){
+  .controller('appendBillController',['$scope','$modalInstance','$http','city','source','orderTypes','resourceLoader','objParse','status',function(s,$modalInstance,$http,city,source,orderTypes,resourceLoader,objParse,status){
         s.sources=source;
         s.orderTypes=orderTypes;
         s.user_citys=city.citys;
-
+        s.statuss=status;
         s.colors=[
             {name:'金色',id:'1'},
             {name:'灰色',id:'2'},
@@ -13,6 +13,7 @@ angular.module('controller')
         ];
         s.oi={
             ordertime:new Date(),
+            user_repair_date:new Date(),
             colorName:s.colors[0].name,
             user_city:s.user_citys[0].cityName
         };
@@ -66,7 +67,7 @@ angular.module('controller')
         
         
         s.ok = function () {
-            var params=objParse(s.oi,[function(o,next){
+            var params=objParse(s.oi,[function(key,o,next){
                 if(o instanceof Date){                    
                     next(new Date(o).getTime());
                 }  
@@ -75,7 +76,7 @@ angular.module('controller')
                 if(d.code!=200){
                     alert(d.msg);
                 }else{
-                    alert(订单提交成功);
+                    alert('订单提交成功');
                     $modalInstance.close("success");    
                 }
             }).error(function(){
@@ -88,7 +89,7 @@ angular.module('controller')
 }]);
 
 angular.module('controller')
-  .controller('appendBillFormController',['$scope',function($scope){
+  .controller('appendBillFormController',['$scope','$http',function($scope,$http){
     $scope.open = function($event) {
         $scope.status.opened = true;
     };
@@ -111,5 +112,18 @@ angular.module('controller')
     $scope.status = {
         ondoor_opened: false
     };
+    $http.post('api/order/getUserByParam',{
+        type:0,
+        page:{
+            "size":50, 
+            "index": 1
+        }
+    }).success(function(d){
+        if(d.code!=200){
+            alert(d.msg);
+        }else{
+            $scope.engineers=d.data.data;
+        }
+    });
 }]);
 

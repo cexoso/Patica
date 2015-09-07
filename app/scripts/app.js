@@ -3,7 +3,9 @@ angular.module('paticaApp', [
   'ngResource',
   'ui.router',
   'ui.bootstrap',
+  'ui.select',
   'ui.bootstrap.tpls',
+  'ngSanitize',
   'controller',
   'services'
 ]).config(['$stateProvider',
@@ -14,7 +16,8 @@ function ($stateProvider, $urlRouterProvider) {
     url: '/manage',
     templateUrl: 'views/manage.html',
     controller: 'manageController'
-  }).state('index', {
+  })
+  .state('index', {
     url: '/index',
     templateUrl: 'views/index.html',
     controller: 'indexController'
@@ -42,11 +45,13 @@ function ($stateProvider, $urlRouterProvider) {
     url: '/coupons',
     templateUrl: 'views/coupons.html',
     controller: 'couponsController'
-  }).state('login', {
+  })
+.state('login', {
     abstract: true,
     url: '/login',
     templateUrl: 'views/login.html'
-  }).state('login.login', {
+  })
+  .state('login.login', {
     url: '^/login',
     views: {
       'login': {
@@ -62,7 +67,6 @@ angular.module('paticaApp').config(['$httpProvider',function ($httpProvider) {
 }]);
 angular.module('paticaApp').run(['$rootScope','$state','user',function($rootScope,$state,user){
   $rootScope.$state=$state;
-  
 }])
 angular.module('controller', [
 ]);

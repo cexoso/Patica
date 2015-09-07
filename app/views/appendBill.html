@@ -10,19 +10,38 @@
                     <label class="col-sm-2 control-label">下单时间</label>
                     <div class="col-sm-4">
                         <div class="input-group">
-                            <input type="date" class="form-control" current-text='今天' clear-text='清除' datepicker-popup ng-model="oi.ordertime" is-open="status.opened" datepicker-options="dateOptions" close-text="关闭" />
+                            <input type="date" ng-readonly="true" ng-click="open($event)" class="form-control" current-text='今天' clear-text='清除' datepicker-popup ng-model="oi.ordertime" is-open="status.opened" datepicker-options="dateOptions" close-text="关闭" />
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-default" ng-click="open($event)"> <i class="glyphicon glyphicon-calendar"></i>
                                 </button>
                             </span>
                         </div>
                     </div>
+                    <label class="col-sm-2 control-label">工程师</label>
+                    <div class="col-sm-4">
+                        <ui-select ng-model="oi.engineer" theme="bootstrap">
+                            <ui-select-match allow-clear="true" placeholder="选择工程师">{{$select.selected.name}}</ui-select-match>
+                            <ui-select-choices repeat="engineer in engineers | propsFilter: {name: $select.search, code: $select.search}">
+                                <div>
+                                    名字:
+                                    <span ng-bind-html="''+engineer.name | highlight: $select.search"></span>
+                                </div>
+                                <small>
+                                    编码:
+                                    <span ng-bind-html="''+engineer.code | highlight: $select.search"></span>
+                                </small>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
 
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">负责人</label>
+                    <label class="col-sm-2 control-label">订单状态</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control"  ng-model="oi.counterman" placeholder="负责人"></div>
+                        <select class='form-control' ng-model="oi.status" ng-disabled="oi.engineer==null" ng-options="status.id as status.name for status in statuss">
+                            <option value=""></option>
+                        </select>
+                    </div>
                     <label for="order_id" class="col-sm-2 control-label">客户来源</label>
                     <div class="col-sm-4">
                         <select class='form-control' ng-model="oi.ordersource" ng-options="source.id as source.name for source in sources">
@@ -49,13 +68,6 @@
                         </select>
                     </div>
                 </div>
-                <!-- <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <div class="checkbox">
-                            <label class="btn btn-primary btn-lg" ng-init="oi.refixed=false" ng-model="oi.refixed" btn-checkbox>{{{true:'返修',false:'首单'}[oi.refixed]}}</label>
-                        </div>
-                    </div>
-                </div> -->
             </fieldset>
             <fieldset>
                 <legend>手机信息</legend>
@@ -81,9 +93,12 @@
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">二级故障</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-4">
                         <select class='form-control' ng-model="oi.trouble_type_detail" ng-options="troubleDetail.id as troubleDetail.name for troubleDetail in troubleDetails"></select>
                     </div>
+                    <label class="col-sm-2 control-label">实收:</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" ng-model="oi.actual_price" placeholder="实收费用"></div>
                 </div>
             </fieldset>
             <fieldset>
@@ -124,20 +139,21 @@
                     </div>
                     <label for="order_id" class="col-sm-2 control-label">上门时间</label>
                     <div class="col-sm-4">
-                        <!-- <timepicker ng-model="oi.user_repair_time_slot" ng-change="changed()" hour-step="1" minute-step="15" show-meridian="false"></timepicker> -->
-                        <input type="text" class="form-control" placeholder="上门时间" ng-model="oi.user_repair_time_slot"></div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">备注</label>
-                    <div class="col-sm-10">
+                        <!-- <timepicker ng-model="oi.user_repair_time_slot" ng-change="changed()" hour-step="1" minute-step="15" show-meridian="false"></timepicker>
+                    -->
+                    <input type="text" class="form-control" placeholder="上门时间段,类似:9-11 9:30" ng-model="oi.user_repair_time_slot"></div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">备注</label>
+                <div class="col-sm-10">
                     <textarea class="form-control" ng-model="oi.remark" ></textarea>
-                        </div>
                 </div>
-            </fieldset>
-        </form>
-    </article>
-    <footer class="modal-footer">
-        <button class="btn btn-primary" ng-click="ok()">添加</button>
-        <button class="btn btn-warning" ng-click="cancel()">退出</button>
-    </footer>
+            </div>
+        </fieldset>
+    </form>
+</article>
+<footer class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">添加</button>
+    <button class="btn btn-warning" ng-click="cancel()">退出</button>
+</footer>
 </section>
