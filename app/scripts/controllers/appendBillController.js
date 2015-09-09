@@ -64,10 +64,12 @@ angular.module('controller')
             });
             s.oi.user_area=s.user_areas[0].region;
         });
-        
+        s.data={};
+       
         
         s.ok = function () {
             var params=objParse(s.oi,[function(key,o,next){
+                console.log(key)
                 if(o instanceof Date){                    
                     next(new Date(o).getTime());
                 }  

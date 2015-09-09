@@ -50,7 +50,6 @@ angular.module('controller')
         
         var loadData=(function(){
             return function (o){
-                
                 $http.post('api/order/getOrderByParam',o)
                 .success(function(d){
                     if(d.code!=200){
@@ -95,6 +94,10 @@ angular.module('controller')
             if(o instanceof Date){
               next($filter('date')(o,'yyyy-MM-dd'));
             }            
+          },function(key,o,next){
+            if(o==engineer){
+              next($filter('date')(o,'yyyy-MM-dd'));
+            }  
           }]);
           loadData(angular.extend({
             page:{
@@ -111,14 +114,7 @@ angular.module('controller')
          // })
          
          s.assign=function(order){
-            var modalInstance = $modal.open({
-                  animation: true,
-                  templateUrl: 'views/engineer.html',
-                  controller: 'engineerController',
-                  size: 'lg',
-                  backdrop:true
-             });
-            modalInstance.result.then(function(engineer){
+            function addTask(order,engineer){
               $http.post('api/order/addTask',{
                 orderid:order.orderid,
                 userid:engineer.id,
@@ -140,7 +136,42 @@ angular.module('controller')
                   });
                 }
               });
-            },function(msg){
+            }
+            function updateTask(order,engineer){
+              $http.post('api/order/updateTask',{
+                orderid:order.orderid,
+                userid:engineer.id,
+              }).success(function(d){
+                if(d.code!=200){
+                  alert(d.msg)
+                }else{
+                  $http.post('api/order/getOrderByParam',{
+                    orderid:order.orderid
+                  }).success(function(d){
+                    if(d.code!=200){
+                      alert(d.msg)
+                    }else{
+                        angular.extend(order,d.data.data[0]);
+                    }
+                  });
+                }
+              });
+            }
+            
+            var modalInstance = $modal.open({
+                  animation: true,
+                  templateUrl: 'views/engineer.html',
+                  controller: 'engineerController',
+                  size: 'lg',
+                  backdrop:true
+             });
+            modalInstance.result.then(function(engineer){
+                  if(order.engineerid){
+                    updateTask(order,engineer);
+                  }else{
+                    addTask(order,engineer);
+                  }
+            },function(error){
             });
         }
 }]);

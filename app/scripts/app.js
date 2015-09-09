@@ -63,7 +63,9 @@ function ($stateProvider, $urlRouterProvider) {
 }
 ]);
 angular.module('paticaApp').config(['$httpProvider',function ($httpProvider) {
-  $httpProvider.interceptors.push('author');
+   // $httpProvider.defaults.useXDomain=true;
+   //delete $httpProvider.defaults.headers.common['X-Requested-With'];
+   $httpProvider.interceptors.push('author');
 }]);
 angular.module('paticaApp').run(['$rootScope','$state','user',function($rootScope,$state,user){
   $rootScope.$state=$state;

@@ -2,6 +2,7 @@
     <header class="modal-header">
         <h3 class="modal-title">手动录单</h3>
     </header>
+    {{oi}}
     <article class="modal-body">
         <form class="form-horizontal" ng-controller="appendBillFormController">
             <fieldset>
@@ -10,7 +11,7 @@
                     <label class="col-sm-2 control-label">下单时间</label>
                     <div class="col-sm-4">
                         <div class="input-group">
-                            <input type="date" ng-readonly="true" ng-click="open($event)" class="form-control" current-text='今天' clear-text='清除' datepicker-popup ng-model="oi.ordertime" is-open="status.opened" datepicker-options="dateOptions" close-text="关闭" />
+                            <input type="date" class="form-control" current-text='今天' clear-text='清除' datepicker-popup ng-model="oi.ordertime" is-open="status.opened" datepicker-options="dateOptions" close-text="关闭" />
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-default" ng-click="open($event)"> <i class="glyphicon glyphicon-calendar"></i>
                                 </button>
@@ -19,7 +20,7 @@
                     </div>
                     <label class="col-sm-2 control-label">工程师</label>
                     <div class="col-sm-4">
-                        <ui-select ng-model="oi.engineer" theme="bootstrap">
+                        <ui-select ng-model="data.engineer" theme="bootstrap">
                             <ui-select-match allow-clear="true" placeholder="选择工程师">{{$select.selected.name}}</ui-select-match>
                             <ui-select-choices repeat="engineer in engineers | propsFilter: {name: $select.search, code: $select.search}">
                                 <div>

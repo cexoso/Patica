@@ -1,5 +1,5 @@
 <section class="container-fluid">
-    <article>
+    <article style="min-height: 86.5vh;">
         <div class="panel panel-default">
             <div class="panel-heading">订单列表&gt;所有订单</div>
         </div>
@@ -62,7 +62,7 @@
                     <div class="col-sm-3">
                         <div class="input-group">
                             <label class="control-label input-group-addon">开始时间</label>
-                            <input type="text" ng-readonly="true" show-weeks="false" style="background-color: #fff;" ng-click="startOpen($event)" class="form-control" current-text='今天' clear-text='清除' datepicker-popup ng-model="filter.starttime" is-open="status.startOpened" max-date="filter.endtime" datepicker-options="dateOptions" close-text="关闭" />
+                            <input type="date" show-weeks="false" class="form-control" current-text='今天' clear-text='清除' datepicker-popup ng-model="filter.starttime" is-open="status.startOpened" max-date="filter.endtime" datepicker-options="dateOptions" close-text="关闭" />
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-default" ng-click="startOpen($event)"> <i class="glyphicon glyphicon-calendar"></i>
                                 </button>
@@ -72,7 +72,7 @@
                     <div class="col-sm-3">
                         <div class="input-group">
                             <label class="control-label input-group-addon">结束时间</label>
-                            <input type="text" ng-readonly="true" show-weeks="false" style="background-color: #fff;" ng-click="endOpen($event)" class="form-control" current-text='今天' clear-text='清除' datepicker-popup ng-model="filter.endtime" is-open="status.endOpened" min-date="filter.starttime" datepicker-options="dateOptions" close-text="关闭" />
+                            <input type="date" show-weeks="false" class="form-control" current-text='今天' clear-text='清除' datepicker-popup ng-model="filter.endtime" is-open="status.endOpened" min-date="filter.starttime" datepicker-options="dateOptions" close-text="关闭" />
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-default" ng-click="endOpen($event)"> <i class="glyphicon glyphicon-calendar"></i>
                                 </button>
@@ -154,19 +154,22 @@
                     </td>
                     <td class="vertical-middle">
                         <div style="width:100px" class="btn-group-vertical">
-              <!--               <button class="btn btn-default" ng-click="del(order)">删除</button> -->
-                            <button class="btn btn-default" ng-disabled="order.engineerName" ng-click="assign(order)">派单</button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+                            <!--               <button class="btn btn-default" ng-click="del(order)">删除</button>
+                        -->
+                        <button class="btn btn-default" ng-click="assign(order)">派单</button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 </article>
 <footer>
-    <div class="container">
+<div style="position:relative;min-height:75px;">
+    <div class="position-center">
         <pagination ng-change="pageChanged(page.page)" total-items="page.totalcount" items-per-page="page.pagesize" ng-model="page.page" max-size="10" class="pagination-sm" boundary-links="true" rotate="false"></pagination>
-        <pre>Page: {{page.page}} / {{page.numPages}}</pre>
     </div>
+</div>
+<pre class="text-center">Page: {{page.page}} / {{page.numPages}}</pre>
 </footer>
 </section>

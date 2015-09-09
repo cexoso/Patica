@@ -633,7 +633,7 @@ angular.module('services').service('objParse', [
         }
         var parsed;
         if (value.constructor.name == 'Object') {
-          robj[o] = parseFun(key,value, parse);
+          robj[o] = parseFun(o,value, parse);
           continue;
         }
         N.reset();
@@ -674,14 +674,14 @@ angular.module('services').service('author', [
         }else{
           return config;
         }
-      },
-      'responseError': function (response) {
-        if (response.status == 401) {
-          $rootScope.$state.go('login.login');
-          return $q.reject(response);
-        }
-        return response;
       }
+      // 'responseError': function (response) {
+      //   if (response.status == 401) {
+      //     $rootScope.$state.go('login.login');
+      //     return $q.reject(response);
+      //   }
+      //   return response;
+      // }
     };
     return interceptor;
   }

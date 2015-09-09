@@ -247,3 +247,10 @@ body > .ui-select-bootstrap.open {
 .modal-header{
   background-color: #5cb85c;
 }
+
+.position-center{
+  position: absolute;
+  left: 50%;
+  transform:translate(-50%);
+  -webkit-transform:translate(-50%);
+}
