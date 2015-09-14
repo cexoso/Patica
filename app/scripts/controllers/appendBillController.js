@@ -69,7 +69,6 @@ angular.module('controller')
         
         s.ok = function () {
             var params=objParse(s.oi,[function(key,o,next){
-                console.log(key)
                 if(o instanceof Date){                    
                     next(new Date(o).getTime());
                 }  
@@ -114,18 +113,5 @@ angular.module('controller')
     $scope.status = {
         ondoor_opened: false
     };
-    $http.post('api/order/getUserByParam',{
-        type:0,
-        page:{
-            "size":50, 
-            "index": 1
-        }
-    }).success(function(d){
-        if(d.code!=200){
-            alert(d.msg);
-        }else{
-            $scope.engineers=d.data.data;
-        }
-    });
 }]);
 

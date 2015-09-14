@@ -37,6 +37,10 @@ function ($stateProvider, $urlRouterProvider) {
     url: '/addDefault',
     templateUrl: 'views/addDefault.html',
     controller: 'addDefaultController'
+  }).state('index.addDefaultDetail', {
+    url: '/addDefaultDetail',
+    templateUrl: 'views/addDefaultDetail.html',
+    controller: 'addDefaultDetailController'
   }).state('index.addQuote', {
     url: '/addQuote',
     templateUrl: 'views/addQuote.html',

@@ -1,33 +1,61 @@
 'use strict';
 angular.module('controller')
-  .controller('addPBController', ['$scope','confirm','$http',function (s,confirm,$http) {
+  .controller('addPBController', ['$scope','confirm','$http','$filter',function (s,confirm,$http,$filter) {
+        s.sub={};
+        s.subTips=[];        
+        s.defaultTips=[];
         s.addBrand=function(brandToAdd){
             if(!brandToAdd){
                 return;
             }
             confirm({title:'再次确认!',content:'你要提交的品牌为:'+brandToAdd,ok:'确认',cancel:'取消'})
             .then(function(){
-                console.log('success')
+                $http.post('api/price/addBrand',{
+                    producetype:'200001',
+                    name:brandToAdd
+                }).success(function(d){
+                    if(d.code!=200){
+                        alert(d.msg);
+                    }else{
+                        s.brandToAdd="";
+                        s.defaultTips.unshift($filter('json')(d.data));
+                        s.$emit('addNewBrand');
+                    }
+                });
             },function(){
                 console.log('fail')
             })
         }
         function freshBrand(){
-            // $http.get('/brand').success(function(data){
-            //     s.brandList=data.brandList;    
-            // })    
-            s.brandList=[{id:1,name:'ihone4'},
-            {id:2,name:'ihone5'},
-            {id:3,name:'ihone6'}]
+            $http.get('api/price/getBrand',{
+                params:{
+                    producetype:'200001'
+                }
+            }).success(function(data){
+                s.brandList=data.data.data;    
+                s.sub.brandid=s.brandList[0].id;
+            })
         }
+        s.$on('addNewBrand',function(){
+            freshBrand();    
+        });
         freshBrand();
-        s.addVersion=function(versionToAdd){
-            if(!versionToAdd){
+        s.addVersion=function(sub){
+            if(!sub){
                 return;
             }
-            confirm({title:'再次确认!',content:'你要提交的型号为:'+versionToAdd,ok:'确认',cancel:'取消'})
+            confirm({title:'再次确认!',content:'你要提交的型号为:'+$filter('json')(sub),ok:'确认',cancel:'取消'})
             .then(function(){
-                console.log('success')
+                $http.post('api/price/addBrandModel',angular.extend({
+                    producetype:'200001'
+                },sub)).success(function(d){
+                    if(d.code!=200){
+                        alert(d.msg);
+                    }else{
+                        delete s.sub;
+                        s.subTips.unshift($filter('json')(d.data));
+                    }
+                });
             },function(){
                 console.log('fail')
             })

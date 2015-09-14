@@ -624,16 +624,15 @@ angular.module('services').service('objParse', [
     }) ();
     return function parseFun(obj, parse /*array*/
     ) {
-      var robj = {
-      };
+      var robj=new obj.constructor();
       for (var o in obj) {
         var value = obj[o];
-        if (!value) {
+        if (value==='undefined') {
           continue;
         }
         var parsed;
         if (value.constructor.name == 'Object') {
-          robj[o] = parseFun(o,value, parse);
+          robj[o] = parseFun(value, parse);
           continue;
         }
         N.reset();
@@ -648,7 +647,7 @@ angular.module('services').service('objParse', [
             }
           }
         }
-        robj[o] || (robj[o] = value);
+        (robj[o]!==undefined )|| (robj[o] = value);
       }
       return robj;
     }

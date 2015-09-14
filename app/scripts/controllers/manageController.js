@@ -162,7 +162,7 @@ angular.module('controller')
                   animation: true,
                   templateUrl: 'views/engineer.html',
                   controller: 'engineerController',
-                  size: 'lg',
+                  size: 'sm',
                   backdrop:true
              });
             modalInstance.result.then(function(engineer){
@@ -227,7 +227,6 @@ angular.module('controller')
                 
             });
         }
-        s.appendBill();
 }]);
 
 

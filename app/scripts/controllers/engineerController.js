@@ -14,20 +14,9 @@ angular.module('controller')
                 s.engineers=d.data.data;
             }
         });
-        s.checkedItem=null;
-        s.engineerClickHandle=(function(){
-            var last=null;
-            return function(i){
-                if(last){
-                    delete last.checked;
-                }
-                s.checkedItem=angular.extend({},i,true);
-                i.checked=true;
-                last=i;
-            }
-        })();
+        s.data={};
         s.assign=function(){
-            $modalInstance.close(s.checkedItem);
+            $modalInstance.close(s.data.engineer);
         }
         s.cancel = function () {
            $modalInstance.dismiss('cancel');

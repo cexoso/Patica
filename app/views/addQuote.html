@@ -28,10 +28,10 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="quote in quoteList">
-                                <td>{{quote.brand}}</td>
-                                <td>{{quote.version}}</td>
-                                <td>{{quote.fault}}</td>
-                                <td>{{quote.subFault}}</td>
+                                <td>{{quote.brand.name}}</td>
+                                <td>{{quote.model.name}}</td>
+                                <td>{{quote.fault.name}}</td>
+                                <td>{{quote.subFault.name}}</td>
                                 <td>
                                     <input type="text" ng-model="quote.quote" ng-init="quote.quote=0" class="form-control"  placeholder="报价"></td>
                             </tr>

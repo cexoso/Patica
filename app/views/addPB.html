@@ -23,7 +23,9 @@
                     </form>
                 </div>
                 <div class="panel-footer clearfix">
-                    <button type="button" class="pull-right btn btn-default" ng-click="addBrand(brandToAdd)">确定添加</button>
+                    <div ng-if="defaultTips.length">添加的品牌信息:</div>
+                    <div ng-repeat="tip in defaultTips">{{tip}}</div>
+                    <button type="button" ng-disabled="!brandToAdd" class="pull-right btn btn-default" ng-click="addBrand(brandToAdd)">确定添加</button>
                 </div>
             </div>
         </div>
@@ -32,27 +34,28 @@
                 <div class="panel-heading">
                     <h1>添加型号</h1>
                 </div>
-                <div class="panel-body">
-                    <form class="form-horizontal">
+                <form class="form-horizontal" name="subF" novalidate>
+                    <div class="panel-body">
+
                         <div class="form-group">
                             <label class="col-sm-2 control-label">选择品牌</label>
                             <div class="col-sm-10">
-                                <select class="form-control">
-                                    <option value="">请选择品牌</option>
-                                    <option value="{{brand.id}}" ng-repeat="brand in brandList">{{brand.name}}</option>
-                                </select>
+                                <select  class='form-control' required ng-model="sub.brandid" ng-options="brand.id as brand.name for brand in brandList"></select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">输入新型号</label>
                             <div class="col-sm-10">
-                                <input type="text" ng-model="versionToAdd" class="form-control"  placeholder="输入新型号"></div>
+                                <input type="text" ng-model="sub.name" required class="form-control"  placeholder="输入新型号"></div>
                         </div>
-                    </form>
-                </div>
-                <div class="panel-footer clearfix">
-                    <button type="button" class="pull-right btn btn-default" ng-click="addVersion(versionToAdd)">确定添加</button>
-                </div>
+
+                    </div>
+                    <div class="panel-footer clearfix">
+                        <div ng-if="subTips.length">添加的品牌型号信息:</div>
+                        <div ng-repeat="tip in subTips">{{tip}}</div>
+                        <button type="submit" ng-disabled="subF.$invalid"  class="pull-right btn btn-default" ng-click="addVersion(sub)">确定添加</button>
+                    </div>
+                </form>
             </div>
         </div>
     </article>

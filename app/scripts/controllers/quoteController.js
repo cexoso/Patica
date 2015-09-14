@@ -2,7 +2,7 @@
 angular.module('services').service('resourceLoader',['$http',function($http){
     function get(url,opt){
         return $http.get(url,{
-            cache:true,
+            cache:false,
             params:opt
         });
     }

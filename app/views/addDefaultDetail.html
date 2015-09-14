@@ -1,0 +1,149 @@
+<section>
+    <header>
+        <div class="well">
+            <h3>添加故障类型</h3>
+            <a class="btn btn-default" ui-sref="index.quote"> <i class="glyphicon glyphicon-share-alt flip-horizontal"></i>
+                返回
+            </a>
+        </div>
+    </header>
+    <article>
+        <div class="container">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1>添加二级故障</h1>
+                    {{Default}}
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal" name="defaultF">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <ui-select required ng-model="select.default" theme="bootstrap">
+                                    <ui-select-match allow-clear="true" placeholder="选择故障类型">{{$select.selected.name}}</ui-select-match>
+                                    <ui-select-choices repeat="default in select.defaults | propsFilter: {name: $select.search}">
+                                        <div>
+                                            <span ng-bind-html="''+default.name | highlight: $select.search"></span>
+                                        </div>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">输入新二级故障</label>
+                            <div class="col-sm-10">
+                                <input type="text" required ng-model="Default.name" class="form-control"  placeholder="输入新二级故障"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">描述</label>
+                            <div class="col-sm-10">
+                                <input type="text" required ng-model="Default.des" class="form-control"  placeholder="故障描述"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">维修方式</label>
+                            <div class="col-sm-10">
+                                <input type="text" required ng-model="Default.repairmethod" class="form-control"  placeholder="维修方式"></div>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model="Default.needcheck">needcheck</label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model="Default.iphoneshow">iphoneshow</label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model="Default.samsungshow">samsungshow</label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model="Default.xiaomishow">xiaomishow</label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model="Default.huaweishow">huaweishow</label>
+                        </div>
+                    </form>
+                    <div class="panel-footer clearfix">
+                        <div ng-if="defaultTips.length">添加的二级故障的信息:</div>
+                        <div ng-repeat="tip in defaultTips">{{tip}}</div>
+                        <button type="button" ng-disabled="defaultF.$invalid" class="pull-right btn btn-default" ng-click="addDefault(Default)">确定添加</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form class="form-horizontal" name="altDefaultF">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <ui-select ng-model="select.default" theme="bootstrap">
+                                    <ui-select-match allow-clear="true" placeholder="选择故障类型">{{$select.selected.name}}</ui-select-match>
+                                    <ui-select-choices repeat="default in select.defaults | propsFilter: {name: $select.search}">
+                                        <div>
+                                            <span ng-bind-html="''+default.name | highlight: $select.search"></span>
+                                        </div>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <ui-select ng-model="select.subDefault" theme="bootstrap">
+                                    <ui-select-match allow-clear="true" placeholder="选择故障类型">{{$select.selected.name}}</ui-select-match>
+                                    <ui-select-choices repeat="default in select.subDefaults | propsFilter: {name: $select.search}">
+                                        <div>
+                                            <span ng-bind-html="''+default.name | highlight: $select.search"></span>
+                                        </div>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">二级故障名称</label>
+                            <div class="col-sm-10">
+                                <input type="text" required ng-model="altDefault.name" class="form-control"  placeholder="输入新二级故障"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">描述</label>
+                            <div class="col-sm-10">
+                                <input type="text" required ng-model="altDefault.des" class="form-control"  placeholder="故障描述"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">维修方式</label>
+                            <div class="col-sm-10">
+                                <input type="text" required ng-model="altDefault.repairmethod" class="form-control"  placeholder="维修方式"></div>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model="altDefault.needcheck">needcheck</label>
+                        </div>        
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model="altDefault.iphoneshow">iphoneshow</label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model="altDefault.samsungshow">samsungshow</label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model="altDefault.xiaomishow">xiaomishow</label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model="altDefault.huaweishow">huaweishow</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="panel-footer clearfix">
+                    <div>{{alter.tip}}</div>
+                    <button type="button" ng-disabled="!altDefault.id" class="pull-right btn btn-default" ng-click="updateDefault(altDefault)">修改</button>
+                </div>
+            </div>
+        </div>
+
+    </article>
+    <footer></footer>
+</section>

@@ -1,6 +1,6 @@
 <section>
     <header>
-           <div class="well">
+        <div class="well">
             <h3>添加故障类型</h3>
             <a class="btn btn-default" ui-sref="index.quote"> <i class="glyphicon glyphicon-share-alt flip-horizontal"></i>
                 返回
@@ -14,44 +14,70 @@
                     <h1>添加一级故障</h1>
                 </div>
                 <div class="panel-body">
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" name="defaultF">
                         <div class="form-group">
                             <label class="col-sm-2 control-label">输入新故障</label>
                             <div class="col-sm-10">
-                                <input type="text" ng-model="defaultToAdd" class="form-control"  placeholder="输入新故障"></div>
+                                <input type="text" required ng-model="Default.name" class="form-control"  placeholder="输入新故障"></div>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model="Default.iphoneshow">iphoneshow</label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model="Default.samsungshow">samsungshow</label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model="Default.xiaomishow">xiaomishow</label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model="Default.huaweishow">huaweishow</label>
                         </div>
                     </form>
                 </div>
                 <div class="panel-footer clearfix">
-                    <button type="button" class="pull-right btn btn-default" ng-click="addDefault(defaultToAdd)">确定添加</button>
+                    <div ng-if="defaultTips.length">添加的品牌信息:</div>
+                    <div ng-repeat="tip in defaultTips">{{tip}}</div>
+                    <button type="button" ng-disabled="defaultF.$invalid" class="pull-right btn btn-default" ng-click="addDefault(Default)">确定添加</button>
                 </div>
             </div>
         </div>
         <div class="container">
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h1>添加二级故障</h1>
-                </div>
                 <div class="panel-body">
-                    <form class="form-horizontal">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">选择一级故障</label>
-                            <div class="col-sm-10">
-                                <select class="form-control">
-                                    <option value="">请选择一级故障</option>
-                                    <option value="{{default.id}}" ng-repeat="default in defaultList">{{default.name}}</option>
-                                </select>
+                    <ui-select ng-model="select.default" theme="bootstrap">
+                        <ui-select-match allow-clear="true" placeholder="选择故障类型">{{$select.selected.name}}</ui-select-match>
+                        <ui-select-choices repeat="default in select.defaults | propsFilter: {name: $select.search}">
+                            <div>
+                                <span ng-bind-html="''+default.name | highlight: $select.search"></span>
                             </div>
+                        </ui-select-choices>
+                    </ui-select>
+                    <form>                        
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model="alter.default.iphoneshow">iphoneshow</label>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">输入新二级故障</label>
-                            <div class="col-sm-10">
-                                <input type="text" ng-model="subDefaultToAdd" class="form-control"  placeholder="输入新二级故障"></div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model="alter.default.samsungshow">samsungshow</label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model="alter.default.xiaomishow">xiaomishow</label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model="alter.default.huaweishow">huaweishow</label>
                         </div>
                     </form>
                 </div>
-                <div class="panel-footer clearfix">
-                    <button type="button" class="pull-right btn btn-default" ng-click="addSubDefault(subDefaultToAdd)">确定添加</button>
+                <div class="panel-footer clearfix">                    
+                    <div>{{alter.tip}}</div>
+                    <button type="button" ng-disabled="!alter.default.id" class="pull-right btn btn-default" ng-click="updateDefault(alter.default)">修改</button>
                 </div>
             </div>
         </div>

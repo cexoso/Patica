@@ -15,21 +15,17 @@ gulp.task('server', function() {
   connect.server({
     root: ['app','bower_components','node_modules'],
     livereload: true,
-    port:80
-    //,
-    // middleware:function(connect,opt){
-    //     return [function(req,res,next){
-    //       var arr=['html','js','css','png','jpg','svg','woff2','woff','ttf'];
-    //       var regUrl=new RegExp('.('+arr.join('|')+')$','igm');
-    //       console.log(req.url)
-    //       if(req.url.match(regUrl)){
-    //         next();
-    //       }else{
-    //         console.log("代理："+req.url)
-    //         proxy.web(req, res, { target: 'http://192.168.0.145:8080/PaticaService'});  
-    //       }
-    //     }]
-    //   }
+    port:80,
+    middleware:function(connect,opt){
+        return [function(req,res,next){
+          if(!req.url.match("/api/")){
+            next();
+          }else{
+            console.log("代理："+req.url)
+            proxy.web(req, res, { target: 'http://127.0.0.1:8080/PaticaService/'});  
+          }
+        }]
+      }
   });
   var rel=['app/views/**/*.html','app/tpls/**/*.html','app/scripts/**/*.js','app/styles/**/*.css'];
   gulp.watch(rel,function(){

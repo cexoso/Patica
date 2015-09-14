@@ -1,6 +1,6 @@
 <section id="index" class="clearfix">
     <header>
-        <nav class="navbar navbar-inverse navbar-fixed-top">
+        <nav style="border-color:transparent" class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="#">Patica</a>
@@ -25,6 +25,28 @@
                     <i class="glyphicon glyphicon-search"></i><span>券-管理</span>    
                 </a>
             </div>
+            <div class="hr-block"></div>
+            <div class="item">
+                <a href="javascript:void(0);">
+                    <i class="glyphicon glyphicon-search"></i><span>基础信息管理</span>    
+                </a>
+            </div>
+            <ul>
+                <li>
+                    <a ui-sref="index.addPB">添加品牌型号</a>
+                </li>
+                <li>
+                    <a ui-sref="index.addDefault">一级故障类型</a>
+                </li>
+                <li>
+                    <a ui-sref="index.addDefaultDetail">二级故障类型</a>
+                </li>
+                <li>
+                    <a ui-sref="index.addQuote">新增报价</a>
+                </li>
+            </ul>
+            <div class="hr-block"></div>
+            
         </aside>
         <article>
             <div ui-view=""></div>

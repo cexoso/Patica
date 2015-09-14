@@ -1,14 +1,16 @@
 'use strict';
 angular.module('controller')
-  .controller('addDefaultController', ['$scope','confirm','$http','$filter','objParse',function (s,confirm,$http,$filter,objParse) {
+  .controller('addDefaultDetailController', ['$scope','confirm','$http','$filter','objParse','$q',function (s,confirm,$http,$filter,objParse,$q) {
         s.defaultTips=[];
         s.select={};
         s.alter={};
+        s.altDefault={};
         s.Default={
             huaweishow:true,
             xiaomishow:true,
             samsungshow:true,
-            iphoneshow:true
+            iphoneshow:true,
+            needcheck:true
         }
         s.addDefault=function(Default){
             var obj=objParse(Default,[function(k,v,next){
@@ -22,11 +24,11 @@ angular.module('controller')
             }]);
             confirm({title:'再次确认!',content:'你要提交的故障为:'+$filter('json')(obj),ok:'确认',cancel:'取消'})
             .then(function(){
-                $http.post('api/price/addTrouble',obj).success(function(d){
+                $http.post('api/price/addTroubleDetail',obj).success(function(d){
                     if(d.code!=200){
                         alert(d.msg);
                     }else{
-                        s.Default="";
+                        s.Default={};
                         s.defaultTips.unshift($filter('json')(d.data));
                         s.$emit('addNewDefault');
                     }
@@ -35,8 +37,8 @@ angular.module('controller')
             })
         }
         s.updateDefault=function(Default){
-            var obj=objParse(Default,[function(k,v,next){
             
+            var obj=objParse(Default,[function(k,v,next){
                 if(v===true){
                     return next(1);
                 }else if(v===false){
@@ -47,7 +49,7 @@ angular.module('controller')
             }]);
             confirm({title:'再次确认!',content:'你要提交的故障为:'+$filter('json')(obj),ok:'确认',cancel:'取消'})
             .then(function(){
-                $http.post('api/price/updateTrouble',obj).success(function(d){
+                $http.post('api/price/updateTroubleDetail',obj).success(function(d){
                     if(d.code!=200){
                         alert(d.msg);
                     }else{
@@ -57,12 +59,13 @@ angular.module('controller')
                         s.$emit('updateDefault');
                     }
                 });
-            });
+            },function(){
+            })
         }
         function freshDefault(){        
             $http.get('api/price/getTrouble').success(function(data){                                
                 var ooo=objParse(data.data.data,[function(k,v,n){
-                    if(k.match(/show$/i)){                        
+                    if(k.match(/needcheck|show$/i)){                        
                         if(v==1){
                             return n(true);
                         }else {
@@ -70,14 +73,57 @@ angular.module('controller')
                         }
                     }
                     return n(v);
-                }]);                
-                s.select.defaults=ooo;
+                }]);
+                s.defaultList=ooo;   
+                console.log(ooo)                 
+                s.select.defaults=s.defaultList;
             })
         }
         freshDefault();
         s.$on('addNewDefault',freshDefault);
         s.$on('updateDefault',freshDefault);
+        function getSubDefault(troubleid){
+            return $http.get('api/price/getTroubleDetail',{
+                    params:{
+                        troubleid:troubleid    
+                    }
+                }).then(function(data){
+                var ooo=objParse(data.data.data,[function(k,v,n){
+                    if(k.match(/needcheck|show$/i)){                        
+                        if(v==1){
+                            return n(true);
+                        }else {
+                            return n(false);
+                        }
+                    }
+                    return n(v);
+                }]);
+                var deferred=$q.defer();
+                deferred.resolve(ooo.data);     
+                return deferred.promise;
+            })
+        }
         s.$watch('select.default',function(d){
-            s.alter.default=angular.extend({},d,true);
+            if(d){
+                s.Default.troubleid=d.id;
+                getSubDefault(d.id).then(function(list){
+                    s.select.subDefaults=list;                    
+                });
+            }else{
+                delete s.Default.troubleid;
+            }
+            //s.alter.default=angular.extend({},d,true);
+        });
+        s.$watch('select.subDefault',function(d){
+            s.altDefault=objParse(angular.extend({},d,true),[function(k,v,n){
+                    if(k.match(/needcheck|show$/i)){                        
+                        if(v==1){
+                            return n(true);
+                        }else {
+                            return n(false);
+                        }
+                    }
+                    return n(v);
+            }]);
         });
 }]);
