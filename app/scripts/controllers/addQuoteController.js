@@ -21,8 +21,10 @@ angular.module('controller')
 }]);
 
 angular.module('controller')
-  .controller('addQuoteDtlController',['$scope','$modalInstance','resourceLoader',function(s,$modalInstance,resourceLoader){
-        s.datas={};
+  .controller('addQuoteDtlController',['$scope','$modalInstance','resourceLoader','source',function(s,$modalInstance,resourceLoader,source){
+        s.datas={
+            offergoals:source
+        };
         s.data={};
         s.ok = function () {
             $modalInstance.close(s.data);  
@@ -48,7 +50,6 @@ angular.module('controller')
                 s.data.model=s.datas.models[0];     
             });
         });
-    
         resourceLoader.loadTrouble().success(function(e){
             s.datas.faults=e.data.data;
             s.data.fault=s.datas.faults[0];

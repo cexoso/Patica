@@ -21,6 +21,7 @@
                             <tr>
                                 <th class='text-center vertical-middle'>品牌</th>
                                 <th class='text-center vertical-middle'>型号</th>
+                                <th class='text-center vertical-middle'>来源</th>
                                 <th class='text-center vertical-middle'>一级故障</th>
                                 <th class='text-center vertical-middle'>二级故障</th>
                                 <th class='text-center vertical-middle'>报价</th>
@@ -30,6 +31,7 @@
                             <tr ng-repeat="quote in quoteList">
                                 <td>{{quote.brand.name}}</td>
                                 <td>{{quote.model.name}}</td>
+                                <td>{{quote.model.offergoal|ordersourceParse}}</td>
                                 <td>{{quote.fault.name}}</td>
                                 <td>{{quote.subFault.name}}</td>
                                 <td>

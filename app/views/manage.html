@@ -7,6 +7,7 @@
             <div class="btn-group" style="margin-bottom: 30px;">
                 <button type="button" class="btn btn-default btn-sm" ng-click="appendBill()">手动录单</button>
                 <button type="button" class="btn btn-default btn-sm" ng-click="appendPeople()">添加负责人</button>
+                <a target="download" ng-href="api/download?ordertime={{filter.starttime|date:'yyyy-MM-dd'}}" class="btn btn-default btn-sm">下载</a>
             </div>
             <form class="form-horizontal">
                 <div class="form-group">
@@ -26,149 +27,164 @@
                     </div>
                     <div class="col-sm-3">
                         <div class="input-group">
-                            <label class="control-label input-group-addon">支付状态</label>
-                            <select  class='form-control' ng-model="filter.pay_status" ng-options="payStatus.id as payStatus.name for payStatus in filters.payStatus">
+                            <label class="control-label input-group-addon">订单类型</label>
+                            <select  class='form-control' ng-model="filter.ordertype" ng-options="orderTypes.id as orderTypes.name for orderTypes in filters.orderTypes">
                                 <option value=""></option>
                             </select>
                         </div>
                     </div>
-                    <div class="col-sm-3">
-                        <div class="input-group">
-                            <label class="control-label input-group-addon">金额</label>
-                            <input type="text" class='form-control' ng-model="filter.price"></div>
+                    <!-- <div class="col-sm-3">
+                    <div class="input-group">
+                        <label class="control-label input-group-addon">支付状态</label>
+                        <select  class='form-control' ng-model="filter.pay_status" ng-options="payStatus.id as payStatus.name for payStatus in filters.payStatus">
+                            <option value=""></option>
+                        </select>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-sm-3">
-                        <div class="input-group">
-                            <label class="control-label input-group-addon">用户名</label>
-                            <input type="text" class='form-control' ng-model="filter.username"></div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="input-group">
-                            <label class="control-label input-group-addon">用户电话</label>
-                            <input type="text" class='form-control' ng-model="filter.phone"></div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="input-group">
-                            <label class="control-label input-group-addon">订单来源</label>
-                            <select  class='form-control' ng-model="filter.ordersource" ng-options="ordersource.id as ordersource.name for ordersource in filters.ordersources">
-                                <option value=""></option>
-                            </select>
-                        </div>
-                    </div>
+                <div class="col-sm-3">
+                    <div class="input-group">
+                        <label class="control-label input-group-addon">金额</label>
+                        <input type="text" class='form-control' ng-model="filter.price"></div>
                 </div>
-                <div class="form-group" ng-controller="DatepickerDemoCtrl">
-                    <div class="col-sm-3">
-                        <div class="input-group">
-                            <label class="control-label input-group-addon">开始时间</label>
-                            <input type="date" show-weeks="false" class="form-control" current-text='今天' clear-text='清除' datepicker-popup ng-model="filter.starttime" is-open="status.startOpened" max-date="filter.endtime" datepicker-options="dateOptions" close-text="关闭" />
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" ng-click="startOpen($event)"> <i class="glyphicon glyphicon-calendar"></i>
-                                </button>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="input-group">
-                            <label class="control-label input-group-addon">结束时间</label>
-                            <input type="date" show-weeks="false" class="form-control" current-text='今天' clear-text='清除' datepicker-popup ng-model="filter.endtime" is-open="status.endOpened" min-date="filter.starttime" datepicker-options="dateOptions" close-text="关闭" />
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" ng-click="endOpen($event)"> <i class="glyphicon glyphicon-calendar"></i>
-                                </button>
-                            </span>
-                        </div>
-                    </div>
+                -->
+            </div>
+            <div class="form-group">
+                <div class="col-sm-3">
+                    <div class="input-group">
+                        <label class="control-label input-group-addon">用户名</label>
+                        <input type="text" class='form-control' ng-model="filter.username"></div>
                 </div>
-                <div class="form-group">
-                    <div class="col-sm-12">
-                        <button style="width:100%" class='btn-lg btn btn-success' ng-click="query()">{{tips.btn}}</button>
-                    </div>
+                <div class="col-sm-3">
+                    <div class="input-group">
+                        <label class="control-label input-group-addon">用户电话</label>
+                        <input type="text" class='form-control' ng-model="filter.phone"></div>
                 </div>
-            </form>
+                <!-- <div class="col-sm-3">
+                <div class="input-group">
+                    <label class="control-label input-group-addon">订单来源</label>
+                    <select  class='form-control' ng-model="filter.ordersource" ng-options="ordersource.id as ordersource.name for ordersource in filters.ordersources">
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+            -->
+        </div>
+        <div class="form-group" ng-controller="DatepickerDemoCtrl">
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <label class="control-label input-group-addon">开始时间</label>
+                    <input type="date" show-weeks="false" class="form-control" current-text='今天' clear-text='清除' datepicker-popup ng-model="filter.starttime" is-open="status.startOpened" max-date="filter.endtime" datepicker-options="dateOptions" close-text="关闭" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="startOpen($event)"> <i class="glyphicon glyphicon-calendar"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <label class="control-label input-group-addon">结束时间</label>
+                    <input type="date" show-weeks="false" class="form-control" current-text='今天' clear-text='清除' datepicker-popup ng-model="filter.endtime" is-open="status.endOpened" min-date="filter.starttime" datepicker-options="dateOptions" close-text="关闭" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="endOpen($event)"> <i class="glyphicon glyphicon-calendar"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <button style="width:100%" class='btn-lg btn btn-success' ng-click="query()">{{tips.btn}}</button>
+            </div>
+        </div>
+    </form>
+    <table class="table table-hover table-bordered table-striped">
+        <thead>
+            <tr style="background-color: orange;">
+                <th class="text-nowrap">#</th>
+                <th class="text-nowrap">订单号</th>
+                <th class="text-nowrap">下单信息</th>
+                <th class="text-nowrap">用户信息</th>
+                <th class="text-nowrap">报价</th>
+                <th class="text-nowrap">订单状态</th>
+                <th class="text-nowrap">备注</th>
+                <th class="text-nowrap">操作</th>
+                <!-- <th class="text-nowrap">付款方式</th>
+            <th class="text-nowrap">负责人</th>
+            <th class="text-nowrap">客户来源</th>
+            <th class="text-nowrap">IMEI</th>
+            <th class="text-nowrap">券号</th>
+            <th class="text-nowrap">备注</th>
+            -->
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="order in page.orders">
+            <td style="vertical-align: middle">{{$index+1}}</td>
+            <td>
+                <div class="table-cell text-wrap">
+                    <div class="cell-item">订单号:{{order.orderid}}</div>
+                    <div class="cell-item">订单来源:{{order.ordersource|ordersourceParse}}</div>
+                    <div class="cell-item">IMEI:</div>
+                    <div class="cell-item">服务单号:</div>
 
-            <table class="table table-hover table-bordered table-striped" ng-if="true">
-                <thead>
-                    <tr style="background-color: orange;">
-                        <th class="text-nowrap">#</th>
-                        <th class="text-nowrap">订单号</th>
-                        <th class="text-nowrap">下单信息</th>
-                        <th class="text-nowrap">用户信息</th>
-                        <th class="text-nowrap">订单来源</th>
-                        <th class="text-nowrap">报价</th>
-                        <th class="text-nowrap">订单状态</th>
-                        <th class="text-nowrap">操作</th>
-                        <!-- <th class="text-nowrap">付款方式</th>
-                    <th class="text-nowrap">负责人</th>
-                    <th class="text-nowrap">客户来源</th>
-                    <th class="text-nowrap">IMEI</th>
-                    <th class="text-nowrap">券号</th>
-                    <th class="text-nowrap">备注</th>
-                    -->
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="order in page.orders">
-                    <td style="vertical-align: middle">{{$index+1}}</td>
-                    <td>
-                        <div class="table-cell text-wrap">
-                            <div class="cell-item">订单号:{{order.orderid}}</div>
-                            <div class="cell-item">IMEI:</div>
-                            <div class="cell-item">服务单号:</div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="table-cell text-wrap">
-                            <div class="cell-item">下单时间:{{order.ordertime|date:'yyyy-MM-dd'}}</div>
-                            <div class="cell-item">品牌:{{order.brandName}}</div>
-                            <div class="cell-item">型号:{{order.colorName}}-{{order.modelName}}</div>
-                            <div class="cell-item">故障:{{order.troubleDetailName}}</div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="table-cell text-wrap">
-                            <div class="cell-item">姓名:{{order.user_real_name}}</div>
-                            <div class="cell-item">电话:{{order.user_phone}}</div>
-                            <div class="cell-item">
-                                地址:{{order.user_city}} {{order.user_area}} {{order.address_desc}}
-                            </div>
-                            <div class="cell-item">
-                                预约时间:{{order.user_repair_date*1000|date:'yyyy-MM-dd'}} {{order.user_repair_time_slot}}
-                            </div>
-                            <div class="cell-item">订单类型:{{order.order_type|orderTypeParse}}</div>
-                        </div>
-                    </td>
-                    <td>{{order.ordersource|ordersourceParse}}</td>
-                    <td>
-                        <div class="table-cell text-wrap">
-                            <div class="cell-item">系统报价:{{order.total_price}}</div>
-                            <div class="cell-item">折扣:{{order.discount_price}}</div>
-                            <div class="cell-item">实付:{{order.actual_price}}</div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="table-cell text-wrap">
-                            <div class="cell-item">订单状态:{{order.status|statusParse}}</div>
-                            <div class="cell-item">负责人:{{order.engineerName}}</div>
-                        </div>
-                    </td>
-                    <td class="vertical-middle">
-                        <div style="width:100px" class="btn-group-vertical">
-                            <!--               <button class="btn btn-default" ng-click="del(order)">删除</button>
-                        -->
-                        <button class="btn btn-default" ng-click="assign(order)">派单</button>
+                </div>
+            </td>
+            <td>
+                <div class="table-cell text-wrap">
+                    <div class="cell-item">下单时间:{{order.ordertime|date:'yyyy-MM-dd'}}</div>
+                    <div class="cell-item">品牌:{{order.brandName}}</div>
+                    <div class="cell-item">型号:{{order.colorName}}-{{order.modelName}}</div>
+                    <div class="cell-item">故障:{{order.troubleDetailName}}</div>
+                </div>
+            </td>
+            <td>
+                <div class="table-cell text-wrap">
+                    <div class="cell-item">姓名:{{order.user_real_name}}</div>
+                    <div class="cell-item">电话:{{order.user_phone}}</div>
+                    <div class="cell-item">
+                        地址:{{order.user_city}} {{order.user_area}} {{order.address_desc}}
                     </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+                    <div class="cell-item">
+                        预约时间:{{order.user_repair_date*1000|date:'yyyy-MM-dd'}} {{order.user_repair_time_slot}}
+                    </div>
+                    <div class="cell-item">订单类型:{{order.order_type|orderTypeParse}}</div>
+                </div>
+            </td>
+
+            <td>
+                <div class="table-cell text-wrap">
+                    <div class="cell-item">系统报价:{{order.total_price}}</div>
+                    <div class="cell-item">折扣:{{order.discount_price}}</div>
+                    <div class="cell-item">实付:{{order.actual_price}}</div>
+                </div>
+            </td>
+            <td>
+                <div class="table-cell text-wrap">
+                    <div class="cell-item">订单状态:{{order.status|statusParse}}</div>
+                    <div class="cell-item">负责人:{{order.engineerName}}</div>
+                </div>
+            </td>
+            <td>
+                <div class="cell-item">{{order.remark}}</div>
+            </td>
+            <td class="vertical-middle">
+                <div style="width:100px" class="btn-group-vertical">
+                    <!--               <button class="btn btn-default" ng-click="del(order)">删除</button>
+                -->
+                <button class="btn btn-default" ng-click="assign(order)">派单</button>
+                <button class="btn btn-default" ng-click="alter(order)">修改</button>
+            </div>
+        </td>
+    </tr>
+</tbody>
+</table>
 </div>
 </article>
 <footer>
 <div style="position:relative;min-height:75px;">
-    <div class="position-center">
-        <pagination ng-change="pageChanged(page.page)" total-items="page.totalcount" items-per-page="page.pagesize" ng-model="page.page" max-size="10" class="pagination-sm" boundary-links="true" rotate="false"></pagination>
-    </div>
+<div class="position-center">
+<pagination ng-change="pageChanged(page.page)" total-items="page.totalcount" items-per-page="page.pagesize" ng-model="page.page" max-size="10" class="pagination-sm" boundary-links="true" rotate="false"></pagination>
+</div>
 </div>
 <pre class="text-center">Page: {{page.page}} / {{page.numPages}}</pre>
 </footer>

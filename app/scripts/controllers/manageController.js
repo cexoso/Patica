@@ -1,6 +1,6 @@
 'use strict';
 angular.module('controller')
-  .controller('manageController', ['$scope','$modal','$http','manageFiltersLinkage','city','resourceLoader','$filter','objParse',function (s,$modal,$http,manageFiltersLinkage,city,resourceLoader,$filter,objParse) {
+  .controller('manageController', ['$scope','$modal','$http','manageFiltersLinkage','city','resourceLoader','$filter','objParse','orderTypes',function (s,$modal,$http,manageFiltersLinkage,city,resourceLoader,$filter,objParse,orderTypes) {
         var config={
           pagesize:10
         };
@@ -8,10 +8,12 @@ angular.module('controller')
         s.filter={
           endtime:now,
           starttime:new Date(now.getFullYear(),now.getMonth(),now.getDate()-3)
+          // starttime:new Date(2015,7,11)
         };
         s.page={};
         manageFiltersLinkage(s);
         s.filters={
+          orderTypes:orderTypes,
           citys:city.citys,
           payStatus:[
             {name:'未支付',id:'0'},
@@ -94,10 +96,6 @@ angular.module('controller')
             if(o instanceof Date){
               next($filter('date')(o,'yyyy-MM-dd'));
             }            
-          },function(key,o,next){
-            if(o==engineer){
-              next($filter('date')(o,'yyyy-MM-dd'));
-            }  
           }]);
           loadData(angular.extend({
             page:{
@@ -174,6 +172,7 @@ angular.module('controller')
             },function(error){
             });
         }
+
 }]);
 
 angular.module('services').service('manageFiltersLinkage',['$http','city',function($http,city){
@@ -225,6 +224,24 @@ angular.module('controller')
                 
             },function(w){
                 
+            });
+        }
+        s.alter=function(order){          
+            var modalInstance = $modal.open({
+                  animation: true,
+                  templateUrl: 'views/alterBill.html',
+                  controller: 'alterBillController',
+                  size: 'lg',
+                  backdrop:false,
+                  resolve:{
+                    order:[function(){
+                      return order;
+                    }]
+                  }
+             });
+            modalInstance.result.then(function(order){
+                
+            },function(error){
             });
         }
 }]);

@@ -9,40 +9,46 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">品牌</label>
                     <div class="col-sm-10">
-                        <select  class='form-control' required ng-model="data.brand" ng-options="brand.name for brand in datas.brands">                            
-                        </select>
+                        <select  class='form-control' required ng-model="data.brand" ng-options="brand.name for brand in datas.brands"></select>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">型号</label>
                     <div class="col-sm-10">
-                        <select  class='form-control' required ng-model="data.model" ng-options="model.name for model in datas.models">
-                        </select>
+                        <select  class='form-control' required ng-model="data.model" ng-options="model.name for model in datas.models"></select>
                     </div>
                 </div>
             </fieldset>
             <fieldset>
                 <legend>故障信息</legend>
-                 <div class="form-group">
+                <div class="form-group">
                     <label class="col-sm-2 control-label">一级故障</label>
                     <div class="col-sm-10">
-                        <select  class='form-control' required ng-model="data.fault" ng-options="fault.name for fault in datas.faults">
-                        </select>
+                        <select  class='form-control' required ng-model="data.fault" ng-options="fault.name for fault in datas.faults"></select>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">二级故障</label>
                     <div class="col-sm-10">
-                        <select  class='form-control' required ng-model="data.subFault" ng-options="subFault.name for subFault in datas.subFaults">
+                        <select  class='form-control' required ng-model="data.subFault" ng-options="subFault.name for subFault in datas.subFaults"></select>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>渠道来源</legend>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">来源</label>
+                    <div class="col-sm-10">
+                        <select  class='form-control' ng-model="data.offergoal" ng-options="offergoal.name for offergoal in datas.offergoals">
+                            <option value="">微信下单</option>
                         </select>
                     </div>
                 </div>
             </fieldset>
         </form>
-
     </article>
-    <footer class="modal-footer">    
-    {{data}}
+    <footer class="modal-footer">
+        {{data}}
         <button class="btn btn-primary" ng-disabled="defaultF.$invalid" ng-click="ok()">添加</button>
         <button class="btn btn-warning" ng-click="cancel()">退出</button>
     </footer>

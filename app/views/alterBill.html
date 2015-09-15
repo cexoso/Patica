@@ -1,6 +1,6 @@
 <section>
     <header class="modal-header">
-        <h3 class="modal-title">手动录单</h3>
+        <h3 class="modal-title">修改订单</h3>
     </header>
     <article class="modal-body">
         <form class="form-horizontal" ng-controller="appendBillFormController">
@@ -19,11 +19,7 @@
                     </div>
                     <label for="order_id" class="col-sm-2 control-label">客户来源</label>
                     <div class="col-sm-4">
-                        <input type="text" placeholder="默认为微信下单" ng-model="oi.ordersource" typeahead="source.id as source.name for source in sources|filter:{id:$viewValue}" class="form-control">
-<!--                         <select class='form-control' ng-model="oi.ordersource" ng-options="source.id as source.name for source in sources">
-                            <option value="">微信下单</option>
-                        </select> -->
-                    </div>
+                        <input type="text" placeholder="默认为微信下单" ng-model="oi.ordersource" typeahead="source.id as source.name for source in sources|filter:{id:$viewValue}" class="form-control"></div>
                     <!--  <label class="col-sm-2 control-label">工程师</label>
                 <div class="col-sm-4">
                     <ui-select ng-model="data.engineer" theme="bootstrap">
@@ -45,14 +41,11 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">订单类型</label>
                 <div class="col-sm-4">
-                    <select class='form-control' ng-model="oi.order_type" ng-options="orderType.id as orderType.name for orderType in orderTypes">                        
-                    </select>
+                    <select class='form-control' ng-model="oi.order_type" ng-options="orderType.id as orderType.name for orderType in orderTypes"></select>
                 </div>
                 <label class="col-sm-2 control-label">订单状态</label>
                 <div class="col-sm-4">
-                    <select class='form-control' disabled ng-model="oi.status" ng-options="status.id as status.name for status in statuss">
-                        
-                    </select>
+                    <select class='form-control' ng-model="oi.status" ng-options="status.id as status.name for status in statuss"></select>
                 </div>
 
             </div>
@@ -88,7 +81,7 @@
     <div class="form-group">
         <label class="col-sm-2 control-label" >手机颜色</label>
         <div class="col-sm-4">
-            <select class='form-control' ng-model="oi.colorName" ng-options="color.id as color.name for color in colors"></select>
+            <select class='form-control' ng-model="oi.colorName" ng-options="color.name as color.name for color in colors"></select>
         </div>
         <label class="col-sm-2 control-label" >一级故障</label>
         <div class="col-sm-4">
@@ -157,7 +150,7 @@
 </form>
 </article>
 <footer class="modal-footer">
-<button class="btn btn-primary" ng-click="ok()">添加</button>
+<button class="btn btn-primary" ng-click="ok()">修改</button>
 <button class="btn btn-warning" ng-click="cancel()">退出</button>
 </footer>
 </section>

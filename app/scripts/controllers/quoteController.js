@@ -130,6 +130,7 @@ angular.module('controller')
                 modelid:modelid,
                 offergoal:offergoal
             }).success(function(d){
+                console.log(d.data.data)
                 s.quotes=d.data.data;
                 console.log(d);
                 s.tips.btn="查询";

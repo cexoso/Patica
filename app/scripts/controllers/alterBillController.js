@@ -1,6 +1,6 @@
 'use strict';
 angular.module('controller')
-  .controller('appendBillController',['$scope','$modalInstance','$http','city','source','orderTypes','resourceLoader','objParse','status',function(s,$modalInstance,$http,city,source,orderTypes,resourceLoader,objParse,status){
+  .controller('alterBillController',['$scope','$modalInstance','$http','city','source','orderTypes','resourceLoader','objParse','status','order',function(s,$modalInstance,$http,city,source,orderTypes,resourceLoader,objParse,status,order){
         s.sources=source;
         s.orderTypes=orderTypes;
         s.user_citys=city.citys;
@@ -11,26 +11,22 @@ angular.module('controller')
             {name:'白色',id:'3'},
             {name:'黑色',id:'4'}
         ];
-        s.oi={
-            ordertime:new Date(),
-            user_repair_date:new Date(),
-            colorName:s.colors[0].id,
-            user_city:s.user_citys[0].cityName,
-            status:101,
-            order_type:1
-        };
-        
+        if(order.ordertime){
+            order.ordertime=new Date(order.ordertime);
+        }
+        if(order.user_repair_date){
+            order.user_repair_date=new Date(order.user_repair_date*1000);
+        }
         resourceLoader.loadBrand({
             producetype:'200001'
         }).success(function(d){
-            s.brands=d.data.data;
-            s.oi.brand=s.brands[0].id;
+            s.brands=d.data.data;            
         });
         resourceLoader.loadTrouble().success(function(e){
             s.troubles=e.data.data;
-            s.oi.trouble_type=s.troubles[0].id;
         });
-        
+
+        s.oi=angular.extend({},order,true);
         s.$watch("oi.brand",function(n){
             if(!n){
                 return;
@@ -50,7 +46,8 @@ angular.module('controller')
                 troubleid:n
             }).success(function(e){
                 s.troubleDetails=e.data.data;
-                s.oi.trouble_type_detail=s.troubleDetails[0].id;
+
+                s.oi.trouble_type_detail=s.troubleDetails[0].id
             });
         });
         s.$watch("oi.user_city",function(n){
@@ -67,15 +64,13 @@ angular.module('controller')
             s.oi.user_area=s.user_areas[0].region;
         });
         s.data={};
-       
-        
         s.ok = function () {
             var params=objParse(s.oi,[function(key,o,next){
                 if(o instanceof Date){                    
                     next(new Date(o).getTime());
-                }  
+                } 
             }]);
-            $http.post('api/order/addOrder',params).success(function(d){
+            $http.post('api/order/updateOrder',params).success(function(d){
                 if(d.code!=200){
                     alert(d.msg);
                 }else{
