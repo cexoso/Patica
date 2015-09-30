@@ -1,15 +1,16 @@
 'use strict';
 angular.module('controller')
-  .controller('alterBillController',['$scope','$modalInstance','$http','city','source','orderTypes','resourceLoader','objParse','status','order',function(s,$modalInstance,$http,city,source,orderTypes,resourceLoader,objParse,status,order){
+  .controller('alterBillController',['$scope','$modalInstance','$http','city','source','orderTypes','resourceLoader','objParse','status','order',function(s,$modalInstance,$http,city,source,orderTypes,resourceLoader,objParse,status,order){        
+        order=order.data.data.data[0];
         s.sources=source;
         s.orderTypes=orderTypes;
         s.user_citys=city.citys;
         s.statuss=status;
         s.colors=[
-            {name:'金色',id:'1'},
-            {name:'灰色',id:'2'},
-            {name:'白色',id:'3'},
-            {name:'黑色',id:'4'}
+            {name:'金色',id:1},
+            {name:'灰色',id:2},
+            {name:'白色',id:3},
+            {name:'黑色',id:4}
         ];
         if(order.ordertime){
             order.ordertime=new Date(order.ordertime);
@@ -27,6 +28,7 @@ angular.module('controller')
         });
 
         s.oi=angular.extend({},order,true);
+
         s.$watch("oi.brand",function(n){
             if(!n){
                 return;

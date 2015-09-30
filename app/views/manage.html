@@ -107,6 +107,7 @@
                 <th class="text-nowrap">报价</th>
                 <th class="text-nowrap">订单状态</th>
                 <th class="text-nowrap">备注</th>
+
                 <th class="text-nowrap">操作</th>
                 <!-- <th class="text-nowrap">付款方式</th>
             <th class="text-nowrap">负责人</th>
@@ -122,68 +123,138 @@
             <td style="vertical-align: middle">{{$index+1}}</td>
             <td>
                 <div class="table-cell text-wrap">
-                    <div class="cell-item">订单号:{{order.orderid}}</div>
-                    <div class="cell-item">订单来源:{{order.ordersource|ordersourceParse}}</div>
-                    <div class="cell-item">IMEI:</div>
-                    <div class="cell-item">服务单号:</div>
+                    <div class="cell-item">
+                        <label class="manageLabel">订单号:</label>
+                        {{order.orderid}}
+                    </div>
+                    <div class="cell-item">
+                        <label class="manageLabel">订单来源:</label>
+                        {{order.ordersource|ordersourceParse}}
+                    </div>
+                    <div class="cell-item">
+                        <label class="manageLabel">IMEI:</label>
+                    </div>
+                    <div class="cell-item">
+                        <label class="manageLabel">服务单号:</label>
+                    </div>
 
                 </div>
             </td>
             <td>
                 <div class="table-cell text-wrap">
-                    <div class="cell-item">下单时间:{{order.ordertime|date:'yyyy-MM-dd'}}</div>
-                    <div class="cell-item">品牌:{{order.brandName}}</div>
-                    <div class="cell-item">型号:{{order.colorName}}-{{order.modelName}}</div>
-                    <div class="cell-item">故障:{{order.troubleDetailName}}</div>
+                    <div class="cell-item">
+                        <label class="manageLabel">下单时间:</label>
+                        {{order.ordertime|date:'yyyy-MM-dd'}}
+                    </div>
+                    <div class="cell-item">
+                        <label class="manageLabel">品牌:</label>
+                        {{order.brandName}}
+                    </div>
+                    <div class="cell-item">
+                        <label class="manageLabel">型号:</label>
+                        {{order.colorName}}-{{order.modelName}}
+                    </div>
+                    <div class="cell-item">
+                        <label class="manageLabel">故障:</label>
+                        {{order.trouble_desc}}
+                    </div>
                 </div>
             </td>
             <td>
                 <div class="table-cell text-wrap">
-                    <div class="cell-item">姓名:{{order.user_real_name}}</div>
-                    <div class="cell-item">电话:{{order.user_phone}}</div>
                     <div class="cell-item">
-                        地址:{{order.user_city}} {{order.user_area}} {{order.address_desc}}
+                        <label class="manageLabel">姓名:</label>
+                        {{order.user_real_name}}
                     </div>
                     <div class="cell-item">
-                        预约时间:{{order.user_repair_date*1000|date:'yyyy-MM-dd'}} {{order.user_repair_time_slot}}
+                        <label class="manageLabel">电话:</label>
+                        {{order.user_phone}}
                     </div>
-                    <div class="cell-item">订单类型:{{order.order_type|orderTypeParse}}</div>
+                    <div class="cell-item">
+                        <label class="manageLabel">地址:</label>
+                        {{order.user_city}} {{order.user_area}} {{order.address_desc}}
+                    </div>
+                    <div class="cell-item">
+                        <label class="manageLabel">预约时间:</label>
+                        {{order.user_repair_date*1000|date:'yyyy-MM-dd'}} {{order.user_repair_time_slot}}
+                    </div>
+                    <div class="cell-item">
+                        <label class="manageLabel">订单类型:</label>
+                        {{order.order_type|orderTypeParse}}
+                    </div>
                 </div>
             </td>
 
             <td>
                 <div class="table-cell text-wrap">
-                    <div class="cell-item">系统报价:{{order.total_price}}</div>
-                    <div class="cell-item">折扣:{{order.discount_price}}</div>
-                    <div class="cell-item">实付:{{order.actual_price}}</div>
+                    <div class="cell-item">
+                        <label class="manageLabel">系统报价:</label>
+                        {{order.total_price}}
+                    </div>
+                    <div class="cell-item">
+                        <label class="manageLabel">折扣:</label>
+                        {{order.discount_price}}
+                    </div>
+                    <div class="cell-item">
+                        <label class="manageLabel">实付:</label>
+                        {{order.actual_price}}
+                    </div>
                 </div>
             </td>
-            <td>
+            <td style="word-break: break-all;max-width:12em">
                 <div class="table-cell text-wrap">
-                    <div class="cell-item">订单状态:{{order.status|statusParse}}</div>
-                    <div class="cell-item">负责人:{{order.engineerName}}</div>
+                    <div class="cell-item">
+                        <label class="manageLabel">订单状态:</label>
+                        {{order.status|statusParse}}
+                    </div>
+                    <div class="cell-item">
+                        <label class="manageLabel">状态修改时间:</label>
+                        {{order.status_time|date:'yyyy-MM-dd'}}
+                    </div>
+                    <div class="cell-item">
+                        <label class="manageLabel">负责人:</label>
+                        {{order.engineerName}}
+                    </div>
+                    <div class="cell-item">
+                        <label class="manageLabel">星:</label>
+                        {{order.evaluate_star}}
+                    </div>
+
+                    <div class="cell-item">
+                        <label class="manageLabel">标签:</label>
+                        {{order.evaluate_tags|evaluate_tagsParse}}
+                    </div>
+                    <div class="cell-item">
+                        <label class="manageLabel">评价:</label>
+                        {{order.evaluate}}
+                    </div>
                 </div>
             </td>
-            <td>
-                <div class="cell-item">{{order.remark}}</div>
+            <td style="word-break: break-all;max-width:12em">
+                <div class="cell-item">
+                    <label class="manageLabel">客户备注:</label>
+                    <div>{{order.userComment}}</div>
+                </div>
+                <div class="cell-item">
+                    <label class="manageLabel">客服备注:</label>
+                    <div>{{order.remark}}</div>
+                </div>
             </td>
             <td class="vertical-middle">
                 <div style="width:100px" class="btn-group-vertical">
-                    <!--               <button class="btn btn-default" ng-click="del(order)">删除</button>
-                -->
-                <button class="btn btn-default" ng-click="assign(order)">派单</button>
-                <button class="btn btn-default" ng-click="alter(order)">修改</button>
-            </div>
-        </td>
-    </tr>
-</tbody>
+                    <button class="btn btn-default" ng-click="assign(order)">派单</button>
+                    <button class="btn btn-default" ng-click="alter(order)">修改</button>
+                </div>
+            </td>
+        </tr>
+    </tbody>
 </table>
 </div>
 </article>
 <footer>
 <div style="position:relative;min-height:75px;">
 <div class="position-center">
-<pagination ng-change="pageChanged(page.page)" total-items="page.totalcount" items-per-page="page.pagesize" ng-model="page.page" max-size="10" class="pagination-sm" boundary-links="true" rotate="false"></pagination>
+    <pagination ng-change="pageChanged(page.page)" total-items="page.totalcount" items-per-page="page.pagesize" ng-model="page.page" max-size="10" class="pagination-sm" boundary-links="true" rotate="false"></pagination>
 </div>
 </div>
 <pre class="text-center">Page: {{page.page}} / {{page.numPages}}</pre>

@@ -6,19 +6,20 @@ angular.module('controller')
         s.user_citys=city.citys;
         s.statuss=status;
         s.colors=[
-            {name:'金色',id:'1'},
-            {name:'灰色',id:'2'},
-            {name:'白色',id:'3'},
-            {name:'黑色',id:'4'}
+            {name:'金色',id:1},
+            {name:'灰色',id:2},
+            {name:'白色',id:3},
+            {name:'黑色',id:4}
         ];
         s.oi={
             ordertime:new Date(),
             user_repair_date:new Date(),
-            colorName:s.colors[0].id,
+            brand_model_color:s.colors[0].id,
             user_city:s.user_citys[0].cityName,
             status:101,
             order_type:1
         };
+        
         
         resourceLoader.loadBrand({
             producetype:'200001'

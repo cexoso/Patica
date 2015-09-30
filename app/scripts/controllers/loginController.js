@@ -10,7 +10,7 @@ angular.module('controller')
                 var data=d.data;
                 user.set(data)
                 console.log(user)
-                $state.go('manage');
+                $state.go('manage');                            
             }
         });
     }

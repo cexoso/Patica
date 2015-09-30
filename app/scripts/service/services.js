@@ -2,11 +2,9 @@
 angular.module('services').filter('propsFilter', function() {
   return function(items, props) {
     var out = [];
-
     if (angular.isArray(items)) {
       items.forEach(function(item) {
         var itemMatches = false;
-
         var keys = Object.keys(props);
         for (var i = 0; i < keys.length; i++) {
           var prop = keys[i];
@@ -16,7 +14,6 @@ angular.module('services').filter('propsFilter', function() {
             break;
           }
         }
-
         if (itemMatches) {
           out.push(item);
         }
@@ -63,22 +60,41 @@ angular.module('services').filter('propsFilter', function() {
       102: '维修工程师确认',
       103: '确认支付',
       104: '用户评价',
-      105: '订单结束',
+      105: '订单完成',
       200: '订单取消'
     }
     return map[t];
   }
-}).filter('userRepairDateParse', function () {
+}).filter('statusParse', function () {
   return function (t) {
-    var d = new Date(t * 1000);
-    return d.getYear() + 1900 + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+    var map = {
+      101: '订单已提交',
+      102: '维修工程师确认',
+      103: '确认支付',
+      104: '用户评价',
+      105: '订单完成',
+      200: '订单取消'
+    }
+    return map[t];
+  }
+}).filter('evaluate_tagsParse', function () {
+  var _arr=['颜值高', '搞机大师', '好准时', '效率极高', '态度好' , '我要给最高'];
+  return function (t) {
+    if(t){
+        var a=t.split(',');        
+        var res=a.map(function(k,v){
+            return _arr[v];
+        })
+        return res.join('、')
+    }
+    return '';
   }
 }).constant('status',[
       {id:101,name:'订单已提交'},
       {id:102,name:'维修工程师确认'},
       {id:103,name:'确认支付'},
       {id:104,name:'用户评价'},
-      {id:105,name:'订单结束'},
+      {id:105,name:'订单完成'},
       {id:200,name:'订单取消'}
 ]).constant('city', {
     citys: [{

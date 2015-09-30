@@ -8,7 +8,8 @@ angular.module('controller')
         s.filter={
           endtime:now,
           starttime:new Date(now.getFullYear(),now.getMonth(),now.getDate()-3)
-          // starttime:new Date(2015,7,11)
+          // starttime:
+          // orderid:"20150725110844168"
         };
         s.page={};
         manageFiltersLinkage(s);
@@ -234,8 +235,14 @@ angular.module('controller')
                   size: 'lg',
                   backdrop:false,
                   resolve:{
-                    order:[function(){
-                      return order;
+                    order:['$http',function($http){
+                      
+                      return $http.get('api/order/getOrderByID',{
+                        params:{
+                          orderid:order.orderid
+                        }
+                      })
+                      //return order;
                     }]
                   }
              });

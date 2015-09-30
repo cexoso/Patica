@@ -17,12 +17,14 @@ gulp.task('server', function() {
     livereload: true,
     port:80,
     middleware:function(connect,opt){
+
         return [function(req,res,next){
           if(!req.url.match("/api/")){
             next();
           }else{
             console.log("代理："+req.url)
-            proxy.web(req, res, { target: 'http://127.0.0.1:8080/PaticaService/'});  
+            next();
+            // proxy.web(req, res, { target: 'http://192.168.0.145:8080/PaticaService/'});  
           }
         }]
       }
